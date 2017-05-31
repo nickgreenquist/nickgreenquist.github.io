@@ -1,4 +1,4 @@
-<?php
+<?php include('/home/w-home/www/framework/v0/rit-identitybar.html');
 
 /**
  * configure here

@@ -494,7 +494,7 @@ CUSTOMERS
 =====================
 
 */
-.customer {
+.customer, .maptitle {
   text-align: center;
 }
 .customer img {
@@ -767,10 +767,10 @@ FOOTER
 #footer p.social a.facebook, #footer p.social a.linkedin {
   background-color: #4460ae;
 }
-#footer p.social a.github {
+#footer p.social a.github, #footer p.social a.git {
   background-color: black;
 }
-#footer p.social a.gplus {
+#footer p.social a.gplus, #footer p.social a.resume  {
   background-color: #c21f25;
 }
 #footer p.social a.instagram {
@@ -797,11 +797,11 @@ FOOTER
   }
 }
 #footer p.template-bootstrapious {
-  margin-top: 20px;
+  margin-top: 0px;
   text-align: center;
   color: #999999;
   font-family: 'Roboto Slab', serif;
-  font-size: 14px;
+  font-size: 8px;
   font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #footer p.template-bootstrapious a {
