@@ -400,9 +400,10 @@ WORKS / REFERENCES
 }
 .reference-item .reference, .reference-item2 .reference2 {
   margin-bottom: 30px;
-  background: #4fbfa8;
+  background: white;
 }
 .reference-item .reference a, .reference-item2 .reference2 a {
+  border-radius: 20px;
   display: block;
   position: relative;
   width: 100%;
@@ -410,6 +411,7 @@ WORKS / REFERENCES
   overflow: hidden;
 }
 .reference-item .reference a .overlay, .reference-item2 .reference2 a .overlay2 {
+  border-radius: 20px;
   display: block;
   position: absolute;
   left: 0;
@@ -432,6 +434,7 @@ WORKS / REFERENCES
   font-weight: 500;
 }
 .reference-item .reference a img, .reference-item2 .reference2 a img {
+  border-radius: 20px;
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
@@ -445,6 +448,7 @@ WORKS / REFERENCES
 }
 .reference-item .reference a:hover img, .reference-item2 .reference2 a:hover img,
 .reference-item .reference a:focus img, .reference-item2 .reference2 a:focus img {
+  border-radius: 20px;
   -webkit-transform: scale(1.2, 1.2);
   -ms-transform: scale(1.2, 1.2);
   transform: scale(1.2, 1.2);
