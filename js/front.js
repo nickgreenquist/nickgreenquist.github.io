@@ -459,6 +459,66 @@ function map() {
 	lng: -70.481091,
 	icon: image
     });
+    map.addMarker({ //Dominican Republic
+	lat: 18.858900,
+	lng: -70.045139,
+	icon: image
+    });
+    map.addMarker({ //Miami
+	lat: 25.761593,
+	lng: -80.192554,
+	icon: image
+    });
+    map.addMarker({ //Tampa
+	lat: 27.953143,
+	lng: -82.452149,
+	icon: image
+    });
+    map.addMarker({ //Virginia Beach
+	lat: 36.852921,
+	lng:  -75.992772,
+	icon: image
+    });
+    map.addMarker({ //ROC
+	lat: 43.162159,
+	lng: -77.613415,
+	icon: image
+    });
+    map.addMarker({ //Bahamas
+	lat: 24.588038,
+	lng: -77.957718,
+	icon: image
+    });
+    map.addMarker({ //Krakv
+	lat: 50.066519,
+	lng: 19.943754,
+	icon: image
+    });
+    map.addMarker({ //Krakv
+	lat: 52.227388,
+	lng: 20.998015,
+	icon: image
+    });
+    map.addMarker({ //Myrtle Beach
+	lat: 33.688879,
+	lng: -78.885677,
+	icon: image
+    });
+    map.addMarker({ //San Diego
+	lat: 32.715696,
+	lng:  -117.174855,
+	icon: image
+    });
+    map.addMarker({ //Amalfi
+	lat: 40.631020,
+	lng:  14.577926,
+	icon: image
+    });
+    map.addMarker({ //Bulgaria
+	lat: 42.501283,
+	lng:  25.107659,
+	icon: image
+    });
 }
 
 /* =========================================
