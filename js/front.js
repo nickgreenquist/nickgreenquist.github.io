@@ -354,15 +354,15 @@ function map() {
     var styles = [{"featureType": "landscape", "stylers": [{"saturation": -100}, {"lightness": 65}, {"visibility": "on"}]}, {"featureType": "poi", "stylers": [{"saturation": -100}, {"lightness": 51}, {"visibility": "simplified"}]}, {"featureType": "road.highway", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "road.arterial", "stylers": [{"saturation": -100}, {"lightness": 30}, {"visibility": "on"}]}, {"featureType": "road.local", "stylers": [{"saturation": -100}, {"lightness": 40}, {"visibility": "on"}]}, {"featureType": "transit", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "administrative.province", "stylers": [{"visibility": "off"}]}, {"featureType": "water", "elementType": "labels", "stylers": [{"visibility": "on"}, {"lightness": -25}, {"saturation": -100}]}, {"featureType": "water", "elementType": "geometry", "stylers": [{"hue": "#ffff00"}, {"lightness": -25}, {"saturation": -97}]}];
     map = new GMaps({
 	el: '#map',
-	lat: 40.166692,
-	lng: -74.021636,
+	lat: 43,
+	lng: -75,
 	zoomControl: true,
 	zoomControlOpt: {
 	    style: 'SMALL',
 	    position: 'TOP_LEFT'
 	},
 	panControl: false,
-    zoom: 13,
+    zoom: 3,
 	streetViewControl: false,
 	mapTypeControl: false,
 	overviewMapControl: false,
@@ -372,15 +372,92 @@ function map() {
     });
 
     var image = 'img/marker.png';
+    var star = 'img/star.png';
 
-    map.addMarker({
+    map.addMarker({ //Spring Lake
 	lat: 40.166692,
 	lng: -74.021636,
-	icon: image/* ,
-	 title: '',
-	 infoWindow: {
-	 content: '<p>HTML Content</p>'
-	 }*/
+	icon: star
+    });
+    map.addMarker({ //GDYNIA
+	lat: 54.518195,
+	lng: 18.530690,
+	icon: image
+    });
+    map.addMarker({ //Vegas
+	lat: 36.169912,
+	lng: -115.131055,
+	icon: image
+    });
+    map.addMarker({ //Tornoto
+	lat: 43.653691,
+	lng: -79.364325,
+	icon: image
+    });
+    map.addMarker({ //San Fran
+	lat: 37.775612,
+	lng: -122.415284,
+	icon: image
+    });
+    map.addMarker({ //LA
+	lat: 34.050908,
+	lng: -118.256591,
+	icon: image
+    });
+    map.addMarker({ //Istanbul
+	lat: 41.011200,
+	lng: 28.979184,
+	icon: image
+    });
+    map.addMarker({ //Paris
+	lat: 48.857031,
+	lng: 2.350301,
+	icon: image
+    });
+    map.addMarker({ //Rome
+	lat: 41.903343,
+	lng: 12.491357,
+	icon: image
+    });
+    map.addMarker({ //Stockholm
+	lat: 59.327818,
+	lng: 18.062383,
+	icon: image
+    });
+    map.addMarker({ //Chichen Itza
+	lat: 20.684425,
+	lng: -88.567085,
+	icon: image
+    });
+    map.addMarker({ //Biucharest
+	lat: 44.427934,
+	lng: 26.096002,
+	icon: image
+    });
+    map.addMarker({ //Key West
+	lat: 24.555082,
+	lng: -81.780176,
+	icon: image
+    });
+    map.addMarker({ //Atlanta
+	lat: 33.747653,
+	lng: -84.390402,
+	icon: image
+    });
+    map.addMarker({ //DC
+	lat: 38.906746,
+	lng: -77.039295,
+	icon: image
+    });
+    map.addMarker({ //Park City
+	lat: 40.646838,
+	lng: -111.500307,
+	icon: image
+    });
+    map.addMarker({ //Kennebunkport
+	lat: 43.361770,
+	lng: -70.481091,
+	icon: image
     });
 }
 
