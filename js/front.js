@@ -373,6 +373,7 @@ function map() {
 
     var image = 'img/marker.png';
     var star = 'img/star.png';
+    var baby = 'img/baby.png';
 
     map.addMarker({ //Spring Lake
 	lat: 40.166692,
@@ -518,6 +519,12 @@ function map() {
 	lat: 42.501283,
 	lng:  25.107659,
 	icon: image
+    });
+    map.addMarker({ //Born here
+	lat: 58.28454,
+	lng:  12.291748,
+	icon: baby,
+    animation:google.maps.Animation.DROP
     });
 }
 

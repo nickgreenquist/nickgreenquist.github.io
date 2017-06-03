@@ -296,6 +296,7 @@ var GMaps = (function(global) {
       context_menu_element.style.display = 'block';
     };
 
+
     this.buildContextMenu = function(control, e) {
       if (control === 'marker') {
         e.pixel = {};
@@ -689,6 +690,11 @@ GMaps.prototype.addMarker = function(options) {
   this.markers.push(marker);
 
   GMaps.fire('marker_added', marker, this);
+  
+  google.maps.event.addListener(marker, 'click', function() {
+    this.map.setZoom(10);
+    this.map.setCenter(new google.maps.LatLng(options.lat, options.lng));
+  });
 
   return marker;
 };
