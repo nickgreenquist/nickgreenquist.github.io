@@ -130,10 +130,23 @@ UNIVERSAL SECTION STYLES
 .text-gradient {
   background: #13836c;
   color: #fff;
-  background-image: -webkit-linear-gradient(top, #13836c 0%, #45b59e 100%);
-  background-image: linear-gradient(to bottom, #13836c 0%, #45b59e 100%);
+  background-image: -webkit-linear-gradient(top, #45b59e 0%, #13836c 100%);
+  background-image: linear-gradient(to bottom, #45b59e 0%, #13836c 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff13836c', endColorstr='#ff45b59e', GradientType=0);
+  padding-bottom: 5px;
+  padding-top: 15px;
+}
+.text-gradient2 {
+  background: white;
+  padding-bottom: 5px;
+  padding-top: 15px;
+}
+.text-gradient3 {
+  background: #13836c;
+  color: #fff;
+  padding-bottom: 5px;
+  padding-top: 15px;
 }
 .text-gradient h2 {
   border-color: #fff;
