@@ -823,6 +823,11 @@ GENERAL
 =====================
 
 */
+
+#me {
+  border: 10px solid #4fbfa8;
+}
+
 button,
 a.btn,
 input.btn {
