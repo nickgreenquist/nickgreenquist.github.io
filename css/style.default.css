@@ -141,6 +141,7 @@ UNIVERSAL SECTION STYLES
   background: white;
   padding-bottom: 5px;
   padding-top: 15px;
+  margin-top: 50px;
 }
 .text-gradient3 {
   background: #13836c;
@@ -1310,6 +1311,13 @@ hr {
   }
 }
 /* buttons  */
+.buttons2 {
+  text-align: center;
+  margin-top: 20px;
+}
+.buttons2 a {
+  margin: 0 10px 10px;
+}
 .btn {
   font-weight: normal;
   font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
