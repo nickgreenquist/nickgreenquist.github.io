@@ -695,6 +695,12 @@ GMaps.prototype.addMarker = function(options) {
     this.map.setZoom(10);
     this.map.setCenter(new google.maps.LatLng(options.lat, options.lng));
   });
+  google.maps.event.addListener(marker, 'mouseover', function() {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    window.setTimeout(function() {
+          marker.setAnimation(null);
+          }, 700);
+  });
 
   return marker;
 };
