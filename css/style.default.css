@@ -814,19 +814,19 @@ FOOTER
     text-align: center;
   }
 }
-#footer p.template-bootstrapious {
+#footer p.goodbye {
   margin-top: 0px;
   text-align: center;
-  color: #999999;
+  color: #eeeeee;
   font-family: 'Roboto Slab', serif;
-  font-size: 8px;
+  font-size: 14px;
   font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-#footer p.template-bootstrapious a {
+#footer p.goodbye a {
   color: #999999;
 }
 @media (max-width: 767px) {
-  #footer p.template-bootstrapious {
+  #footer p.goodbye {
     text-align: center;
   }
 }
