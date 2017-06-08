@@ -2,20 +2,6 @@ if ($.cookie("theme_csspath")) {
     $('link#theme-stylesheet').attr("href", $.cookie("theme_csspath"));
 }
 
-$(function () {
-
-    animations();
-    sliders();
-    fullScreenContainer();
-    utils();
-    sliding();
-    contactForm();
-    //map();
-    counters();
-    parallax();
-    demo();
-});
-
 $(window).load(function () {
   
   onReady(function () {
@@ -27,7 +13,16 @@ $(window).load(function () {
     $(this).alignElementsSameHeight();
 
     masonry();
+    animations();
+    sliders();
+    fullScreenContainer();
+    utils();
+    sliding();
+    contactForm();
     map();
+    counters();
+    parallax();
+    demo();
   });
 
 });
