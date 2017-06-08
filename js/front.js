@@ -5,7 +5,6 @@ if ($.cookie("theme_csspath")) {
 $(window).load(function () {
   
   //before animation
-  fullScreenContainer();
   
   onReady(function () {
     document.getElementById('loader').style.display = 'none';
@@ -20,6 +19,7 @@ $(window).load(function () {
     masonry();
     animations();
     sliders();
+    fullScreenContainer();
     utils();
     sliding();
     contactForm();
