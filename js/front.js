@@ -10,17 +10,25 @@ $(function () {
     utils();
     sliding();
     contactForm();
-    map();
+    //map();
     counters();
     parallax();
     demo();
 });
 
 $(window).load(function () {
+  
+  onReady(function () {
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('all').style.display = 'block';
+    document.getElementById('navbar').style.display = 'block';
+    
     windowWidth = $(window).width();
     $(this).alignElementsSameHeight();
 
     masonry();
+    map();
+  });
 
 });
 $(window).resize(function () {
@@ -37,6 +45,19 @@ $(window).resize(function () {
     }
 
 });
+
+
+function onReady(callback) {
+    var intervalID = window.setInterval(checkReady, 1800);
+  
+    function checkReady() {
+        if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalID);
+            callback.call(this);
+        }
+    }
+}
+
 
 
 /* =========================================
