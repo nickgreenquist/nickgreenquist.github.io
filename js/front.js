@@ -4,6 +4,9 @@ if ($.cookie("theme_csspath")) {
 
 $(window).load(function () {
   
+  //before animation
+  fullScreenContainer();
+  
   onReady(function () {
     document.getElementById('loader').style.display = 'none';
     document.getElementById('all').style.display = 'block';
@@ -12,10 +15,11 @@ $(window).load(function () {
     windowWidth = $(window).width();
     $(this).alignElementsSameHeight();
 
+    
+    //after animation
     masonry();
     animations();
     sliders();
-    fullScreenContainer();
     utils();
     sliding();
     contactForm();
