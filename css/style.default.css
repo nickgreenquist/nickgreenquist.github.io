@@ -173,11 +173,7 @@ UNIVERSAL SECTION STYLES
     background-repeat: no-repeat;
     background-size: cover;
 }
-@media (max-width: 991px) {
-  .text-parallax {
-    padding-top: 80px;
-    padding-bottom: 80px;
-  }
+
 }
 /*
 =====================
