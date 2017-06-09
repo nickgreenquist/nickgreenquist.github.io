@@ -22,7 +22,7 @@ $(window).load(function () {
     fullScreenContainer();
     utils();
     sliding();
-    contactForm();
+    //contactForm();
     map();
     counters();
     parallax();
