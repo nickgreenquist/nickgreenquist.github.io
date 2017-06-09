@@ -174,7 +174,7 @@ UNIVERSAL SECTION STYLES
     background-size: cover;
 }
 /* Turn off parallax scrolling for tablets and phones. Increase/decrease the pixels if needed */
-@media(max-device-width: 991px) {
+@media (max-width: 991px) {
     .text-parallax.parallax-image1 {
         background-attachment: scroll;
     }
