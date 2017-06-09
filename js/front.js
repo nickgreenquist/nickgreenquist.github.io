@@ -612,6 +612,7 @@ function waypointsRefresh() {
 
 /* ajax contact form */
 
+/*
 function contactForm() {
     $("#contact-form").submit(function () {
 
@@ -634,3 +635,4 @@ function contactForm() {
 	return false; // avoid to execute the actual submit of the form.
     });
 }
+*/
