@@ -192,6 +192,7 @@ INTRO
   -o-background-size: cover;
   background-size: cover;
   -webkit-backface-visibility: hidden;
+  
 }
 #intro .item .logo {
   margin-bottom: 50px;
@@ -247,6 +248,8 @@ INTRO
 #intro .item .carousel-caption {
   left: 0;
   right: 0;
+  position: relative;
+  top: 15%;
 }
 #intro .container,
 #intro .row {
