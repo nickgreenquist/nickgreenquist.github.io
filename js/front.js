@@ -134,12 +134,20 @@ function animations() {
 
 function sliding() {
     $('.scrollTo, #navigation a').click(function (event) {
-	event.preventDefault();
-	var full_url = this.href;
-	var parts = full_url.split("#");
-	var trgt = parts[1];
+     var full_url = this.href;
+     var fileName = full_url.replace(/^.*[\\\/]/, '')
 
-	$('body').scrollTo($('#' + trgt), 800, {offset: -80});
+     if(fileName === "ResumeCurrent.pdf") {
+      // open link like normal
+      }
+      
+      else {
+       var parts = full_url.split("#");
+	   var trgt = parts[1];
+       event.preventDefault();
+
+	   $('body').scrollTo($('#' + trgt), 800, {offset: -80});
+      }
 
     });
 }
