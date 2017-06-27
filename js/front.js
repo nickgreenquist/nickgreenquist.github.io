@@ -137,7 +137,7 @@ function sliding() {
      var full_url = this.href;
      var fileName = full_url.replace(/^.*[\\\/]/, '')
 
-     if(fileName === "ResumeCurrent.pdf") {
+     if(fileName === "Resume.pdf") {
       // open link like normal
       }
       
