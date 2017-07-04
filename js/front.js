@@ -47,7 +47,7 @@ $(window).resize(function () {
 
 
 function onReady(callback) {
-    var intervalID = window.setInterval(checkReady, 1500);
+    var intervalID = window.setInterval(checkReady, 1000);
   
     function checkReady() {
         if (document.getElementsByTagName('body')[0] !== undefined) {
