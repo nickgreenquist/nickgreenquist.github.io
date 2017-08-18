@@ -418,6 +418,11 @@ function map() {
 	lng: -115.131055,
 	icon: image
     }, 'img/map/vegas.png');
+	map.addMarker({ //Grand Canyon
+	lat: 36.1070,
+	lng: -112.1130,
+	icon: image
+    }, 'img/map/grandcanyon.png');
     map.addMarker({ //Tornoto
 	lat: 43.653691,
 	lng: -79.364325,
@@ -531,11 +536,6 @@ function map() {
     map.addMarker({ //Myrtle Beach
 	lat: 33.688879,
 	lng: -78.885677,
-	icon: image
-    });
-    map.addMarker({ //San Diego
-	lat: 32.715696,
-	lng:  -117.174855,
 	icon: image
     });
     map.addMarker({ //Amalfi

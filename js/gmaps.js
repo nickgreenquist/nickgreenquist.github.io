@@ -189,6 +189,7 @@ var GMaps = (function(global) {
             style: google.maps.ZoomControlStyle[zoomControlStyle],
             position: google.maps.ControlPosition[zoomControlPosition]
           },
+          fullscreenControl:  false,
           mapTypeControl: mapTypeControl,
           scaleControl: scaleControl,
           streetViewControl: streetViewControl,
