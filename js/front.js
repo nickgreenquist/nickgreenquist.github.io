@@ -482,7 +482,7 @@ function map() {
 	lat: 40.646838,
 	lng: -111.500307,
 	icon: image
-    }, 'img/map/parkcity.png');
+    }, 'img/map/pc.png');
     map.addMarker({ //Kennebunkport
 	lat: 43.361770,
 	lng: -70.481091,
