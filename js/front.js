@@ -417,7 +417,7 @@ function map() {
 	lat: 36.169912,
 	lng: -115.131055,
 	icon: image
-    });
+    }, 'img/map/vegas.png');
     map.addMarker({ //Tornoto
 	lat: 43.653691,
 	lng: -79.364325,
@@ -427,7 +427,7 @@ function map() {
 	lat: 37.775612,
 	lng: -122.415284,
 	icon: image
-    });
+    }, 'img/map/sanfran.png');
     map.addMarker({ //LA
 	lat: 34.050908,
 	lng: -118.256591,
@@ -477,12 +477,12 @@ function map() {
 	lat: 38.906746,
 	lng: -77.039295,
 	icon: image
-    });
+    }, 'img/map/dc.png');
     map.addMarker({ //Park City
 	lat: 40.646838,
 	lng: -111.500307,
 	icon: image
-    });
+    }, 'img/map/parkcity.png');
     map.addMarker({ //Kennebunkport
 	lat: 43.361770,
 	lng: -70.481091,
@@ -497,7 +497,7 @@ function map() {
 	lat: 25.761593,
 	lng: -80.192554,
 	icon: image
-    });
+    }, 'img/map/miami.png');
     map.addMarker({ //Tampa
 	lat: 27.953143,
 	lng: -82.452149,

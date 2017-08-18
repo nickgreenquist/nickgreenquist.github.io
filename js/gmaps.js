@@ -666,7 +666,7 @@ GMaps.prototype.createMarker = function(options) {
   return marker;
 };
 
-GMaps.prototype.addMarker = function(options) {
+GMaps.prototype.addMarker = function(options, image) {
   var marker;
   if(options.hasOwnProperty('gm_accessors_')) {
     // Native google.maps.Marker object
@@ -687,20 +687,20 @@ GMaps.prototype.addMarker = function(options) {
     this.markerClusterer.addMarker(marker);
   }
 
-  this.markers.push(marker);
+  marker.info = new google.maps.InfoWindow({
+    content: '<div><IMG SRC=' + image + ' STYLE="max-width:100%;max-height=100%"/></div>',
+    maxWidth: 400
+  });
 
   GMaps.fire('marker_added', marker, this);
   
   google.maps.event.addListener(marker, 'click', function() {
     this.map.setZoom(10);
     this.map.setCenter(new google.maps.LatLng(options.lat, options.lng));
+    marker.info.open(options.map, marker);
   });
-  google.maps.event.addListener(marker, 'mouseover', function() {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-    window.setTimeout(function() {
-          marker.setAnimation(null);
-          }, 700);
-  });
+
+  this.markers.push(marker);
 
   return marker;
 };
