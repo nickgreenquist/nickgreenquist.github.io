@@ -695,9 +695,16 @@ GMaps.prototype.addMarker = function(options, image) {
   GMaps.fire('marker_added', marker, this);
   
   google.maps.event.addListener(marker, 'click', function() {
-    this.map.setZoom(10);
-    this.map.setCenter(new google.maps.LatLng(options.lat, options.lng));
     marker.info.open(options.map, marker);
+  });
+
+  google.maps.event.addListener(marker, 'rightclick', function() {
+    if(this.map.zoom === 10) {
+      this.map.setZoom(3);
+    } else {
+      this.map.setZoom(10);
+    }
+    this.map.setCenter(new google.maps.LatLng(options.lat, options.lng));
   });
 
   this.markers.push(marker);

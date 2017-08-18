@@ -407,12 +407,12 @@ function map() {
 	lat: 40.166692,
 	lng: -74.021636,
 	icon: star
-    });
+    }, 'img/map/springlake.png');
     map.addMarker({ //GDYNIA
 	lat: 54.518195,
 	lng: 18.530690,
 	icon: image
-    });
+    }, 'img/map/gdynia.png');
     map.addMarker({ //Vegas
 	lat: 36.169912,
 	lng: -115.131055,
@@ -422,7 +422,12 @@ function map() {
 	lat: 43.653691,
 	lng: -79.364325,
 	icon: image
-    });
+    }, 'img/map/toronto.png');
+	map.addMarker({ //Pittsburgh
+	lat: 40.4406,
+	lng: -79.9959,
+	icon: image
+    }, 'img/map/pittsburgh.png');
     map.addMarker({ //San Fran
 	lat: 37.775612,
 	lng: -122.415284,
@@ -432,27 +437,22 @@ function map() {
 	lat: 34.050908,
 	lng: -118.256591,
 	icon: image
-    });
+    }, 'img/map/la.png');
     map.addMarker({ //Istanbul
 	lat: 41.011200,
 	lng: 28.979184,
 	icon: image
-    });
+    }, 'img/map/istanbul.png');
     map.addMarker({ //Paris
 	lat: 48.857031,
 	lng: 2.350301,
 	icon: image
-    });
-    map.addMarker({ //Rome
-	lat: 41.903343,
-	lng: 12.491357,
-	icon: image
-    });
+    }, 'img/map/paris.png');
     map.addMarker({ //Stockholm
 	lat: 59.327818,
 	lng: 18.062383,
 	icon: image
-    });
+    }, 'img/map/stockholm.png');
     map.addMarker({ //Chichen Itza
 	lat: 20.684425,
 	lng: -88.567085,
@@ -462,7 +462,7 @@ function map() {
 	lat: 44.427934,
 	lng: 26.096002,
 	icon: image
-    });
+    }, 'img/map/bucharest.png');
     map.addMarker({ //Key West
 	lat: 24.555082,
 	lng: -81.780176,
@@ -498,11 +498,11 @@ function map() {
 	lng: -80.192554,
 	icon: image
     }, 'img/map/miami.png');
-    map.addMarker({ //Tampa
-	lat: 27.953143,
-	lng: -82.452149,
+    map.addMarker({ //Orlando
+	lat: 28.5383,
+	lng: -81.3792,
 	icon: image
-    });
+    }, 'img/map/orlando.png');
     map.addMarker({ //Virginia Beach
 	lat: 36.852921,
 	lng:  -75.992772,
@@ -512,18 +512,18 @@ function map() {
 	lat: 43.162159,
 	lng: -77.613415,
 	icon: image
-    });
+    }, 'img/map/roc.png');
     map.addMarker({ //Bahamas
 	lat: 24.588038,
 	lng: -77.957718,
 	icon: image
-    });
+    }, 'img/map/bahamas.png');
     map.addMarker({ //Krakv
 	lat: 50.066519,
 	lng: 19.943754,
 	icon: image
-    });
-    map.addMarker({ //Krakv
+    }, 'img/map/krakow.png');
+    map.addMarker({ //Warsaw
 	lat: 52.227388,
 	lng: 20.998015,
 	icon: image
@@ -542,12 +542,12 @@ function map() {
 	lat: 40.631020,
 	lng:  14.577926,
 	icon: image
-    });
+    }, 'img/map/amalfi.png');
     map.addMarker({ //Bulgaria
 	lat: 42.501283,
 	lng:  25.107659,
 	icon: image
-    });
+    }, 'img/map/bulgaria.png');
     map.addMarker({ //Born here
 	lat: 58.28454,
 	lng:  12.291748,
