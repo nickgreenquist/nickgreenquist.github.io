@@ -428,6 +428,11 @@ function map() {
 	lng: -79.364325,
 	icon: image
     }, 'img/map/toronto.png');
+	map.addMarker({ //Chicago
+	lat: 41.8781,
+	lng: -87.6298,
+	icon: image
+    }, 'img/map/chicago.png');
 	map.addMarker({ //Pittsburgh
 	lat: 40.4406,
 	lng: -79.9959,
@@ -462,22 +467,22 @@ function map() {
 	lat: 20.684425,
 	lng: -88.567085,
 	icon: image
-    });
+    }, 'img/map/chichenitza.png');
     map.addMarker({ //Biucharest
 	lat: 44.427934,
 	lng: 26.096002,
 	icon: image
     }, 'img/map/bucharest.png');
-    map.addMarker({ //Key West
-	lat: 24.555082,
-	lng: -81.780176,
-	icon: image
-    });
+    // map.addMarker({ //Key West
+	// lat: 24.555082,
+	// lng: -81.780176,
+	// icon: image
+    // });
     map.addMarker({ //Atlanta
 	lat: 33.747653,
 	lng: -84.390402,
 	icon: image
-    });
+    }, 'img/map/marrieta.png');
     map.addMarker({ //DC
 	lat: 38.906746,
 	lng: -77.039295,
@@ -492,35 +497,50 @@ function map() {
 	lat: 43.361770,
 	lng: -70.481091,
 	icon: image
-    });
+    }, 'img/map/kennebunk.png');
+	// map.addMarker({ //Freeport
+	// lat: 43.8579,
+	// lng: -70.1034,
+	// icon: image
+    // }, 'img/map/freeport.png');
+	// map.addMarker({ //BoothBay
+	// lat: 43.8763,
+	// lng: -69.6337,
+	// icon: image
+    // }, 'img/map/boothbay.png');
     map.addMarker({ //Dominican Republic
 	lat: 18.858900,
 	lng: -70.045139,
 	icon: image
-    });
+    }, 'img/map/dominicanrepublic.png');
     map.addMarker({ //Miami
 	lat: 25.761593,
 	lng: -80.192554,
 	icon: image
     }, 'img/map/miami.png');
     map.addMarker({ //Orlando
-	lat: 28.5383,
-	lng: -81.3792,
+	lat: 28.3852,
+	lng: -81.5639,
 	icon: image
     }, 'img/map/orlando.png');
-    map.addMarker({ //Virginia Beach
-	lat: 36.852921,
-	lng:  -75.992772,
+	map.addMarker({ //Tampa
+	lat: 27.9506,
+	lng: -82.4572,
 	icon: image
-    });
+    }, 'img/map/tampa.png');
+	map.addMarker({ //Naples
+	lat: 26.2741,
+	lng: -81.8218,
+	icon: image
+    }, 'img/map/naples.png');
     map.addMarker({ //ROC
 	lat: 43.162159,
 	lng: -77.613415,
 	icon: image
     }, 'img/map/roc.png');
     map.addMarker({ //Bahamas
-	lat: 24.588038,
-	lng: -77.957718,
+	lat: 24.0685,
+	lng: -74.5353,
 	icon: image
     }, 'img/map/bahamas.png');
     map.addMarker({ //Krakv
@@ -532,12 +552,12 @@ function map() {
 	lat: 52.227388,
 	lng: 20.998015,
 	icon: image
-    });
+    }, 'img/map/warsaw.png');
     map.addMarker({ //Myrtle Beach
 	lat: 33.688879,
 	lng: -78.885677,
 	icon: image
-    });
+    }, 'img/map/myrtlebeach.png');
     map.addMarker({ //Amalfi
 	lat: 40.631020,
 	lng:  14.577926,
@@ -552,8 +572,8 @@ function map() {
 	lat: 58.28454,
 	lng:  12.291748,
 	icon: baby,
-    animation:google.maps.Animation.DROP
-    });
+    animation:google.maps.Animation.DROP,
+    }, 'img/map/trollhatan.png');
 }
 
 /* =========================================
