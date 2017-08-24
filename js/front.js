@@ -443,6 +443,11 @@ function map() {
 	lng: -122.415284,
 	icon: image
     }, 'img/map/sanfran.png');
+	map.addMarker({ //Stewarts Point
+	lat: 38.6524,
+	lng: -123.3989,
+	icon: image
+    }, 'img/map/stewartspoint.png');
     map.addMarker({ //LA
 	lat: 34.050908,
 	lng: -118.256591,
@@ -534,8 +539,8 @@ function map() {
 	icon: image
     }, 'img/map/naples.png');
     map.addMarker({ //ROC
-	lat: 43.162159,
-	lng: -77.613415,
+	lat: 43.0861,
+	lng: -77.6705,
 	icon: image
     }, 'img/map/roc.png');
     map.addMarker({ //Bahamas

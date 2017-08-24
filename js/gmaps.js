@@ -222,6 +222,8 @@ var GMaps = (function(global) {
     this.zoom = options.zoom;
     this.registered_events = {};
 
+    this.lastInfoWindowOpen = null;
+
     this.el.style.width = options.width || this.el.scrollWidth || this.el.offsetWidth;
     this.el.style.height = options.height || this.el.scrollHeight || this.el.offsetHeight;
 
@@ -688,18 +690,13 @@ GMaps.prototype.addMarker = function(options, image) {
     this.markerClusterer.addMarker(marker);
   }
 
-  // marker.info = new google.maps.InfoWindow({
-  //   content: '<div><IMG SRC=' + image + ' STYLE="max-width:100%;max-height=100%"/></div>',
-  //   maxWidth: 400
-  // });
-
   GMaps.fire('marker_added', marker, this);
   
   google.maps.event.addListener(marker, 'click', function() {
     marker.info = new google.maps.InfoWindow({
-    content: '<div><IMG SRC=' + image + ' STYLE="max-width:100%;max-height=100%"/></div>',
-    maxWidth: 400
-  });
+      content: '<div><IMG SRC=' + image + ' STYLE="max-width:100%;max-height=100%"/></div>',
+      maxWidth: 400
+    });
     marker.info.open(options.map, marker);
   });
 
