@@ -132,3 +132,11 @@ body .dot {
   -o-animation: r-to-l 0.4s infinite;
   animation: r-to-l 0.4s infinite;
 }
+
+#borderimg1 { 
+    border: 10px solid transparent;
+    padding: 10px;
+    -webkit-border-image: url('../img/map/border.png') 30 stretch; /* Safari 3.1-5 */
+    -o-border-image: url('../img/map/border.png') 30 stretch; /* Opera 11-12.1 */
+    border-image: url('../img/map/border.png') 30 stretch;
+}

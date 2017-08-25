@@ -669,7 +669,7 @@ GMaps.prototype.createMarker = function(options) {
   return marker;
 };
 
-GMaps.prototype.addMarker = function(options, image) {
+GMaps.prototype.addMarker = function(options, image, title) {
   var marker;
   if(options.hasOwnProperty('gm_accessors_')) {
     // Native google.maps.Marker object
@@ -694,7 +694,8 @@ GMaps.prototype.addMarker = function(options, image) {
   
   google.maps.event.addListener(marker, 'click', function() {
     marker.info = new google.maps.InfoWindow({
-      content: '<div><IMG SRC=' + image + ' STYLE="max-width:100%;max-height=100%"/></div>',
+      content: '<div id="borderimg1"><div style="float: left; font-weight: bold;"><p>' + title + '</p></div>' + 
+      '<IMG SRC=' + image + ' STYLE="max-width:100%;max-height=100%"/></div>',
       maxWidth: 400
     });
     marker.info.open(options.map, marker);

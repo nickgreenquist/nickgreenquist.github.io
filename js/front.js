@@ -407,102 +407,102 @@ function map() {
 	lat: 40.166692,
 	lng: -74.021636,
 	icon: star
-    }, 'img/map/springlake.png');
+    }, 'img/map/springlake.png', 'Lifeguard Photo Contest - Winning Photo, Spring Lake 2014');
     map.addMarker({ //GDYNIA
 	lat: 54.518195,
 	lng: 18.530690,
 	icon: image
-    }, 'img/map/gdynia.png');
+    }, 'img/map/gdynia.png', 'Me with Mom at my 22nd birthday dinner, Gdynia 2016');
     map.addMarker({ //Vegas
 	lat: 36.169912,
 	lng: -115.131055,
 	icon: image
-    }, 'img/map/vegas.png');
+    }, 'img/map/vegas.png', 'Hoover Dam with Dad, Las Vegas 2015');
 	map.addMarker({ //Grand Canyon
 	lat: 36.1070,
 	lng: -112.1130,
 	icon: image
-    }, 'img/map/grandcanyon.png');
+    }, 'img/map/grandcanyon.png', 'Hanging on for dear life, Grand Canyon 2015');
     map.addMarker({ //Tornoto
 	lat: 43.653691,
 	lng: -79.364325,
 	icon: image
-    }, 'img/map/toronto.png');
+    }, 'img/map/toronto.png', 'Top of the CN Tower, Toronto 2017');
 	map.addMarker({ //Chicago
 	lat: 41.8781,
 	lng: -87.6298,
 	icon: image
-    }, 'img/map/chicago.png');
+    }, 'img/map/chicago.png', 'D3 Wrestling Exchange Trip first practice, Chicago 2015');
 	map.addMarker({ //Pittsburgh
 	lat: 40.4406,
 	lng: -79.9959,
 	icon: image
-    }, 'img/map/pittsburgh.png');
+    }, 'img/map/pittsburgh.png', 'Watching the US Womens Soccer Team with my good friend Kasey, Pittsburgh 2015');
     map.addMarker({ //San Fran
 	lat: 37.775612,
 	lng: -122.415284,
 	icon: image
-    }, 'img/map/sanfran.png');
+    }, 'img/map/sanfran.png', 'Golden Gate Bridge, San Francisco 2014');
 	map.addMarker({ //Stewarts Point
 	lat: 38.6524,
 	lng: -123.3989,
 	icon: image
-    }, 'img/map/stewartspoint.png');
+    }, 'img/map/stewartspoint.png', 'Hiking with Uncle Charlie, Melinda, and Dahlia, Stewarts Point 2014');
     map.addMarker({ //LA
 	lat: 34.050908,
 	lng: -118.256591,
 	icon: image
-    }, 'img/map/la.png');
+    }, 'img/map/la.png', 'Hiking the Hollywood sign with my friend Jake, LA 2016');
     map.addMarker({ //Istanbul
 	lat: 41.011200,
 	lng: 28.979184,
 	icon: image
-    }, 'img/map/istanbul.png');
+    }, 'img/map/istanbul.png', 'Hagia Sophia with Tate from the D3 Wrestling Exchange Trip, Istanbul 2015');
     map.addMarker({ //Paris
 	lat: 48.857031,
 	lng: 2.350301,
 	icon: image
-    }, 'img/map/paris.png');
+    }, 'img/map/paris.png', 'D3 Wrestling Exchange Trip\'s version of the Eiffel Tower, Paris 2015');
     map.addMarker({ //Stockholm
 	lat: 59.327818,
 	lng: 18.062383,
 	icon: image
-    }, 'img/map/stockholm.png');
+    }, 'img/map/stockholm.png', 'First time visiting Sweden since I was born, Stockholm 2016');
     map.addMarker({ //Chichen Itza
 	lat: 20.684425,
 	lng: -88.567085,
 	icon: image
-    }, 'img/map/chichenitza.png');
+    }, 'img/map/chichenitza.png', 'Climbing the pyramid, Chichen Itza ????');
     map.addMarker({ //Biucharest
 	lat: 44.427934,
 	lng: 26.096002,
 	icon: image
-    }, 'img/map/bucharest.png');
+    }, 'img/map/bucharest.png', 'Streets of Bucharest with Jake from the D3 Wrestling Exchange Trip, Bucharest 2015');
     // map.addMarker({ //Key West
 	// lat: 24.555082,
 	// lng: -81.780176,
 	// icon: image
     // });
-    map.addMarker({ //Atlanta
-	lat: 33.747653,
-	lng: -84.390402,
+    map.addMarker({ //Marietta
+	lat: 33.9526,
+	lng: -84.5499,
 	icon: image
-    }, 'img/map/marrieta.png');
+    }, 'img/map/marrieta.png', 'Graduating Primrose Preschool, Marietta 1998');
     map.addMarker({ //DC
 	lat: 38.906746,
 	lng: -77.039295,
 	icon: image
-    }, 'img/map/dc.png');
+    }, 'img/map/dc.png', 'Touring DC with my sister Iris after our failed attempts to reach Poland, DC 2015');
     map.addMarker({ //Park City
 	lat: 40.646838,
 	lng: -111.500307,
 	icon: image
-    }, 'img/map/pc.png');
+    }, 'img/map/pc.png', 'Neff Land with the boys during Spring Break, Park City 2015');
     map.addMarker({ //Kennebunkport
 	lat: 43.361770,
 	lng: -70.481091,
 	icon: image
-    }, 'img/map/kennebunk.png');
+    }, 'img/map/kennebunk.png', 'Rugosa Lobster Tour, Kennebunkport 2017');
 	// map.addMarker({ //Freeport
 	// lat: 43.8579,
 	// lng: -70.1034,
@@ -517,68 +517,73 @@ function map() {
 	lat: 18.858900,
 	lng: -70.045139,
 	icon: image
-    }, 'img/map/dominicanrepublic.png');
+    }, 'img/map/dominicanrepublic.png', 'Exploring the countryside, Dominican Republic ????');
     map.addMarker({ //Miami
 	lat: 25.761593,
 	lng: -80.192554,
 	icon: image
-    }, 'img/map/miami.png');
+    }, 'img/map/miami.png', 'Jungle Island, Miami 2016');
     map.addMarker({ //Orlando
 	lat: 28.3852,
 	lng: -81.5639,
 	icon: image
-    }, 'img/map/orlando.png');
+    }, 'img/map/orlando.png', '4th of July in Disney World with Kayla, Orlando 2016');
 	map.addMarker({ //Tampa
 	lat: 27.9506,
 	lng: -82.4572,
 	icon: image
-    }, 'img/map/tampa.png');
+    }, 'img/map/tampa.png', 'Kayaking with my sister Dahlia, Kayla, and Codie, Tampa 2016');
 	map.addMarker({ //Naples
 	lat: 26.2741,
 	lng: -81.8218,
 	icon: image
-    }, 'img/map/naples.png');
-    map.addMarker({ //ROC
+    }, 'img/map/naples.png', 'Visiting Grandpa Tom, Naples 2016');
+	map.addMarker({ //Hamilton
+	lat: 43.0521,
+	lng: -75.4061,
+	icon: image
+    }, 'img/map/hamilton.png', 'Iris\' Graduation, Hamilton College 2012');
+	map.addMarker({ //ROC
 	lat: 43.0861,
 	lng: -77.6705,
 	icon: image
-    }, 'img/map/roc.png');
+    }, 'img/map/roc.png', 'Graduating from Rochester Institute of Technology, Rochester 2017');
     map.addMarker({ //Bahamas
 	lat: 24.0685,
 	lng: -74.5353,
 	icon: image
-    }, 'img/map/bahamas.png');
+    }, 'img/map/bahamas.png', 'Acting in a play at Club Med, Bahamas ????');
     map.addMarker({ //Krakv
 	lat: 50.066519,
 	lng: 19.943754,
 	icon: image
-    }, 'img/map/krakow.png');
+    }, 'img/map/krakow.png', 'Visiting Wawel Castle with my Mom and my sister Iris, Krakow 2013');
     map.addMarker({ //Warsaw
 	lat: 52.227388,
 	lng: 20.998015,
 	icon: image
-    }, 'img/map/warsaw.png');
+    }, 'img/map/warsaw.png', 'First Christmas, Warsaw 1994');
     map.addMarker({ //Myrtle Beach
 	lat: 33.688879,
 	lng: -78.885677,
 	icon: image
-    }, 'img/map/myrtlebeach.png');
+    }, 'img/map/myrtlebeach.png', 'Summer vacation with the Menezes family, Myrtle Beach ????');
     map.addMarker({ //Amalfi
 	lat: 40.631020,
 	lng:  14.577926,
 	icon: image
-    }, 'img/map/amalfi.png');
+    }, 'img/map/amalfi.png', 'Kurt Glaser\'s mother\'s wedding day, Amalfi Coast 2007');
     map.addMarker({ //Bulgaria
-	lat: 42.501283,
-	lng:  25.107659,
+	lat: 43.7622,
+	lng:  27.6727,
 	icon: image
-    }, 'img/map/bulgaria.png');
+    }, 'img/map/bulgaria.png', 'Competing in a traditional Bulgarian wrestling festival, Cherna 2015');
     map.addMarker({ //Born here
 	lat: 58.28454,
 	lng:  12.291748,
 	icon: baby,
     animation:google.maps.Animation.DROP,
-    }, 'img/map/trollhatan.png');
+    }, 'img/map/trollhatan.png', 'Start of the journey, Trollhattan 1994');
 }
 
 /* =========================================
