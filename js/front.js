@@ -538,6 +538,11 @@ function map() {
 	lng: -81.8218,
 	icon: image
     }, 'img/map/naples.png', 'Visiting Grandpa Tom, Naples 2016');
+	map.addMarker({ //Killington
+	lat: 43.6045,
+	lng: -72.8201,
+	icon: image
+    }, 'img/map/killington.png', 'Ski trip to Lauren\'s house in Vermont, Killington 2016');
 	map.addMarker({ //Hamilton
 	lat: 43.0521,
 	lng: -75.4061,
