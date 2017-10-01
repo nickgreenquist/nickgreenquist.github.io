@@ -139,17 +139,22 @@ function sliding() {
 
      if(fileName === "Resume.pdf") {
       // open link like normal
-      }
+	  }
+	  
       
       else {
        var parts = full_url.split("#");
 	   var trgt = parts[1];
-       event.preventDefault();
+	   event.preventDefault();
+	   
+	   $("html, body").animate({
+        scrollTop: $('#' + trgt).offset().top
+    	});
 
-	   $('body').scrollTo($('#' + trgt), 800, {offset: -80});
+	   //$('body').scrollTo($('#' + trgt), 800, {offset: -80});
       }
 
-    });
+	});
 }
 
 /* =========================================
