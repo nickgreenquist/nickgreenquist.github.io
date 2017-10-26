@@ -669,6 +669,7 @@ GMaps.prototype.createMarker = function(options) {
   return marker;
 };
 
+var infowindow;
 GMaps.prototype.addMarker = function(options, image, title) {
   var marker;
   if(options.hasOwnProperty('gm_accessors_')) {
@@ -693,12 +694,13 @@ GMaps.prototype.addMarker = function(options, image, title) {
   GMaps.fire('marker_added', marker, this);
   
   google.maps.event.addListener(marker, 'click', function() {
-    marker.info = new google.maps.InfoWindow({
+    if (infowindow) { infowindow.close();}
+    infowindow = new google.maps.InfoWindow({
       content: '<div id="borderimg1"><div style="float: left; font-weight: bold;"><p>' + title + '</p></div>' + 
       '<IMG SRC=' + image + ' STYLE="max-width:100%;max-height=100%"/></div>',
       maxWidth: 400
     });
-    marker.info.open(options.map, marker);
+    infowindow.open(options.map, marker);
   });
 
   google.maps.event.addListener(marker, 'rightclick', function() {
@@ -714,6 +716,7 @@ GMaps.prototype.addMarker = function(options, image, title) {
 
   return marker;
 };
+
 
 GMaps.prototype.addMarkers = function(array) {
   for (var i = 0, marker; marker=array[i]; i++) {
