@@ -172,6 +172,35 @@ _________________________________________________________ -->
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <!-- Trigger the Modal -->
+                            <img id="myImg4" src="../img/wrestling/senior_year.jpg" alt="Senior Year, Saint Rose" class="image img-responsive modal-image">   
+                            <div class="caption">
+                            <p>Senior Year, Saint Rose</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <!-- Trigger the Modal -->
+                            <img id="myImg5" src="../img/wrestling/USA.jpg" alt="Off Season Tournament" class="image img-responsive modal-image">   
+                            <div class="caption">
+                            <p>Off Season Tournament</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="thumbnail">
+                            <!-- Trigger the Modal -->
+                            <img id="myImg6" src="../img/wrestling/slam.jpg" alt="Slam!" class="image img-responsive modal-image">   
+                            <div class="caption">
+                            <p>Slam!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -282,6 +311,27 @@ _________________________________________________________ -->
 
         var img3 = document.getElementById('myImg3');
         img3.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+
+        var img4 = document.getElementById('myImg4');
+        img4.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+
+        var img5 = document.getElementById('myImg5');
+        img5.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+        }
+
+        var img6 = document.getElementById('myImg6');
+        img6.onclick = function(){
             modal.style.display = "block";
             modalImg.src = this.src;
             captionText.innerHTML = this.alt;
