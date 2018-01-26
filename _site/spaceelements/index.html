@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Space Elements</title>
+	
+	<!--import scripts-->
+	<script src="scripts/utils.js"></script>
+	<script src="scripts/player.js"></script>
+	<script src="scripts/Bullet.js"></script>
+	<script src="scripts/audio.js"></script>
+	<script src="scripts/Enemy.js"></script>
+	<script src="scripts/Upgrades.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
+	<script>
+		"use strict";
+		
+		window.addEventListener("load",loadImages);
+		
+		//Constants
+		var CANVAS_WIDTH = 640;
+		var CANVAS_HEIGHT = 480;
+		var KEYBOARD={
+			"KEY_LEFT":37,
+			"KEY_UP":38,
+			"KEY_RIGHT":39,
+			"KEY_DOWN":40,
+			"KEY_SPACE":32,
+			"KEY_E":69,
+			"KEY_W":87,
+			"KEY_Q":81
+		};
+		var IMAGE_SOURCES={ //image array used in other classes
+			playerImageRed:"images/Player/playerShipRed.png",
+			playerImageRedLeft:"images/Player/playerShipRedLeft.png",
+			playerImageRedRight:"images/Player/playerShipRedRight.png",
+			playerImageGreen:"images/Player/playerShipGreen.png",
+			playerImageGreenLeft:"images/Player/playerShipGreenLeft.png",
+			playerImageGreenRight:"images/Player/playerShipGreenRight.png",
+			playerImageBlue:"images/Player/playerShipBlue.png",
+			playerImageBlueLeft:"images/Player/playerShipBlueLeft.png",
+			playerImageBlueRight:"images/Player/playerShipBlueRight.png",
+			enemyImage:"images/enemy.png",
+			enemyImageHit:"images/enemyHit.png",
+			redEnemyImage: "images/meteor.png",
+			redEnemyImageHit: "images/meteorHit.png",
+			greenEnemyImage: "images/shooter.png",
+			greenEnemyImageHit: "images/shooterHit.png",
+			blueEnemyImage: "images/tracker.png",
+			blueEnemyImageR: "images/trackerR.png",
+			blueEnemyImageL: "images/trackerL.png",
+			blueEnemyImageH: "images/trackerHit.png",
+			blueEnemyImageHR: "images/trackerHitR.png",
+			blueEnemyImageHL: "images/trackerHitL.png",
+			backgroundImage: "images/scoreBack.png",
+			spaceBackground: "images/spaceBackground.png",
+			spaceBackground2: "images/space2.png",
+			spaceBackground3: "images/space3.png",
+			spaceBackground4: "images/space4.png",
+			explosion: "images/Player/explosionframes.png",
+			boss: "images/boss.png",
+			bossHit: "images/bossHit.png"
+		};
+		var FIRE_RATE = 5;
+		var ENEMY_PROBABILIY_PER_SECOND = 1.0;
+		
+		//Globals
+		var ctx;
+		var player;
+		var paused;
+		var lastTime = 0;
+		var bC = 0;//background picture changer
+		var keydown = []; 
+		var images={};
+		var playerBullets = [];
+		var enemyBullets = [];
+		var cooldown = 0;
+		var enemies = [];
+		var score = 0;
+		var lives = 10;
+		var bossTrigger = 100;
+		var bossActive = false;
+		var enemyHP = 1;
+		var mainMenu = true;
+		var endScreen = false;
+		var lastScore = 0;
+		var upgrade = [];
+		var dropUpgrade = false;
+		var backgroundCounter = -470;
+		var start1 = false;
+		var start2 = false;
+		var start3 = false;
+		var start4 = false;
+		//var playerSpriteX = 16;
+		//var playerSpriteY = 506;
+		//var playerSpriteW = 36;
+		//var playerSpriteH = 22;
+		
+		//this function sets up a huge amount of stuff the game needs
+		function init() {
+			var canvasElement = document.querySelector("canvas");
+			canvasElement.width = CANVAS_WIDTH;
+			canvasElement.height = CANVAS_HEIGHT
+			
+			//get a 2D rendering context
+			ctx = canvasElement.getContext("2d");
+			
+			//setup
+			//preload audio
+			audio.playBulletSound(0);
+			audio.playExplosionSound(0);
+			
+			//start BG music
+			audio.playBackgroundSound(.3);
+			
+			//start game
+			animate();
+			
+			//event listeners
+			window.addEventListener("keydown",function(e) {
+				//console.log("keydown=" + e.keyCode);
+				keydown[e.keyCode] = true;
+			});
+			
+			window.addEventListener("keyup",function(e) {
+				//console.log("keyup=" + e.keyCode);
+				keydown[e.keyCode] = false;
+			});
+		}
+		
+		//helper method to calculate time
+		function calculateDeltaTime() {
+			var now;
+			var fps;
+			now = (+new Date);
+			fps = 1000 / (now - lastTime);
+			fps = clamp(fps,12,60);
+			lastTime = now;
+			return 1/fps;
+		}
+		
+		//handles requesting animation and calling update and draw
+		function animate() {
+			var dt = calculateDeltaTime();
+			
+			if(!paused) {
+				//1) Update sprites
+				if(mainMenu == true){
+					update(dt);
+					
+					
+				
+				//2)draw background
+					drawBackground();
+				
+				//3) draw everything else
+					drawSprites();
+					drawScore(ctx);
+					
+					drawMain();
+				}
+				
+				else if(endScreen == true){
+					drawEnd();
+				}
+				
+				else{
+					update(dt);
+				
+				//2)draw background
+					drawBackground();
+				
+				//3) draw everything else
+					drawSprites();
+					drawScore(ctx);
+				}
+			}
+			
+			window.requestAnimationFrame(animate);
+		}
+		
+		//draw the main menu
+		function drawMain(){
+			
+			if(start1 == false){
+				ctx.font = "20px Audiowide";
+				ctx.fillStyle = "red";
+				ctx.fillText("Be red ('Q') and shoot ('Spacebar')", 50, 200);
+				
+			
+				if(player.color == "red" && keydown[KEYBOARD.KEY_SPACE] ){
+					start1 = true;
+				}
+			}
+			else if(start2 == false){
+				ctx.font = "20px Audiowide";
+				ctx.fillStyle = "green";
+				ctx.fillText("Be green ('W') and shoot ('Spacebar')", 50, 200);
+				
+				
+				if(player.color == "green" && keydown[KEYBOARD.KEY_SPACE]){
+					start2 = true;
+				}
+			}
+			else if(start3 == false){
+				ctx.font = "20px Audiowide";
+				ctx.fillStyle = "blue";
+				ctx.fillText("Be blue ('E') and shoot ('Spacebar')", 50, 200);
+				
+				if(player.color == "blue" && keydown[KEYBOARD.KEY_SPACE]){
+					start3 = true;
+				}
+			}
+			else if(start4 == false){
+				ctx.font = "20px Audiowide";
+				ctx.fillStyle = "red";
+				ctx.fillText("Be red ('Q') and shoot ('Spacebar')", 50, 200);
+				ctx.fillText("TO BEGIN", 50, 300);
+				
+				if(player.color == "red" && keydown[KEYBOARD.KEY_SPACE]){
+					mainMenu = false;
+					start4 = true;
+				}
+			}
+		}
+		
+		//draw the end game screen
+		function drawEnd(){
+			var grad = ctx.createLinearGradient(0,0,0,CANVAS_HEIGHT);
+			grad.addColorStop(0,"grey"); //top
+			grad.addColorStop(1,"black"); //bottom
+
+			ctx.fillStyle=grad; 
+			ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+			
+			ctx.font = "30px Audiowide";
+			ctx.fillStyle = "blue";
+			ctx.fillText("Press 'E' to play the game", 50, 200);
+			ctx.fillStyle = "red";
+			ctx.fillText("Score: " + lastScore, 50, 300);
+			
+			
+			if(keydown[KEYBOARD.KEY_E]){
+				mainMenu = true;
+				endScreen= false;
+				
+			}
+		}
+		
+		//main game update
+		function update(dt) {
+			
+			//this occurs when the player dies
+			if(lives == 0){
+				lastScore = score;
+				score = 0;
+				lives= 5;
+				player.x = (CANVAS_WIDTH / 2) - 50;
+				player.y = (CANVAS_HEIGHT - player.height);
+				player.greenUpgrade = false;
+				player.redUpgrade = false;
+				player.blueUpgrade = false;
+				enemyHP = 1;
+				playerBullets = [];
+				bossActive = false;
+				
+				enemyBullets = [];
+				enemies = [];
+				upgrade = [];
+				
+				endScreen= true;
+				
+				start4 = false;
+				bC = 0;
+				
+				
+			}
+			player.direction = "straight";
+			
+			if(!player.isHit)
+			{
+				if(keydown[KEYBOARD.KEY_LEFT]){
+					player.x-=player.speed*dt;
+					player.direction = "left";
+				}
+			
+				if(keydown[KEYBOARD.KEY_RIGHT]){
+					player.x+=player.speed*dt;
+					player.direction = "right";
+				}
+			
+				if(keydown[KEYBOARD.KEY_UP]){
+					player.y-=player.speed*dt;
+				}
+			
+				if(keydown[KEYBOARD.KEY_DOWN]){
+					player.y+=player.speed*dt;
+				}
+			}
+			//change ship color
+			if(keydown[KEYBOARD.KEY_Q]){
+				//player.playerSpriteX  = 16;
+				player.color = "red";
+			}
+			if(keydown[KEYBOARD.KEY_W]){
+				//player.playerSpriteX  = 124;
+				player.color = "green";
+			}
+			if(keydown[KEYBOARD.KEY_E]){
+				//player.playerSpriteX  = 160;
+				player.color = "blue";
+			}
+			
+			//clamp the players position to prevent leaving screen
+			player.x = clamp(player.x,0,CANVAS_WIDTH-100-(player.width));
+			player.y = clamp(player.y,0,CANVAS_HEIGHT-(player.height));
+			
+			//clamp the enemy x position?????
+			enemies.forEach(function(enem){
+				enem.x = clamp(enem.x ,0+enem.width,CANVAS_WIDTH-100-enem.width);
+			});
+			
+			
+			
+			//Bullet
+			cooldown--;
+			if(player.greenUpgrade == true && player.color == "green") { cooldown--; }
+			if(player.redUpgrade == true && player.color == "red") { cooldown--; }
+			//poll keyboard
+			if(cooldown <= 0 && keydown[KEYBOARD.KEY_SPACE] && !player.isHit) {
+				shoot(player.x, player.y);
+				cooldown = 60/FIRE_RATE; //assumes fps is 60
+				if(player.color == "red") {
+					cooldown /= 2;
+				}
+				audio.playBulletSound(.1);
+			}
+			playerBullets.forEach(function(bullet) {
+				bullet.update(dt);
+			});
+			enemyBullets.forEach(function(bullet) { 
+				bullet.update(dt); 
+			});
+			upgrade.forEach(function(up) { 
+				up.update(dt); 
+			});
+			
+			
+			//array.filter() returns a new array with only active bullets
+			playerBullets = playerBullets.filter(function(bullet) {
+				return bullet.active;
+			});
+			enemyBullets = enemyBullets.filter(function(bullet) { 
+				return bullet.active; 
+			});
+			upgrade = upgrade.filter(function(upgrad) { 
+				return upgrad.active; 
+			});
+			
+			//enemy shooting, includes boss
+			enemies.forEach(function(enemy) {
+				enemy.update(dt,player.x); 
+				if(enemy.shooting == true){
+					enemyBullets.push(new Bullet(enemy.x + (enemy.width / 2),enemy.y + enemy.height,-400,"white"));
+					if(enemy.boss == true) {
+						enemyBullets.push(new Bullet(enemy.x + (enemy.width / 2),enemy.y + enemy.height,-400,"white"));
+						enemyBullets[enemyBullets.length-1].xVelocity = 400;
+						enemyBullets.push(new Bullet(enemy.x + (enemy.width / 2),enemy.y + enemy.height,-400,"white"));
+						enemyBullets[enemyBullets.length-1].xVelocity = -400;
+						enemyBullets.push(new Bullet(enemy.x + (enemy.width / 2),enemy.y,400,"white"));
+						enemyBullets[enemyBullets.length-1].xVelocity = 400;
+						enemyBullets.push(new Bullet(enemy.x + (enemy.width / 2),enemy.y,400,"white"));
+						enemyBullets[enemyBullets.length-1].xVelocity = -400;
+						enemyBullets.push(new Bullet(enemy.x + (enemy.width / 2),enemy.y,400,"white"));
+						enemyBullets.push(new Bullet(enemy.x + (enemy.width / 2),enemy.y + (enemy.height / 2),0,"white"));
+						enemyBullets[enemyBullets.length-1].xVelocity = -400;
+						enemyBullets.push(new Bullet(enemy.x + (enemy.width / 2),enemy.y + (enemy.height / 2),0,"white"));
+						enemyBullets[enemyBullets.length-1].xVelocity = 400;
+					}
+				}
+			});
+			
+			enemies = enemies.filter(function(enemy) {
+				return enemy.active;
+			});
+			
+			//spawn enemies
+			if(score > bossTrigger && !mainMenu)
+			{
+				enemies.push(new Enemy(CANVAS_WIDTH / 2,CANVAS_HEIGHT,"NA",10,score));
+				enemies[enemies.length-1].width = 128;
+				enemies[enemies.length-1].height = 128;
+				enemies[enemies.length-1].boss = true;
+				enemies[enemies.length-1].shotTimer = 90 - (20*(score / 100));
+				if(enemies[enemies.length-1].shotTimer <= 25) { enemies[enemies.length-1].shotTimer = 25; }
+				bossTrigger += 100;
+				bC++;
+				bossActive = true;
+				enemyHP+=1;
+				ENEMY_PROBABILIY_PER_SECOND+=.2;//only happens once since +=100 stops it for a bit
+				
+			}
+			if(!bossActive && !mainMenu) {
+				if(Math.random() < ENEMY_PROBABILIY_PER_SECOND/60) {
+					var randomNum = Math.random() * 6;
+					if(randomNum > 0 && randomNum < 1) {
+						enemies.push(new Enemy(CANVAS_WIDTH,CANVAS_HEIGHT,"red",100,enemyHP));
+					}
+					else if(randomNum > 1 && randomNum < 2) { 
+						enemies.push(new Enemy(CANVAS_WIDTH,CANVAS_HEIGHT,"green",50,enemyHP));
+					}
+					else if(randomNum > 2 && randomNum < 3) {
+						enemies.push(new Enemy(CANVAS_WIDTH,CANVAS_HEIGHT,"blue",100,enemyHP));
+					}
+					else {
+						//console.log("Random number: " + randomNum);
+						enemies.push(new Enemy(CANVAS_WIDTH,CANVAS_HEIGHT,"NA",100,enemyHP));
+						//console.log("New Enemy created! enemies.length = " + enemies.length);
+					}
+				}
+			}
+			
+			//create the upgrade drop
+			if(dropUpgrade == true){
+				dropUpgrade = false;
+				var upgradeColor = "black";
+				var darand = Math.random() * 8;
+				if(darand < 3){upgradeColor = "blue"; }
+				if(darand >=3 && darand <6 ){upgradeColor = "green";}
+				if(darand >=6){upgradeColor = "red"; }
+				upgrade.push(new Upgrades(CANVAS_WIDTH/2,30,-50,upgradeColor)); 
+			}
+			
+			
+			
+			handleCollisions();
+			
+			
+		}
+		
+		function drawSprites() {
+			//draw player
+			player.draw(ctx);
+			//draw bullets
+			playerBullets.forEach(function(bullet) {
+				bullet.draw(ctx);
+			});
+			enemyBullets.forEach(function(bullet) { 
+				bullet.draw(ctx); 
+			});
+			upgrade.forEach(function(up) { 
+				up.draw(ctx); 
+			});
+			//draw enemies
+			enemies.forEach(function(enemy) {
+				enemy.draw(ctx);
+			});
+		}
+		
+		function drawBackground() {		
+			if(bC ==0){
+				ctx.drawImage(images["spaceBackground"],0 ,backgroundCounter);
+			}
+			if(bC ==1){
+				ctx.drawImage(images["spaceBackground2"],0 ,backgroundCounter);
+			}
+			if(bC ==2){
+				ctx.drawImage(images["spaceBackground3"],0 ,backgroundCounter);
+			}
+			if(bC ==3){
+				ctx.drawImage(images["spaceBackground4"],0 ,backgroundCounter);
+			}
+			
+			backgroundCounter+=15;
+			
+			if(backgroundCounter >=-15){
+				backgroundCounter = -470;
+			}
+			
+			ctx.drawImage(images["backgroundImage"],CANVAS_WIDTH - 100 ,0);
+			
+			
+		}
+		
+		function loadImages(){
+			var numLoadedImages = 0;
+			var numImages = 0;
+			//get num of sources
+			for(var imageName in IMAGE_SOURCES) {
+				numImages++;
+			} //end for
+			
+			//load images
+			for(var imageName in IMAGE_SOURCES) {
+				console.log("Started loading " + imageName);
+				images[imageName] = new Image(); //Image in class
+				images[imageName].src = IMAGE_SOURCES[imageName];
+				
+				images[imageName].onload = function() {
+					console.log(this.src + " load complete");
+					if(++numLoadedImages >= numImages) {
+						console.log("Done Loading Images");
+						init(); //start the game
+					}
+				}
+			} //end for
+		}
+		
+		//enemy shooting logic
+		function shoot(x,y) {
+			console.log("shots fired");
+			if(player.color == "blue") {
+				playerBullets.push(new Bullet(x + (player.width / 2) ,y,370,player.color));
+				playerBullets.push(new Bullet(x + (player.width / 2),y,-370,player.color));
+				playerBullets.push(new Bullet(x + (player.width / 2),y,0,player.color));
+				playerBullets[playerBullets.length-1].xVelocity = 370;
+				playerBullets.push(new Bullet(x + (player.width / 2),y,0,player.color));
+				playerBullets[playerBullets.length-1].xVelocity = -370;
+				if(player.blueUpgrade == true) {
+					playerBullets.push(new Bullet(x + (player.width / 2),y,185,player.color));
+					playerBullets[playerBullets.length-1].xVelocity = 185;
+					playerBullets.push(new Bullet(x + (player.width / 2),y,185,player.color));
+					playerBullets[playerBullets.length-1].xVelocity = -185;
+					playerBullets.push(new Bullet(x + (player.width / 2),y,-185,player.color));
+					playerBullets[playerBullets.length-1].xVelocity = 185;
+					playerBullets.push(new Bullet(x + (player.width / 2),y,-185,player.color));
+					playerBullets[playerBullets.length-1].xVelocity = -185;
+				}
+			}
+			if(player.color == "green") {
+				playerBullets.push(new Bullet(x + (player.width / 2),y,370,player.color));
+				playerBullets.push(new Bullet(x + (player.width / 2),y,370,player.color));
+				playerBullets[playerBullets.length-1].xVelocity = 100;
+				playerBullets.push(new Bullet(x + (player.width / 2),y,370,player.color));
+				playerBullets[playerBullets.length-1].xVelocity = -100;
+				if(player.greenUpgrade == true) {
+					playerBullets.push(new Bullet(x + (player.width / 2),y,370,player.color));
+					playerBullets[playerBullets.length-1].xVelocity = -200;
+					playerBullets.push(new Bullet(x + (player.width / 2),y,370,player.color));
+					playerBullets[playerBullets.length-1].xVelocity = 200;
+				}
+			}
+			if(player.color == "red") {
+				playerBullets.push(new Bullet(x + (player.width / 2),y,370,player.color));
+				if(player.redUpgrade == true) {
+					playerBullets.push(new Bullet(x + (player.width / 2),y,370,player.color));
+					playerBullets[playerBullets.length-1].x-=6;
+					playerBullets[playerBullets.length-2].x+=6;
+				}
+			}
+		}
+		
+		//helper collide method
+		function collides(a,b) {
+			return a.x < b.x + b.width && 
+				a.x + a.width > b.x &&
+				a.y < b.y + b.height &&
+				a.y + a.height > b.y;
+		} //end collides
+		
+		//code where collision is dealt with
+		function handleCollisions() {
+			playerBullets.forEach(function(bullet) {
+				enemies.forEach(function(enemy){
+					if(collides(bullet,enemy)) {
+						//enemy.explode();
+						enemy.loseHP(bullet);
+						if(!enemy.isSmall && enemy.color == "red" && bullet.color == "red" && enemy.hp == 0) //meteors split
+						{
+							console.log(enemy.type);
+							for(var i = 0; i < enemyHP + 1; i++)
+							{
+								enemies.push(new Enemy(CANVAS_WIDTH,CANVAS_HEIGHT,"red",100,1));
+								enemies[enemies.length-1].isSmall = true;
+								enemies[enemies.length-1].x = enemy.x;
+								enemies[enemies.length-1].y = enemy.y;
+								enemies[enemies.length-1].width = 20;
+								enemies[enemies.length-1].height = 20;
+							}
+						}
+						bullet.active = false;
+						
+						if(enemy.hp == 0)
+						{
+							score+=1;
+							audio.playExplosionSound(.5);
+						}
+						
+						//make the enemy flash red when hit
+						enemy.isHit = true;
+					}//end if
+				});//end forEach enemy
+			}); //end forEach bullet
+			
+			if(upgrade.length >0){
+				if (collides(upgrade[0], player)) { 
+		
+					console.log("POWER UP");
+					upgrade[0].active = false; 
+					if(upgrade[0].color == "red") { player.redUpgrade = true; }
+					if(upgrade[0].color == "green") { player.greenUpgrade = true; }
+					if(upgrade[0].color == "blue") { player.blueUpgrade = true; }
+					
+		
+				} 
+			}
+			
+			enemyBullets.forEach(function(bullet) { 
+				if (collides(bullet, player)) { 
+					if(!player.isHit)
+					{
+						player.explode();
+						//player.x = (CANVAS_WIDTH / 2) - 50;
+						//player.y = (CANVAS_HEIGHT - player.height);
+						lives--;
+						if(lives <= 0)
+						{
+							player.isHit = false;
+							lives = 0;
+						}
+					}
+					bullet.active = false; 
+					audio.playExplosionSound(.8);
+		
+				} 
+			 });
+			
+			enemies.forEach(function(enemy){
+				if(collides(enemy,player)){
+					if(!enemy.boss)
+					{	
+						enemy.isExplode = true;
+					}
+					if(!player.isHit)
+					{
+						player.explode();
+						//player.x = (CANVAS_WIDTH / 2) - 50;
+						//player.y = (CANVAS_HEIGHT - player.height);
+						lives--;
+						if(lives <= 0)
+						{
+							player.isHit = false;
+							lives = 0;
+						}
+					}
+					audio.playExplosionSound(.8);
+				}
+			});
+		} //end handleCollisions
+		
+		//draw this score and live onto the screen
+		function drawScore(ctx){
+			ctx.fillStyle = "brown";
+			//ctx.fillRect(CANVAS_WIDTH - 100, 0, 100 , CANVAS_HEIGHT);
+	
+			ctx.fillStyle = "red";
+			ctx.font = "18px Audiowide";
+			ctx.fillText("Score: " ,CANVAS_WIDTH - 80,50);
+			ctx.strokeStyle = "green";
+			ctx.strokeText("Score:",CANVAS_WIDTH - 80,50);
+			//ctx.filltext(score, 100,50);
+			ctx.fillText(" " + score ,CANVAS_WIDTH - 73,75);
+	
+			ctx.fillText("Lives: " ,CANVAS_WIDTH - 80,125);
+	
+			ctx.strokeText("Lives:",CANVAS_WIDTH - 80,125);
+
+			ctx.fillText(" " + lives ,CANVAS_WIDTH - 65,150);
+		}
+		
+		
+	</script>
+</head>
+<body>
+<canvas>
+	Get a real browser!
+</canvas>
+
+</body>
+</html>
