@@ -47,7 +47,7 @@ $(window).resize(function () {
 
 
 function onReady(callback) {
-    var intervalID = window.setInterval(checkReady, 1000);
+    var intervalID = window.setInterval(checkReady, 500); //Pac Man
   
     function checkReady() {
         if (document.getElementsByTagName('body')[0] !== undefined) {
@@ -269,9 +269,13 @@ $('#filter a').click(function (e) {
  *  =======================================*/
 
 $('.reference-item').click(function (e) {
-    e.preventDefault();
+	var element = $(this);
+	var link = element.find('a:first').attr('href');
 
-    var element = $(this);
+	if(link.length <= 1) {
+		e.preventDefault();
+	}
+
     var title = element.find('.reference-title').text();
     var description = element.find('.reference-description').html();
 
