@@ -399,7 +399,7 @@ function map() {
 	    position: 'TOP_LEFT'
 	},
 	panControl: false,
-    zoom: 3,
+    zoom: 2.5,
 	streetViewControl: false,
 	mapTypeControl: false,
 	overviewMapControl: false,
@@ -597,7 +597,13 @@ function map() {
 	lng:  12.291748,
 	icon: baby,
     animation:google.maps.Animation.DROP,
-    }, '../img/map/trollhatan.png', 'Start of the journey, Trollhattan 1994');
+	}, '../img/map/trollhatan.png', 'Start of the journey, Trollhattan 1994');
+	map.addMarker({ //Suzhou, China
+	lat: 31.298974,
+	lng:  120.585289,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/suzhou.png', 'Presenting research paper at IEEE Conference at Xi\'an Jiaotong-Liverpool University, Suzhou 2019');
 }
 
 /* =========================================
