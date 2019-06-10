@@ -604,6 +604,12 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/suzhou.png', 'Presenting research paper at IEEE Conference at Xi\'an Jiaotong-Liverpool University, Suzhou 2019');
+	map.addMarker({ //Nara, Japan
+	lat: 34.6851,
+	lng:  135.8048,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/nara.png', 'Feeding a tame deer at Nara Park, Nara 2019');
 }
 
 /* =========================================
