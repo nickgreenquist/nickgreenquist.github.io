@@ -610,6 +610,12 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/nara.png', 'Feeding a tame deer at Nara Park, Nara 2019');
+	map.addMarker({ //Tokyo, Japan
+	lat: 35.6762,
+	lng:  139.6503,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/tokyo.png', 'Action packed 5 days in this incredible city, Tokyo 2019');
 }
 
 /* =========================================
