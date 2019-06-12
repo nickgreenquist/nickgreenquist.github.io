@@ -396,7 +396,7 @@ function map() {
 	zoomControl: true,
 	zoomControlOpt: {
 	    style: 'SMALL',
-	    position: 'TOP_LEFT'
+	    position: 'RIGHT_TOP'
 	},
 	panControl: false,
     zoom: 2.5,
@@ -604,18 +604,24 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/suzhou.png', 'Presenting research paper at IEEE Conference at Xi\'an Jiaotong-Liverpool University, Suzhou 2019');
-	map.addMarker({ //Nara, Japan
-	lat: 34.6851,
-	lng:  135.8048,
-	icon: image,
-	animation:google.maps.Animation.DROP,
-	}, '../img/map/nara.png', 'Feeding a tame deer at Nara Park, Nara 2019');
 	map.addMarker({ //Tokyo, Japan
 	lat: 35.6762,
 	lng:  139.6503,
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/tokyo.png', 'Action packed 5 days in this incredible city, Tokyo 2019');
+	map.addMarker({ //Kyoto, Japan
+	lat: 35.0116,
+	lng:  135.7681,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/kyoto.png', 'Gion District, Fushimi Inari Shrine, Arashiyama Bamboo Grove and Monkey Park, and so much more, Kyoto 2019');
+	map.addMarker({ //Nara, Japan
+	lat: 34.6851,
+	lng:  135.8048,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/nara.png', 'Feeding a tame deer at Nara Park, Nara 2019');
 }
 
 /* =========================================
