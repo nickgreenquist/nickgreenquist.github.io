@@ -604,6 +604,13 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/suzhou.png', 'Presenting research paper at IEEE Conference at Xi\'an Jiaotong-Liverpool University, Suzhou 2019');
+	map.addMarker({ //Hakone, Japan
+	lat: 35.2096,
+	lng:  139.0035,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	zIndex: -1,
+	}, '../img/map/hakone.png', 'Mount Fuji in the background on Lake Ashi, Hakone 2019');
 	map.addMarker({ //Tokyo, Japan
 	lat: 35.6762,
 	lng:  139.6503,
@@ -622,6 +629,12 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/nara.png', 'Feeding a tame deer at Nara Park, Nara 2019');
+	map.addMarker({ //Osaka, Japan
+	lat: 34.6937,
+	lng:  135.5023,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/osaka.png', 'Dotonbori, Osaka Castle, and Dotonbori, Osaka 2019');
 }
 
 /* =========================================
