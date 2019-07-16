@@ -391,8 +391,8 @@ function map() {
     var styles = [{"featureType": "landscape", "stylers": [{"saturation": -100}, {"lightness": 65}, {"visibility": "on"}]}, {"featureType": "poi", "stylers": [{"saturation": -100}, {"lightness": 51}, {"visibility": "simplified"}]}, {"featureType": "road.highway", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "road.arterial", "stylers": [{"saturation": -100}, {"lightness": 30}, {"visibility": "on"}]}, {"featureType": "road.local", "stylers": [{"saturation": -100}, {"lightness": 40}, {"visibility": "on"}]}, {"featureType": "transit", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "administrative.province", "stylers": [{"visibility": "off"}]}, {"featureType": "water", "elementType": "labels", "stylers": [{"visibility": "on"}, {"lightness": -25}, {"saturation": -100}]}, {"featureType": "water", "elementType": "geometry", "stylers": [{"hue": "#ffff00"}, {"lightness": -25}, {"saturation": -97}]}];
     map = new GMaps({
 	el: '#map',
-	lat: 43,
-	lng: -75,
+	lat: 25,
+	lng: -96,
 	zoomControl: true,
 	zoomControlOpt: {
 	    style: 'SMALL',
@@ -481,7 +481,7 @@ function map() {
 	lat: 20.684425,
 	lng: -88.567085,
 	icon: image
-    }, '../img/map/chichenitza.png', 'Climbing the pyramid, Chichen Itza ????');
+    }, '../img/map/chichenitza.png', 'Looking confused in the bottom right corner, Chichen Itza ????');
     map.addMarker({ //Biucharest
 	lat: 44.427934,
 	lng: 26.096002,
@@ -501,7 +501,7 @@ function map() {
 	lat: 38.906746,
 	lng: -77.039295,
 	icon: image
-    }, '../img/map/dc.png', 'Touring DC with my sister Iris after our failed attempts to reach Poland, DC 2015');
+    }, '../img/map/dc.png', 'Touring the captial with my sister Iris, Washington DC 2015');
     map.addMarker({ //Park City
 	lat: 40.646838,
 	lng: -111.500307,
@@ -604,13 +604,6 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/suzhou.png', 'Presenting research paper at IEEE Conference at Xi\'an Jiaotong-Liverpool University, Suzhou 2019');
-	map.addMarker({ //Hakone, Japan
-	lat: 35.2096,
-	lng:  139.0035,
-	icon: image,
-	animation:google.maps.Animation.DROP,
-	zIndex: -1,
-	}, '../img/map/hakone.png', 'Mount Fuji in the background on Lake Ashi, Hakone 2019');
 	map.addMarker({ //Tokyo, Japan
 	lat: 35.6762,
 	lng:  139.6503,
@@ -634,13 +627,49 @@ function map() {
 	lng:  135.5023,
 	icon: image,
 	animation:google.maps.Animation.DROP,
-	}, '../img/map/osaka.png', 'Dotonbori, Osaka Castle, and Dotonbori, Osaka 2019');
+	}, '../img/map/osaka.png', 'Dotonbori, Osaka Castle, and Ramen Museum, Osaka 2019');
 	map.addMarker({ //Bali, Indonesia
 	lat: -8.3405,
 	lng:  115.0920,
 	icon: image,
 	animation:google.maps.Animation.DROP,
-	}, '../img/map/bali.png', 'Incredible natural beauty of this island, Bali 2019');
+	}, '../img/map/bali.png', 'Small taste of the incredible natural beauty of this island, Bali 2019');
+	map.addMarker({ //Ha Long Bay, Vietnam
+	lat: 20.9101,
+	lng:  107.1839,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/halong.png', 'Party Cruise on the Natural World Wonder of Ha Long Bay, Vietnam 2019');
+	map.addMarker({ //Hanoi, Vietnam
+	lat: 21.0278,
+	lng:  105.8342,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/hanoi.png', 'Old Quarter views with Omar, Hanoi 2019');
+	map.addMarker({ //Phong Nha, Vietnam
+	lat: 17.5983,
+	lng:  106.2949,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/phongnha.png', 'Feeding a baby duck at the Duck Stop, Phong Nha 2019');
+	map.addMarker({ //Hoi An, Vietnam
+	lat: 15.8801,
+	lng:  108.3380,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/hoian.png', 'Solo motorbike journey over the Hai Van Pass, near Hoi An 2019');
+	map.addMarker({ //Saigon, Vietnam
+	lat: 10.8231,
+	lng:  106.6297,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/saigon.png', 'Rooftop parties, Bitexco Tower, Heineken World, and Cu Chi Tunnels, Saigon 2019');
+	map.addMarker({ //Angkor Wat, Vietnam
+	lat: 13.4125,
+	lng:  103.8670,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/angkor.png', 'Wonder of the World: Angkor Wat Temple, Cambodia 2019');
 }
 
 /* =========================================
