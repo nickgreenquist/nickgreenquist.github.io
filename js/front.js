@@ -635,6 +635,12 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/osaka.png', 'Dotonbori, Osaka Castle, and Dotonbori, Osaka 2019');
+	map.addMarker({ //Bali, Indonesia
+	lat: -8.3405,
+	lng:  115.0920,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/bali.png', 'Incredible natural beauty of this island, Bali 2019');
 }
 
 /* =========================================
