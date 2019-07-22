@@ -664,12 +664,18 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/saigon.png', 'Rooftop parties, Bitexco Tower, Heineken World, and Cu Chi Tunnels, Saigon 2019');
-	map.addMarker({ //Angkor Wat, Vietnam
+	map.addMarker({ //Angkor Wat, Cambodia
 	lat: 13.4125,
 	lng:  103.8670,
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/angkor.png', 'Wonder of the World: Angkor Wat Temple, Cambodia 2019');
+	map.addMarker({ //Kuala Lumpur, Malaysia
+	lat: 3.1390,
+	lng:  101.6869,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/kualalumpur.png', 'Spectacular views and epic night life, Kuala Lumpur 2019');
 }
 
 /* =========================================
