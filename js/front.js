@@ -452,11 +452,11 @@ function map() {
 	lng: -122.415284,
 	icon: image
     }, '../img/map/sanfran.png', 'Golden Gate Bridge, San Francisco 2014');
-	map.addMarker({ //Stewarts Point
-	lat: 38.6524,
-	lng: -123.3989,
-	icon: image
-    }, '../img/map/stewartspoint.png', 'Hiking with Uncle Charlie, Melinda, and Dahlia, Stewarts Point 2014');
+	// map.addMarker({ //Stewarts Point
+	// lat: 38.6524,
+	// lng: -123.3989,
+	// icon: image
+    // }, '../img/map/stewartspoint.png', 'Hiking with Uncle Charlie, Melinda, and Dahlia, Stewarts Point 2014');
     map.addMarker({ //LA
 	lat: 34.050908,
 	lng: -118.256591,
