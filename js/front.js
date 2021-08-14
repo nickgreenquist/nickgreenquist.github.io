@@ -436,22 +436,17 @@ function map() {
 	lat: 43.653691,
 	lng: -79.364325,
 	icon: image
-    }, '../img/map/toronto.png', 'Top of the CN Tower, Toronto 2017');
+    }, '../img/map/toronto.png', 'Google Toronto, Toronto 2019');
 	map.addMarker({ //Chicago
 	lat: 41.8781,
 	lng: -87.6298,
 	icon: image
-    }, '../img/map/chicago.png', 'D3 Wrestling Exchange Trip first practice, Chicago 2015');
+    }, '../img/map/chicago.png', 'Lollapalooza Music Festival, Chicago 2021');
 	map.addMarker({ //Pittsburgh
 	lat: 40.4406,
 	lng: -79.9959,
 	icon: image
     }, '../img/map/pittsburgh.png', 'Watching the US Womens Soccer Team with my good friend Kasey, Pittsburgh 2015');
-    map.addMarker({ //San Fran
-	lat: 37.775612,
-	lng: -122.415284,
-	icon: image
-    }, '../img/map/sanfran.png', 'Golden Gate Bridge, San Francisco 2014');
 	// map.addMarker({ //Stewarts Point
 	// lat: 38.6524,
 	// lng: -123.3989,
@@ -537,11 +532,6 @@ function map() {
 	lng: -81.5639,
 	icon: image
     }, '../img/map/orlando.png', '4th of July in Disney World with Kayla, Orlando 2016');
-	map.addMarker({ //Tampa
-	lat: 27.9506,
-	lng: -82.4572,
-	icon: image
-    }, '../img/map/tampa.png', 'Kayaking with my sister Dahlia, Kayla, and Codie, Tampa 2016');
 	map.addMarker({ //Naples
 	lat: 26.2741,
 	lng: -81.8218,
@@ -646,12 +636,12 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/hanoi.png', 'Old Quarter views with Omar, Hanoi 2019');
-	map.addMarker({ //Phong Nha, Vietnam
-	lat: 17.5983,
-	lng:  106.2949,
-	icon: image,
-	animation:google.maps.Animation.DROP,
-	}, '../img/map/phongnha.png', 'Feeding a baby duck at the Duck Stop, Phong Nha 2019');
+	// map.addMarker({ //Phong Nha, Vietnam
+	// lat: 17.5983,
+	// lng:  106.2949,
+	// icon: image,
+	// animation:google.maps.Animation.DROP,
+	// }, '../img/map/phongnha.png', 'Feeding a baby duck at the Duck Stop, Phong Nha 2019');
 	map.addMarker({ //Hoi An, Vietnam
 	lat: 15.8801,
 	lng:  108.3380,
@@ -676,6 +666,30 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/kualalumpur.png', 'Spectacular views and epic night life, Kuala Lumpur 2019');
+	map.addMarker({ //Yosemite National Park, CA
+	lat: 37.8651,
+	lng:  -119.5383,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/yosemite.png', 'Yosemite National Park, California 2019');
+	map.addMarker({ //Bay Area
+	lat: 37.3382,
+	lng:  -121.8863,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/southbay.png', 'Land of the amazing bike rides, Bay Area 2019');
+	map.addMarker({ //Monument Valley
+	lat: 37.1017,
+	lng:  -109.9908,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/monument.png', 'Monument Valley, Arizona 2020');
+	map.addMarker({ //Hawaii
+	lat: 21.4666648,
+	lng:  21.4666648 -157.9833294,
+	icon: image,
+	animation:google.maps.Animation.DROP,
+	}, '../img/map/hawaii.png', 'On top of the world, Hawaii 2020');
 }
 
 /* =========================================
