@@ -23,7 +23,7 @@ $(window).load(function () {
     utils();
     sliding();
     //contactForm();
-    map();
+    map(); // no-op — map() body is commented out; see function definition below for cleanup TODO
     counters();
     parallax();
     demo();
@@ -387,7 +387,15 @@ function fullScreenContainer() {
  *  =======================================*/
 
 function map() {
-
+    // TODO: Clean up — this entire function is dead code.
+    // The map page (map/index.html) now uses a Google My Maps iframe embed,
+    // not a gmaps.js-rendered map. The #map div is the iframe container, and
+    // gmaps.js is no longer loaded on that page. All marker images referenced
+    // below (img/map/*.png) have also been removed from the git repo.
+    // Either delete this function and remove the map() call from onReady,
+    // or restore the marker images if returning to a gmaps-based map.
+    return;
+    /*
     var styles = [{"featureType": "landscape", "stylers": [{"saturation": -100}, {"lightness": 65}, {"visibility": "on"}]}, {"featureType": "poi", "stylers": [{"saturation": -100}, {"lightness": 51}, {"visibility": "simplified"}]}, {"featureType": "road.highway", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "road.arterial", "stylers": [{"saturation": -100}, {"lightness": 30}, {"visibility": "on"}]}, {"featureType": "road.local", "stylers": [{"saturation": -100}, {"lightness": 40}, {"visibility": "on"}]}, {"featureType": "transit", "stylers": [{"saturation": -100}, {"visibility": "simplified"}]}, {"featureType": "administrative.province", "stylers": [{"visibility": "off"}]}, {"featureType": "water", "elementType": "labels", "stylers": [{"visibility": "on"}, {"lightness": -25}, {"saturation": -100}]}, {"featureType": "water", "elementType": "geometry", "stylers": [{"hue": "#ffff00"}, {"lightness": -25}, {"saturation": -97}]}];
     map = new GMaps({
 	el: '#map',
@@ -690,6 +698,7 @@ function map() {
 	icon: image,
 	animation:google.maps.Animation.DROP,
 	}, '../img/map/hawaii.png', 'On top of the world, Hawaii 2020');
+    */
 }
 
 /* =========================================

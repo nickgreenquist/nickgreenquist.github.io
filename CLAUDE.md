@@ -14,6 +14,9 @@ Personal portfolio site — static HTML/CSS/JS, hosted on GitHub Pages.
 - **jQuery 1.11 + Bootstrap 3** — both from 2014. Swapping for plain CSS/JS or Bootstrap 5 would reduce page weight and remove the jQuery dependency.
 - **Add OG meta tags** — missing `og:title`, `og:image`, `og:description` so link previews on Slack/Twitter look bare.
 
+### Known Limitations
+- **jQuery cannot be easily removed** — the entire site is built on a 2014 Bootstrap 3 template with jQuery baked in at every layer: Bootstrap 3 (navbar, dropdowns, tooltips, scrollspy), Masonry (project grid), Owl Carousel, Waypoints (scroll animations), Parallax, CounterUp, ScrollTo, and `front.js` itself. Removing jQuery would require rewriting all of `front.js` and migrating off Bootstrap 3 — a full site refactor.
+
 ### UX
 - **"More" dropdown** — Wrestling and Blog are buried there. Promote Blog to top-level nav if active, otherwise remove it.
 - **Pacman loader** — adds perceived latency for a static site that loads near-instantly. Consider removing.
