@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'Nick Greenquist',
+  description = 'Senior Software Engineer at Google working on Machine Learning and Recommendation Systems.',
+  ogImage = '/me-og.jpg',
+} = Astro.props;
+
+const siteUrl = 'https://nickgreenquist.github.io';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const absoluteOgImage = new URL(ogImage, siteUrl).toString();
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={absoluteOgImage} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content="Nick Greenquist" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={absoluteOgImage} />
+	</head>
+	<body class="bg-neutral-50 text-neutral-900 antialiased font-sans">
+		<slot />
+		<footer class="mx-auto max-w-3xl px-6 py-12 text-sm text-neutral-500">
+			<a href="/" class="hover:text-neutral-900 transition-colors">← nickgreenquist.github.io</a>
+		</footer>
+	</body>
+</html>

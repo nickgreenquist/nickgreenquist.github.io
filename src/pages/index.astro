@@ -1,19 +1,107 @@
 ---
-import '../styles/global.css';
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import GatewayCard from '../components/GatewayCard.astro';
+import EducationSection from '../components/EducationSection.astro';
+import { headline, subhead, bioParagraphs } from '../data/about';
+import mePhoto from '../assets/me.jpg';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Nick Greenquist</title>
-	</head>
-	<body class="bg-neutral-50 text-neutral-900 font-sans">
-		<main class="min-h-screen flex items-center justify-center">
-			<h1 class="text-4xl font-bold">Portfolio v2 — under construction</h1>
-		</main>
-	</body>
-</html>
+<Layout
+  title="Nick Greenquist"
+  description="Senior Software Engineer at Google. Machine Learning and Recommendation Systems."
+>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <!-- Hero -->
+    <section class="flex flex-col sm:flex-row items-start gap-8">
+      <Image
+        src={mePhoto}
+        alt="Nick Greenquist"
+        widths={[160, 240, 320]}
+        sizes="160px"
+        class="w-32 h-32 rounded-full object-cover flex-shrink-0"
+        loading="eager"
+      />
+      <div class="space-y-2">
+        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">{headline}</h1>
+        <p class="text-base sm:text-lg text-neutral-600">{subhead}</p>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="mt-10 space-y-4 text-neutral-700 leading-relaxed">
+      {bioParagraphs.map((p) => (
+        <p set:html={p} class="[&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 hover:[&_a]:text-neutral-950 hover:[&_a]:decoration-neutral-900"></p>
+      ))}
+    </section>
+
+    <!-- Gateway grid -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">Elsewhere</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <GatewayCard
+          href="https://github.com/nickgreenquist"
+          label="GitHub"
+          description="ML research, recommender systems, side projects."
+          external
+        />
+        <GatewayCard
+          href="https://www.linkedin.com/in/nickgreenquist/"
+          label="LinkedIn"
+          description="Professional history, publications, recommendations."
+          external
+        />
+        <GatewayCard
+          href="https://nickgreenquist.myportfolio.com/"
+          label="Photography"
+          description="Wildlife and travel photography portfolio."
+          external
+        />
+        <GatewayCard
+          href="https://nickgreenquist.github.io/blog/"
+          label="Blog"
+          description="Writing on machine learning, systems, and projects."
+          external
+        />
+        <GatewayCard
+          href="/map"
+          label="Travel Map"
+          description="Places I've lived, visited, and want to return to."
+        />
+        <GatewayCard
+          href="/wrestling"
+          label="Wrestling"
+          description="Nine years of the sport that defined a lot of me."
+        />
+        <GatewayCard
+          href="/Resume.pdf"
+          label="Resume"
+          description="PDF, kept current."
+          external
+        />
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">Education</h2>
+      <EducationSection />
+    </section>
+
+    <!-- Contact -->
+    <section class="mt-12">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">Contact</h2>
+      <div class="rounded-lg border border-neutral-200 bg-white p-5">
+        <p class="text-neutral-700">
+          Best way to reach me is email:
+          <a href="mailto:nickgreenquist@gmail.com" class="font-medium text-neutral-900 underline decoration-neutral-400 underline-offset-2 hover:decoration-neutral-900">
+            nickgreenquist@gmail.com
+          </a>
+        </p>
+        <p class="mt-1 text-sm text-neutral-500">
+          Or DM me on <a href="https://www.linkedin.com/in/nickgreenquist/" class="underline hover:text-neutral-900">LinkedIn</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>

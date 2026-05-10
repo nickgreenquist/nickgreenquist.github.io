@@ -1,0 +1,36 @@
+---
+import coursesData from '../data/courses.json';
+
+const { sections } = coursesData;
+---
+
+<section class="space-y-3">
+  {sections.map((section) => (
+    <details class="group rounded-lg border border-neutral-200 bg-white">
+      <summary class="cursor-pointer list-none px-5 py-3 flex items-center justify-between font-medium text-neutral-900 hover:bg-neutral-50 rounded-lg">
+        <span>{section.section}</span>
+        <span class="flex items-center gap-3 text-sm text-neutral-500">
+          <span>{section.courses.length} {section.courses.length === 1 ? 'course' : 'courses'}</span>
+          <span class="transition-transform group-open:rotate-90">›</span>
+        </span>
+      </summary>
+      <ul class="border-t border-neutral-200 divide-y divide-neutral-100">
+        {section.courses.map((course) => (
+          <li class="px-5 py-3">
+            <details class="group/inner">
+              <summary class="cursor-pointer list-none font-medium text-neutral-800 hover:text-neutral-950 flex items-center gap-2">
+                <span class="text-neutral-400 transition-transform group-open/inner:rotate-90 text-xs">›</span>
+                <span>{course.title}</span>
+              </summary>
+              {course.description && (
+                <p class="mt-2 ml-5 text-sm text-neutral-600 leading-relaxed">
+                  {course.description}
+                </p>
+              )}
+            </details>
+          </li>
+        ))}
+      </ul>
+    </details>
+  ))}
+</section>

@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Gallery from '../components/Gallery.astro';
+
+import team from '../assets/wrestling/team.jpg';
+import ritTournament from '../assets/wrestling/RIT_tournament.png';
+import slam from '../assets/wrestling/slam.jpg';
+import bulgaria from '../assets/wrestling/bulgaria.png';
+import nypa from '../assets/wrestling/nypa.jpg';
+import seniorNight from '../assets/wrestling/SeniorNight2015.jpg';
+import seniorYear from '../assets/wrestling/senior_year.jpg';
+import chicago from '../assets/wrestling/chicago.png';
+import firstMatch from '../assets/wrestling/first_match.jpg';
+
+const galleryOne = [
+  { src: team, alt: 'Team photo, 2017-2018 season', caption: 'The Team' },
+  { src: ritTournament, alt: 'Senior year, RIT tournament', caption: 'Senior Year, RIT Tournament' },
+  { src: slam, alt: 'Demon-Role escape', caption: 'Slam!' },
+];
+
+const galleryTwo = [
+  { src: bulgaria, alt: 'Traditional Bulgarian wrestling festival', caption: 'Bulgarian Wrestling Festival' },
+  { src: nypa, alt: 'Spladle on the NY vs PA Duals cover', caption: 'Front Cover Spladle' },
+  { src: seniorNight, alt: 'Junior year, Tiger Den', caption: 'Junior Year, Tiger Den' },
+];
+
+const galleryThree = [
+  { src: seniorYear, alt: 'Senior year, Saint Rose match', caption: 'Senior Year, Saint Rose' },
+  { src: chicago, alt: 'After the first practice of the D3 Cultural Exchange Wrestling Trip', caption: 'D3 Cultural Exchange Trip' },
+  { src: firstMatch, alt: 'First high-school match', caption: 'First High-School Match' },
+];
+---
+
+<Layout
+  title="Wrestling · Nick Greenquist"
+  description="Nine years of wrestling — what it took, what it gave back."
+>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Wrestling</h1>
+      <p class="mt-2 text-neutral-600">Nine years of the sport that defined a lot of me.</p>
+    </header>
+
+    <section class="space-y-6 text-neutral-700 leading-relaxed">
+      <p>
+        Wrestling was a massive part of my life. From freshman year of high school
+        through my final year of college, much of my time was devoted to this demanding sport.
+        It's impossible to fully convey the experience of being a wrestler, but I can say a few things
+        that attempt to explain the madness.
+      </p>
+      <p>
+        Nothing I've ever done comes close to how grueling and difficult the sport is. When you step
+        out on the mat, the person across from you wants the same thing you do, and they'd be willing
+        to break you for it if the rules allowed. There is no team around you when the whistle blows.
+        When you lose, you can't blame anyone but yourself. That option simply doesn't exist in a
+        wrestling match. If you lose, it's because the person in front of you worked harder than you,
+        or is simply better.
+      </p>
+    </section>
+
+    <Gallery photos={galleryOne} />
+
+    <section class="space-y-6 text-neutral-700 leading-relaxed">
+      <p>
+        There aren't many experiences in life that give you this raw arena to expose who you are.
+        We usually shy away from things that measure us so directly. In college, every ounce of free time
+        not spent in class or in daily two-hour practices was spent practicing more or working out.
+        Doing the bare minimum gets you nowhere — every person you face has already done that.
+        The wrestlers who edge their way to the podium are the ones willing to spend the extra
+        thousands of hours over years of time.
+      </p>
+      <p>
+        On top of that, wrestling has weight classes. Cutting weight is a fact of the sport and a
+        necessary evil. If you don't cut, someone hungrier than you — literally and figuratively —
+        drops the extra ten pounds to the next class, and suddenly you're wrestling someone who
+        walks around ten pounds heavier than you. In college athletics, most of that weight is muscle.
+      </p>
+    </section>
+
+    <Gallery photos={galleryTwo} />
+
+    <section class="space-y-6 text-neutral-700 leading-relaxed">
+      <p>
+        When I started wrestling as a high-school freshman, I went 0–21 that first season. I was pinned
+        20 of those 21 times. I'm still not sure why I didn't quit and switch to something more fun and
+        less painful. I think a part of me wanted something in life that really challenged me and
+        didn't just hand me rewards for showing up. Before wrestling, my free time was video games:
+        easy, instant gratification, easy wins. Suddenly I was standing in front of a sport that
+        chewed me up and spit me out — and in a strange way, I knew that was what I'd been craving.
+      </p>
+      <p>
+        Fast-forward nine years. I didn't reach my ultimate goal of becoming an All-American, but I
+        still pulled off something I've never met another wrestler who did: my college record was
+        better than my high-school record. College wrestling is a different world where everyone was a
+        stud in high school. The only thing that got me there was an obsession with getting better.
+        I wasn't the most technical wrestler — most of my opponents had been wrestling since middle
+        school, and I started at 14 — so I had to outwork them in every other dimension.
+      </p>
+    </section>
+
+    <Gallery photos={galleryThree} />
+
+    <section class="space-y-6 text-neutral-700 leading-relaxed">
+      <p>
+        When I look back, not all of the memories are pleasant. The sport hurts, mentally and
+        physically. Plenty of injuries still affect me. When you dedicate nine years of your life
+        to something and fall short of your goals, it hurts. I sometimes wonder what I could have
+        built with those thousands of hours.
+      </p>
+      <p>
+        Deep down though, I'm thankful for what the sport gave me. It took a lot, but it gave back
+        more. I would not be the person I am today without wrestling. I'm tougher than I would have
+        been, and I learned that I can withstand far more than I thought. When you allow yourself
+        to be consumed by a goal, it's incredible what you'll put yourself through to reach it.
+        If you asked me today whether I'd do it all over again — yes. And I'd dedicate even more
+        of myself to it.
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  // intentionally empty — no JS required for this page
+</script>

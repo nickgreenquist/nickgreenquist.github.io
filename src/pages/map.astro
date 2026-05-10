@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Travel Map · Nick Greenquist"
+  description="Places I've lived, visited, and want to return to."
+>
+  <main class="mx-auto max-w-4xl px-6 py-16">
+    <header class="mb-6">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Oh, the places you'll go</h1>
+      <p class="mt-2 text-neutral-600">A running map of where I've been.</p>
+    </header>
+
+    <div class="relative w-full overflow-hidden rounded-lg border border-neutral-200 bg-white" style="padding-bottom: 56.25%;">
+      <iframe
+        src="https://www.google.com/maps/d/u/0/embed?mid=1SGBSxjz3azsfBz95mCXOsjUkdLXJnMk&ehbc=2E312F"
+        class="absolute inset-0 h-full w-full border-0"
+        allowfullscreen
+        loading="lazy"
+        title="Nick Greenquist travel map"
+      ></iframe>
+    </div>
+  </main>
+</Layout>

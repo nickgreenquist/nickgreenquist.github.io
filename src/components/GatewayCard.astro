@@ -1,0 +1,25 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  description: string;
+  external?: boolean;
+}
+
+const { href, label, description, external = false } = Astro.props;
+const relAttr = external ? 'noopener noreferrer' : undefined;
+const targetAttr = external ? '_blank' : undefined;
+---
+
+<a
+  href={href}
+  rel={relAttr}
+  target={targetAttr}
+  class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all hover:border-neutral-900 hover:shadow-md"
+>
+  <div class="flex items-center justify-between">
+    <h3 class="font-semibold text-neutral-900">{label}</h3>
+    <span class="text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-0.5 transition-all">→</span>
+  </div>
+  <p class="mt-1 text-sm text-neutral-600">{description}</p>
+</a>
