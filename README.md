@@ -1,3 +1,0 @@
-Nick Greenquist
-
-Personal Website
