@@ -1,0 +1,345 @@
+{
+  "sections": [
+    {
+      "section": "MS in Computer Science - NYU",
+      "courses": [
+        {
+          "title": "Mathematical Techniques For CS Applications",
+          "description": "An introduction to theory, computational techniques, and applications of linear algebra, probability and statistics. These three areas of continuous mathematics are critical in many parts of computer science, including machine learning, scientific computing, computer vision, computational biology, natural language processing, and computer graphics. The course teaches a specialized language for mathematical computation, such as Matlab, and discusses how the language can be used for computation and for graphical output. No prior knowledge of linear algebra, probability, or statistics is assumed."
+        },
+        {
+          "title": "Fundamental Algorithms",
+          "description": "Reviews a number of important algorithms, with emphasis on correctness and efficiency. The topics covered include solution of recurrence equations, sorting algorithms, selection, binary search trees and balanced-tree strategies, tree traversal, partitioning, graphs, spanning trees, shortest paths, connectivity, depth-first and breadth-first search, dynamic programming, and divide-and-conquer techniques."
+        },
+        {
+          "title": "Programming Languages",
+          "description": "Discusses the design, use, and implementation of imperative, object-oriented, and functional programming languages. The topics covered include scoping, type systems, control structures, functions, modules, object orientation, exception handling, and concurrency. A variety of languages are studied, including C++, Java, Ada, Lisp, and ML, and concepts are reinforced by programming exercises."
+        },
+        {
+          "title": "Operating Systems",
+          "description": "The topics covered include a review of linkers and loaders and the high-level design of key operating systems concepts such as process scheduling and synchronization; deadlocks and their prevention; memory management, including (demand) paging and segmentation; and I/O and file systems, with examples from Unix/Linux and Windows. Programming assignments may require C, C++, Java, or C#."
+        },
+        {
+          "title": "Artificial Intelligence",
+          "description": "There are many cognitive tasks that people do easily and almost unconsciously but that have proven extremely difficult to program on a computer. Artificial intelligence is the problem of developing computer systems that can carry out these tasks. This course covers problem solving and state space search; automated reasoning; probabilistic reasoning; planning; and knowledge representation."
+        },
+        {
+          "title": "Big Data Science",
+          "description": "Data Science has recently gained a substantial interest in a variety of industries including healthcare, finance, manufacturing and marketing. It is positioned at the intersection point of computer science, data mining, machine learning, predictive analytics, business, statistics and domain expertise. It aims at finding hidden knowledge (patterns, models, associations) for the purpose of making better decisions. This course will introduce the basic fundamental concepts of the algorithms and the tools of extracting valuable insights from data with the ability to formulating and solving problems with it. Topics of this course include, but are not limited to: Basics of Data Analytics Project Lifecycle, Developing an Analytics Roadmap, Data Preprocessing, Data Analytics Use cases, Data Cleaning Algorithms, Feature Selection Algorithms, Introduction to Hadoop in Theory and in Practice, Algorithms for Finding Similar Data Items, Dimensionality Reduction techniques, Clustering Algorithms, Classification Algorithms, Introduction to Sentiment Analysis in short text (e.g Tweets), Mining Association Rules, Performance Measures, Ensemble Methods, Information retrieval systems and Recommendation Systems with applications in Bio-informatics, Text Mining and Social Network Analytics."
+        },
+        {
+          "title": "Big Data and Machine Learning Systems",
+          "description": "This class aims to cover introductory and recent concepts in big data and machine learning systems. The class will focus on a broad spectrum of big data computational problems, algorithms and platforms. The class will be centered around several big data case studies in commercial use to understand big data and machine learning tasks across different domains and provide an in-depth understanding of the problems and algorithms used in each domain. From the computational platform perspective, this class covers popular and widely used commercial platforms including Hadoop and Mapreduce variants, Spark, streaming platforms, Tensorflow, ML platforms (MLBase, MxNet) and GPU platforms. The goal of this class is to educate students about the algorithms and systems techniques used to build scalable big data and ML platforms and how these platforms are used in the real world. This class covers the following broad topics: a. Cloud Infrastructure Blocks: AWS, Mapreduce, Hadoop, Yarn b. Big Data Algorithms: searching and indexing large data sets, implementing standard statistical algorithms, similar items, nearest neighbors, graph mining, network analytics, dimensionality reduction c. Big Data Computation Platforms: Spark, TensorFlow, MLBase, MLib, MxNet, GPU computing d. Scalable ML Algorithms: Implementing deep learning algorithms, graph and network analytics, scalable vision algorithms, scalable NLP algorithms e. Domain Specific Applications and Case Studies: vision analytics engines, NLP analytics engines, search and graph analytics"
+        },
+        {
+          "title": "Distributed Systems",
+          "description": "Large-scale distributed systems lie at the core of application domains such as cloud computing, internet of things, large multiplayer games, etc. These application domains make use of systems such as distributed databases (e.g., Google's Spanner, Amazon's Dynamo, etc.), large scale analytics frameworks (e.g., Hadoop, Spark and TensorFlow), distributed locking systems (e.g., Paxos, etcd, etc.), and others. In this class we will look at how to construct these distributed systems, in particular looking at why this is more complex than building applications running on a single machine, and present abstraction and design techniques for building distributed systems. We will focus on a solving a variety of common problems in these systems including consensus, consistency, naming, fault tolerance, etc. This is a graduate-level course, but undergraduates are welcome! The course itself will consist of a series of lectures and will require reading research papers. This class satisfies the Ph.D. breadth requirement in Systems and also serves as a M.S. capstone course."
+        },
+        {
+          "title": "Graphics Processing Units (GPUs): Architecture and Programming",
+          "description": "In this course, we will cover architectural aspects and capabilities of modern GPUs (graphics processing unit) and will learn the architecture and the programming of GPUs to solve different type of problems. Many computations can be performed much faster on the GPU than on a traditional processor. This is why GPUs are present now in almost all computers; and the majority of Top 500 supercomputers in the world are built around GPUs. GPUs are no longer restricted to graphics applications but are now used for a diverse set of applications and domains. This introduces the concept of general-purpose GPUs or GPGPUs, which is the main subject of this course. This course serves as a capstone for the MSCS program."
+        },
+        {
+          "title": "Machine Learning",
+          "description": "The course covers a wide variety of topics in machine learning and statistical modeling. While mathematical methods and theoretical aspects will be covered, the primary goal is to provide students with the tools and principles needed to solve the data science problems found in practice. This course will serve as a foundation of knowledge on which more advanced courses and further independent study can build."
+        },
+        {
+          "title": "Deep Learning",
+          "description": "This course concerns the latest techniques in deep learning and representation learning, focusing on supervised and unsupervised deep learning, embedding methods, metric learning, convolutional net and recurrent nets, with applications to computer vision, natural language understanding, and speech recognition."
+        }
+      ]
+    },
+    {
+      "section": "BS in Game Design and Development (Programming) - RIT",
+      "courses": [
+        {
+          "title": "Game Software Dev I",
+          "description": "The goal of this course is to introduce students within the domain of game design and development to computing. Students will begin mastering fundamental problem solving skills and learn about the basic elements of game software development, including problem decomposition, the design and implementation of games, and testing/debugging. Programming assignments are an integral part of the course"
+        },
+        {
+          "title": "Game Software Dev II",
+          "description": "This course furthers the development of fundamental problem solving skills introduced in Game Software Development I. Topics such as graphical user interfaces (GUIs), exception handling, files/streams, linear data structures, threads, and event-driven programming will be covered with an emphasis on their use in game development. Games will be developed through using existing components and appropriate software design patterns will be used. Programming projects are and integral part of the course."
+        },
+        {
+          "title": "Game Software Dev III",
+          "description": "This course builds upon the fundamental problem solving skills presented in Game Software Development II. Students will learn the more advanced data structures and algorithms commonly used in game development. In order to demonstrate knowledge of such techniques within the realm of game development, students will work in teams on a quarter long game development project."
+        },
+        {
+          "title": "Interactive Media Development",
+          "description": "In this course, students will learn to create visually rich interactive experiences. It is a course in programming graphics and media, but it is also a course on the relationship between ideas and code. Students will explore topics in math and physics by building programs that simulate and visualize processes in the natural world. Assignments will include major programming projects, such as building a virtual world inhabited by digital creatures that display observable behaviors"
+        },
+        {
+          "title": "Introduction to Web Design",
+          "description": "Students are introduced to the planning, design, and production of interactive projects that are Web-based. Web design concepts and methods in site design, page design, and graphic-user interface design will be explored. The course will include instruction in producing Web pages and creating interactivity with HTML and Web production software."
+        },
+        {
+          "title": "Rich Media Web Application Development I",
+          "description": "This course provides students the opportunity to explore the design and development of Media Rich Internet Applications (MRIAs). This course moves beyond client and server side web development, and explores issues of presentation, interactivity, persistence, and extensibility common among such applications. Specifically, items explored include framework characteristics, data management, persistence, data binding, information manipulation, as well as data presentation."
+        },
+        {
+          "title": "Rich Media Web Application Development II",
+          "description": "This course provides students the opportunity to continue the exploration of Media Rich Internet Applications (MRIAs). Topics include communications for media ecologies, distributed web application frameworks, advanced interactivity, data transformation, representation, automation, persistence, and large scale systems deployment. In addition, students are exposed to concepts and technologies related to the next generation of MRIA development."
+        },
+        {
+          "title": "Data Structures and Alg for Games/Sim I",
+          "description": "This course focuses upon the application of data structures, algorithms, and fundamental Newtonian physics to the development of video game applications, entertainment software titles, and simulations. Topics covered include 3D coordinate systems and the implementation of affine transformations, geometric primitives, and efficient data structures and algorithms for real-time collision detection. Furthermore, Newtonian mechanics principles will be examined in the context of developing game and entertainment software where they will be applied to compute the position, velocity and acceleration of a point-mass subject to forces and the conservation of momentum and energy. Programming assignments are a required part of this course"
+        },
+        {
+          "title": "Data Structures and Algorithms for Games and Simulation II",
+          "description": "This course continues the investigation into the application of data structures, algorithms, and fundamental Newtonian mechanics required for the development of video game applications, simulations, and entertainment software titles. Topics covered include quaternion representation of orientation and displacement, cubic curves and surfaces, classifiers, recursive generation of geometric structures, texture mapping, and the implementation of algorithms within game physics engines for collision detection and collision resolution of rigid bodies, and the numerical integration of the equations of motion. In addition, advanced data structures such as B+ trees and graphs will be investigated from the context of game application and entertainment software development. Programming assignments are a requirement for this course."
+        },
+        {
+          "title": "Foundations of Game Graphics Programming",
+          "description": "Students will explore the use of an advanced graphics API to access hardware-accelerated graphics in a real-time graphics engine context. The course will involve discussion of scene graphs, optimizations, and integration with the API object structure, as well as input schemes, content pipelines, and 2D and 3D rendering techniques. Students will also explore the advanced use of the API calls in production code to construct environments capable of real-time performance. Students will construct from scratch a fully functional graphics engine, with library construction for game development."
+        },
+        {
+          "title": "AI for Games",
+          "description": "This course explores introductory artificial intelligence concepts through both a theoretical and practical perspective, with an emphasis on how to apply these concepts in a game development context. In particular the course focuses on applying concepts such as search, reactive intelligence, knowledge representation, and machine learning to real-time situations and applications as relevant to the field of entertainment technology and simulation."
+        },
+        {
+          "title": "Innovation and Invention",
+          "description": "In this course, students explore the process and products of innovation and invention. Each term a multi-disciplinary team of students conceives and develops a different \"outside the box\" project. Readings, projects, scholarly term papers, and pragmatic challenges of collaboration and communication across disciplines provides direct experience of the interplay of technology, human nature, and a human environment in which emerging technologies and new modes of interaction are pervasive and ubiquitous. Artists, natural scientists, social scientists, and technologists are guided through a series of collaborative experiences inventing, designing, implementing and studying emerging technologies. Presentations, projects and individually written research papers are required. The faculty staff and resources of the Center for Student Innovation are significant assets for this course."
+        }
+      ]
+    },
+    {
+      "section": "BS in Game Design and Development (Art and Design) - RIT",
+      "courses": [
+        {
+          "title": "Intro to Interactive Media",
+          "description": "This course provides an overview of media in historical, current and future contexts. Emphasizing discussion and hands on work with written and visual media assets, students examine the role of written and visual media from both a contextual and practical perspective"
+        },
+        {
+          "title": "Interaction, Immersion and Media Interface",
+          "description": "This course examines the concepts of interface and interaction models in a media-specific context, with particular emphasis on the concept of the immersive interface. This course explores concepts such as perception, expectation, Gestalt Theory, interactivity, Semiotics, presence, and immersion in the context of media application development and deployment. In addition, underlying concepts of cognitive psychology and cognitive science will be integrated where appropriate. These theories are then integrated in the exploration of the immersive interface, and with related concepts such as user-level-interface modification, augmentation of identity, and the interface as a social catalyst."
+        },
+        {
+          "title": "2D Animation",
+          "description": "This course provides a theoretical framework covering the principles of animation and its use in game design to affect user experience. Emphasis will be placed upon principles that support character development and animations that show cause and effect. Students will apply these principles to create animations that reflect movement and character appropriate for different uses and environments"
+        },
+        {
+          "title": "Advanced Animation and Asset Prod",
+          "description": "This course provides an overview of 3D game asset production. Basic ideas learned within the first asset production course are also revisited within the 3D environs. Topics covered include modeling, texturing, skinning and animation. Emphasis is put on low polygon modeling techniques, best practices in game art production, and effective communication strategies between artists, programmers and designers"
+        },
+        {
+          "title": "Game Design and Development I",
+          "description": "This course examines the core process of game design, from ideation and structured brainstorming in an entertainment technology context through the examination of industry standard processes and techniques for documenting and managing the design process. This course specifically examines techniques for assessing and quantifying the validity of a given design, for managing innovation and creativity in a game development-specific context, and for world and character design. Specific emphasis is placed on both the examination and deconstruction of historical successes and failures, along with presentation of ethical and cultural issues related to the design and development of interactive software and the role of individuals in a team-oriented design methodology. Students in this class are expected to actively participate and engage in the culture of design and critique as it relates to the field"
+        },
+        {
+          "title": "Game Design and Development II",
+          "description": "This course continues to examine the core theories of game design as they relate to the professional field. Beginning with a formalized pitch process, this course examines the design and development paradigm from story-boarding and pre-visualization through rapid iteration, refinement, and structured prototyping exercises to further examine the validity of a given design. Specific emphasis is placed on iterative prototyping models, and on methodologies for both informal and formal critique. This course also explores production techniques and life-cycle in the professional industry."
+        }
+      ]
+    },
+    {
+      "section": "Minor in Computer Science - RIT",
+      "courses": [
+        {
+          "title": "Mechanics of Programming",
+          "description": "Students will be introduced to the details of program structure and the mechanics of execution as well as supportive operating system features. Security and performance issues in program design will be discussed. The program translation process will be examined. Programming assignments will be required."
+        },
+        {
+          "title": "Concepts of Computer Systems",
+          "description": "An introduction to the hardware and software organization of computer systems. The course emphasizes a multilevel model of computer organization. Topics include the digital logic level; the micro architecture level; the machine instruction set level; the operating system level; and the assembly language level. Programming assignments will be required."
+        },
+        {
+          "title": "Analysis of Algorithms",
+          "description": "This course provides an introduction to the design and analysis of algorithms. It covers a variety of classical algorithms and data structures and their complexity and will equip students with the intellectual tools to design, analyze, implement, and evaluate their own algorithms"
+        },
+        {
+          "title": "Principles of Data Management",
+          "description": "This course provides a broad introduction to the principles and practice of modern data management, with an emphasis on the relational database model. Topics in relational database systems include data modeling; the relational model; relational algebra; Structured Query Language (SQL); and data quality, transactions, integrity and security. Students will also learn approaches to building relational database application programs. Additional topics include object-oriented and object-relational databases; semi-structured databases (such as XML); and information retrieval. A database project is required."
+        },
+        {
+          "title": "Intro to Intelligent Systems",
+          "description": "An introduction to the theories and algorithms used to create intelligent systems. Topics include search algorithms (e.g. A*, iterative deepening), logic, planning, knowledge representation, machine learning, and applications from areas such as computer vision, robotics, natural language processing, and expert systems. Programming assignments are an integral part of the course."
+        }
+      ]
+    },
+    {
+      "section": "Mathematics - RIT",
+      "courses": [
+        {
+          "title": "Calculus B",
+          "description": "This is the second course in three-course sequence (MATH-171, MATH-172, MATH-173). This course includes Newton's method, optimization, Riemann sums, the Fundamental Theorem of Calculus, and techniques of integration including substitution, integration by parts, and partial fractions. Applications of the definite integral include the areas between curves, volumes, arc length, and average values of functions are also included."
+        },
+        {
+          "title": "Discrete Math I",
+          "description": "An introduction to topics of discrete mathematics for students of Information Technology, including number systems, sets and logic, counting and matrices."
+        },
+        {
+          "title": "Discrete Math II",
+          "description": "A continuation of an introduction to topics of discrete mathematics for students of Information Technology, including relations, Boolean algebra, graph theory and regular sets."
+        },
+        {
+          "title": "Analytic Geometry",
+          "description": "This is a course covering topics in analytical geometry such as slopes, lines, and conic sections. Additional topics may include polar coordinates, determinants, parametric equations, trigonometry, and two and three dimensional vectors."
+        },
+        {
+          "title": "Math Graphical Simulation",
+          "description": "This is the first part of a two course sequence that aims at providing the mathematical tools needed to manipulate graphical objects and to model and simulate the physical properties of these objects. Topics from linear algebra, primarily in two and three dimensional space, analytic geometry, and calculus will be presented. The emphasis is on linear algebra, particularly its application to problems in geometry and graphical systems."
+        },
+        {
+          "title": "Probability and Statistics I",
+          "description": "This course will introduce sample spaces and events, axioms of probability, counting techniques, conditional probability and independence, distributions of discrete and continuous random variables, joint distributions (discrete and continuous), the central limit theorem, descriptive statistics, interval estimation, and applications of probability and statistic to realworld problems."
+        }
+      ]
+    },
+    {
+      "section": "Liberal Arts - RIT",
+      "courses": [
+        {
+          "title": "Principles of Microeconomics",
+          "description": "Microeconomics studies the workings of individual markets. That is, it examines the interaction of the demanders of goods and services with the suppliers of those goods and services. It explores how the behavior of consumers (demanders), the behavior of producers (suppliers), and the level of market competition influence market outcomes"
+        },
+        {
+          "title": "Principles of Macroeconomics",
+          "description": "Macroeconomics studies aggregate economic behavior. The course begins by presenting the production possibilities model. This is followed by a discussion of basic macroeconomic concepts including inflation, unemployment, and economic growth and fluctuations. The next topic is national income accounting, which is the measurement of macroeconomic variables. The latter part of the course focuses on the development of one or more macroeconomic models, a discussion of the role of money in the macroeconomy, the aggregate supply-aggregate demand framework, and other topics the individual instructor may choose."
+        },
+        {
+          "title": "Physics I",
+          "description": "This is an introductory course in algebra-based physics focusing on mechanics. The course is taught in a lecture/workshop format that integrates material traditionally found in separate lecture and laboratory courses. Topics include kinematics, planar motion, Newton’s Laws, gravitation; rotational kinematics and dynamics; work, kinetic and potential energy; momentum and impulse; conservation laws; data presentation and analysis, error propagation."
+        },
+        {
+          "title": "Intro to Psychology",
+          "description": "Introduction to the field of psychology. Provides a survey of basic concepts, theories, and research methods. Topics include: thinking critically with psychological science; neuroscience and behavior; sensation and perception; learning; memory; thinking, language, and intelligence; motivation and emotion; personality; psychological disorders and therapy; and social psychology."
+        },
+        {
+          "title": "Intro to Creative Writing",
+          "description": "This course gives students the opportunity to write in different creative genres such as fiction, non-fiction, and poetry. In producing a portfolio, students will learn concrete elements of craft and techniques of improvisation to generate creative work. The course uses peer feedback, workshops, and collaborative brainstorming to develop and refine texts for the printed page and beyond."
+        },
+        {
+          "title": "Human Communication",
+          "description": "An introduction to the theoretical and conceptual underpinnings of oral, visual and written communication. Introduces basic communication models, the role of language in communication, symbols and symbol making, issues of audience analysis and the development of different modes of discourse. Also explores the history of communication and introduces students to basic principles and research in communication studies."
+        },
+        {
+          "title": "Public Speaking",
+          "description": "The public speaking course is designed to equip the student with knowledge of the theories and principles necessary for formal public speaking. Informative and persuasive speeches are the focus with emphasis on organization, evidence, language use, strategy, delivery, and effective use of media aids. Public speaking is generally offered each semester"
+        },
+        {
+          "title": "Advanced Public Speaking",
+          "description": "Further development of knowledge and skills learned in public speaking. This course emphasizes language, delivery, and speech organization, requiring stu-dents to develop and deliver speeches for various occasions, using a variety of delivery methods. Students will present outof-the-classroom speeches as well as practice ghostwriting."
+        }
+      ]
+    },
+    {
+      "section": "Online Courses (Machine Learning)",
+      "courses": [
+        {
+          "title": "Machine Learning - Coursera",
+          "description": "This course provides a broad introduction to machine learning, datamining, and statistical pattern recognition. Topics include: (i) Supervised learning (parametric/non-parametric algorithms, support vector machines, kernels, neural networks). (ii) Unsupervised learning (clustering, dimensionality reduction, recommender systems, deep learning). (iii) Best practices in machine learning (bias/variance theory; innovation process in machine learning and AI). The course will also draw from numerous case studies and applications, so that you'll also learn how to apply learning algorithms to building smart robots (perception, control), text understanding (web search, anti-spam), computer vision, medical informatics, audio, database mining, and other areas."
+        },
+        {
+          "title": "Deep Learning Specialization - Coursera",
+          "description": "The Deep Learning Specialization is a foundational program that will help you understand the capabilities, challenges, and consequences of deep learning and prepare you to participate in the development of leading-edge AI technology."
+        },
+        {
+          "title": "Machine Learning Crash Course - Google",
+          "description": "Google's fast-paced, practical introduction to machine learning. Machine Learning Crash Course features a series of lessons with video lectures, real-world case studies, and hands-on practice exercises."
+        },
+        {
+          "title": "Practical Deep Learning for Coders - Part 1 - FastAI",
+          "description": "What you will learn: - How to train models that achieve state-of-the-art results in: computer vision, NLP, Tabular data, collaborative filtering - Why and how deep learning models work, and how to use that knowledge to improve the accuracy, speed, and reliability of your models - The latest deep learning techniques that really matter in practice - How to implement stochastic gradient descent and a complete training loop from scratch - How to think about the ethical implications of your work, to help ensure that you're making the world a better place and that your work isn't misused for harm"
+        },
+        {
+          "title": "Machine Learning Specialization - Coursera",
+          "description": "It provides a broad introduction to modern machine learning, including supervised learning (multiple linear regression, logistic regression, neural networks, and decision trees), unsupervised learning (clustering, dimensionality reduction, recommender systems), and some of the best practices used in Silicon Valley for artificial intelligence and machine learning innovation (evaluating and tuning models, taking a data-centric approach to improving performance, and more.)"
+        },
+        {
+          "title": "Deep Learning Tensorflow Developer Specialization - Coursera",
+          "description": "Best practices for TensorFlow, a popular open-source machine learning framework."
+        },
+        {
+          "title": "Build GPT from Scratch: Neural Networks Zero to Hero - YouTube",
+          "description": "A course by Andrej Karpathy on building neural networks, from scratch, in code. We start with the basics of backpropagation and build up to modern deep neural networks, like GPT."
+        }
+      ]
+    },
+    {
+      "section": "Online Courses (Mathematics)",
+      "courses": [
+        {
+          "title": "Introduction to Probability: The Science of Uncertainty - edX",
+          "description": "The world is full of uncertainty: accidents, storms, unruly financial markets, noisy communications. The world is also full of data. Probabilistic modeling and the related field of statistical inference are the keys to analyzing data and making scientifically sound predictions. Probabilistic models use the language of mathematics. But instead of relying on the traditional \"theorem - proof\" format, we develop the material in an intuitive -- but still rigorous and mathematically precise -- manner. Furthermore, while the applications are multiple and evident, we emphasize the basic concepts and methodologies that are universally applicable. The course covers all of the basic probability concepts, including: - multiple discrete or continuous random variables, expectations, and conditional distributions - laws of large numbers - the main tools of Bayesian inference methods - an introduction to random processes (Poisson processes and Markov chains) The contents of this course are essentially the same as those of the corresponding MIT class (Probabilistic Systems Analysis and Applied Probability) -- a course that has been offered and continuously refined over more than 50 years. It is a challenging class, but it will enable you to apply the tools of probability theory to real-world applications or your research."
+        },
+        {
+          "title": "Essential Math for Machine Learning: Python Edition - edX",
+          "description": "Want to study machine learning or artificial intelligence, but worried that your math skills may not be up to it? Do words like “algebra’ and “calculus” fill you with dread? Has it been so long since you studied math at school that you’ve forgotten much of what you learned in the first place. You’re not alone. machine learning and AI are built on mathematical principles like Calculus, Linear Algebra, Probability, Statistics, and Optimization; and many would-be AI practitioners find this daunting. This course is not designed to make you a mathematician. Rather, it aims to help you learn some essential foundational concepts and the notation used to express them. The course provides a hands-on approach to working with data and applying the techniques you’ve learned. This course is not a full math curriculum; it’s not designed to replace school or college math education. Instead, it focuses on the key mathematical concepts that you’ll encounter in studies of machine learning. It is designed to fill the gaps for students who missed these key concepts as part of their formal education, or who need to refresh their memories after a long break from studying math."
+        },
+        {
+          "title": "Multivariable Calculus - Khan Academy",
+          "description": "Multivariable functions, partial derivatives, gradient and directional derivatives, curvature, divergence, curl, laplacian, jacobian, linear and quadratic approximations, optimization, lagrange, and constrained optimization"
+        },
+        {
+          "title": "Statistics and Probability - Khan Academy",
+          "description": "Analyzing and summarizing categorical data, data distributions, bivariate numerical data, regression, sampling and experiments, probability, conditional probability, combinatorics, random variables, sampling distributions, confidence intervals, significance tests, two-sample inference, chi-squared goodness-of-fit, advanced regression, and analysis of variance"
+        },
+        {
+          "title": "Mathematics for Machine Learning and Data Science - Coursera",
+          "description": "Master the Toolkit of AI and Machine Learning. Mathematics for Machine Learning and Data Science is a beginner-friendly Specialization where you’ll learn the fundamental mathematics toolkit of machine learning: calculus, linear algebra, statistics, and probability."
+        },
+        {
+          "title": "Mathematics for Machine Learning Specialization - Coursera",
+          "description": "Mathematics for Machine Learning. Learn about the prerequisite mathematics for applications in data science and machine learning."
+        }
+      ]
+    },
+    {
+      "section": "Online Courses (Miscl)",
+      "courses": [
+        {
+          "title": "Cloud Computing Concepts, Part 1 - Coursera",
+          "description": "About this course: Cloud computing systems today, whether open-source or used inside companies, are built using a common set of core techniques, algorithms, and design philosophies – all centered around distributed systems. Learn about such fundamental distributed computing \"concepts\" for cloud computing. Some of these concepts include: clouds, MapReduce, key-value/NoSQL stores, classical distributed algorithms, widely-used distributed algorithms, scalability, trending areas, and much, much more!"
+        },
+        {
+          "title": "11 Essential Coding Interview Questions - Udemy",
+          "description": "Learn what a coding interview is like Learn 3 problem solving techniques you'll be able to use in your next coding interview! Go through 11 of the most essential coding interview questions, coding exercises and answers! Overall, feel more confident and be ready for your next coding interview"
+        },
+        {
+          "title": "Dynamic Programming - Udemy",
+          "description": "Learn the importance of dynamic programming How to use the top-down approach of dynamic programming (memoization) How to use the bottom-up approach of dynamic programming (tabulation) How to solve almost any dynamic programming problem"
+        },
+        {
+          "title": "Learning How to Learn - Coursera",
+          "description": "This course gives you easy access to the invaluable learning techniques used by experts in art, music, literature, math, science, sports, and many other disciplines. We’ll learn about the how the brain uses two very different learning modes and how it encapsulates (“chunks”) information. We’ll also cover illusions of learning, memory techniques, dealing with procrastination, and best practices shown by research to be most effective in helping you master tough subjects. Using these approaches, no matter what your skill levels in topics you would like to master, you can change your thinking and change your life. If you’re already an expert, this peep under the mental hood will give you ideas for: turbocharging successful learning, including counter-intuitive test-taking tips and insights that will help you make the best use of your time on homework and problem sets. If you’re struggling, you’ll see a structured treasure trove of practical techniques that walk you through what you need to do to get on track. If you’ve ever wanted to become better at anything, this course will help serve as your guide."
+        },
+        {
+          "title": "The Science of Happiness - edX",
+          "description": "The Science of Happiness explores the roots of a happy and meaningful life. Students engage with some of the most provocative and practical lessons from this science, discovering how cutting-edge research can be applied to their own lives."
+        },
+        {
+          "title": "Self Authoring - Self Authoring",
+          "description": "The Past Authoring Program helps you remember, articulate and analyze key positive and negative life experiences. The Present Authoring Program has two modules. The first helps you understand and rectify your personality faults. The second helps you understand and develop your personality virtues. The Future Authoring Program helps you envision a meaningful, healthy and productive future, three to five years down the road, and to develop a detailed, implementable plan to make that future a reality."
+        },
+        {
+          "title": "The Modern World, Part One: Global History from 1760 to 1910 - Coursera",
+          "description": "This is a survey of modern history from a global perspective. Part One begins with the political and economic revolutions of the late 1700s and tracks the transformation of the world during the 1800s. Part One concludes as these bewildering changes seem to be running beyond the capacity of older institutions to handle them. Throughout the course we try to grasp what is happening and ask: Why? And the answers often turn on very human choices."
+        },
+        {
+          "title": "The Modern World, Part Two: Global History since 1910 - Coursera",
+          "description": "This is a survey of modern history from a global perspective. Part Two begins early in the twentieth century, as older ways of doing things and habits of thought give way. What follows is an era of cataclysmic struggles over what ideas and institutions will take their place. The course concludes in the present day, as communities everywhere are transitioning into a new era of world history. Again we work hard to grasp what is happening and ask: Why? Again we are drawn to pivotal choices made at key moments by individuals and communities.."
+        },
+        {
+          "title": "Introduction to TypeScript 2 - edX",
+          "description": "Want to write organized code for your website that you can easily manage and maintain? TypeScript is the answer to building scalable web applications. TypeScript lets you write JavaScript the way you want to. TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It works on Any browser. Any host. Any OS. TypeScript is open source and has attracted the attention of a big community of web developers who are continuously contributing to the wealth of the language making it the language for web development. TypeScript brings all the next-generation features of ECMAScript 6 like Arrow Functions, Decorators, Generics, Modules and Interfaces. In this course, you'll learn all the basics of TypeScript and will have hands-on using features of TypeScript such as types, optional static types, classes, interfaces, and modules. You will learn how TypeScript has solved many issues developers have suffered from with JavaScript. You will learn how TypeScript has made web development more fun and easier. You will be doing all this using the most recent released version of the language TypeScript 2.3."
+        },
+        {
+          "title": "Google Tech Dev Guide - Foundations - Tech Dev Guide",
+          "description": "Reach beyond the basics of coding with these carefully curated resources for newer programmers who have already completed 1-2 computing courses. You’re at an exciting point and we want to support you however and wherever you’re learning!"
+        },
+        {
+          "title": "The Bits and Bytes of Computer Networking - Coursera",
+          "description": "This course is designed to provide a full overview of computer networking. We’ll cover everything from the fundamentals of modern networking technologies and protocols to an overview of the cloud to practical applications and network troubleshooting."
+        },
+        {
+          "title": "Adobe Lightroom Classic CC & CC: Photo Editing Masterclass - Udemy",
+          "description": "Your complete guide to editing beautiful photos in Adobe Lightroom Classic CC and Adobe Lightroom CC."
+        },
+        {
+          "title": "Lectures on Digital Photography - Google Courses",
+          "description": "How cameras work and how to take good pictures using them."
+        }
+      ]
+    }
+  ]
+}
