@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EducationSection from '../components/EducationSection.astro';
+import coursesData from '../data/courses.json';
+
+const totalCourses = coursesData.sections.reduce((sum, s) => sum + s.courses.length, 0);
+---
+
+<Layout
+  title="Education · Nick Greenquist"
+  description="Every course I've taken — formal and online."
+>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Education</h1>
+      <p class="mt-2 text-neutral-600">
+        Every course I've taken — {totalCourses} across {coursesData.sections.length} sections.
+        Click into any section to expand the course list.
+      </p>
+    </header>
+
+    <EducationSection />
+  </main>
+</Layout>
