@@ -66,12 +66,6 @@ GoDaddy "Domain Forwarding" doesn't support HTTPS, so visiting `https://nickgree
 2. Add `public/CNAME` containing `nickgreenquist.com` (Astro copies `public/*` to the build artifact, which is how Pages picks up the custom domain on each deploy)
 3. In repo Settings → Pages, set Custom domain to `nickgreenquist.com`, wait for DNS check to pass (~5–10 min), then enable **Enforce HTTPS**
 
-### P1 — Add "UNDER CONSTRUCTION" notice to Travel Map
-
-The `/map` page currently shows a Google MyMaps iframe with only some travel markers. Until it's filled out:
-- Home page Travel Map card description: append "(under construction)" or similar
-- `/map` page subtitle: add a brief note about the work in progress
-
 ### P1 — Add "Current Work" section on home page
 
 A new section between Bio and Skills (or between Skills and Links — TBD) listing currently-being-built projects with links to their deployed Streamlit apps:
