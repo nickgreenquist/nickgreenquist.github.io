@@ -1,0 +1,20 @@
+---
+import { skillGroups } from '../data/skills';
+---
+
+<div class="space-y-4">
+  {skillGroups.map((group) => (
+    <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-5">
+      <span class="text-xs font-bold uppercase tracking-wider text-neutral-500 sm:min-w-[100px] sm:flex-shrink-0">
+        {group.label}
+      </span>
+      <div class="flex flex-wrap gap-2">
+        {group.tags.map((tag) => (
+          <span class="inline-block rounded-md border border-neutral-200 bg-white px-3 py-1 text-sm text-neutral-700">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

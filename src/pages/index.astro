@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import GatewayCard from '../components/GatewayCard.astro';
+import SkillsSection from '../components/SkillsSection.astro';
 import { headline, subhead, bioParagraphs } from '../data/about';
 import mePhoto from '../assets/me.jpg';
 ---
@@ -13,18 +14,18 @@ import mePhoto from '../assets/me.jpg';
   <main class="mx-auto max-w-3xl px-6 py-16">
     <!-- Hero -->
     <section class="flex flex-col sm:flex-row items-start gap-8">
+      <div class="space-y-3 flex-1">
+        <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{headline}</h1>
+        <p class="text-lg sm:text-xl text-neutral-600">{subhead}</p>
+      </div>
       <Image
         src={mePhoto}
         alt="Nick Greenquist"
-        widths={[160, 240, 320]}
-        sizes="160px"
-        class="w-32 h-32 rounded-full object-cover flex-shrink-0"
+        widths={[128, 192, 256]}
+        sizes="128px"
+        class="w-32 rounded-2xl flex-shrink-0"
         loading="eager"
       />
-      <div class="space-y-2">
-        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">{headline}</h1>
-        <p class="text-base sm:text-lg text-neutral-600">{subhead}</p>
-      </div>
     </section>
 
     <!-- About -->
@@ -34,20 +35,26 @@ import mePhoto from '../assets/me.jpg';
       ))}
     </section>
 
+    <!-- Skills -->
+    <section class="mt-12">
+      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">Skills</h2>
+      <SkillsSection />
+    </section>
+
     <!-- Gateway grid -->
     <section class="mt-12">
-      <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">Elsewhere</h2>
+      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">Links</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <GatewayCard
           href="https://github.com/nickgreenquist"
           label="GitHub"
-          description="ML research, recommender systems, side projects."
+          description="Personal projects — recommender systems and ML."
           external
         />
         <GatewayCard
           href="https://www.linkedin.com/in/nickgreenquist/"
           label="LinkedIn"
-          description="Professional history, publications, recommendations."
+          description="Professional and career details."
           external
         />
         <GatewayCard
@@ -59,13 +66,13 @@ import mePhoto from '../assets/me.jpg';
         <GatewayCard
           href="https://nickgreenquist.github.io/blog/"
           label="Blog"
-          description="Writing on machine learning, systems, and projects."
+          description="Thoughts on machine learning, systems, and projects."
           external
         />
         <GatewayCard
           href="/map"
           label="Travel Map"
-          description="Places I've lived, visited, and want to return to."
+          description="Everywhere I've been on Earth."
         />
         <GatewayCard
           href="/wrestling"
@@ -83,60 +90,11 @@ import mePhoto from '../assets/me.jpg';
           description="PDF, kept current."
           external
         />
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="mt-12">
-      <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-4">Contact</h2>
-      <div class="rounded-lg border border-neutral-200 bg-white p-5">
-        <form
-          action="https://formspree.io/f/maqvayqy"
-          method="POST"
-          class="space-y-4"
-        >
-          <div>
-            <label for="name" class="block text-sm font-medium text-neutral-700 mb-1">Name</label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              required
-              class="w-full rounded-md border border-neutral-300 px-3 py-2 text-neutral-900 focus:border-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900"
-            />
-          </div>
-          <div>
-            <label for="email" class="block text-sm font-medium text-neutral-700 mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              class="w-full rounded-md border border-neutral-300 px-3 py-2 text-neutral-900 focus:border-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900"
-            />
-          </div>
-          <div>
-            <label for="message" class="block text-sm font-medium text-neutral-700 mb-1">Message</label>
-            <textarea
-              name="message"
-              id="message"
-              rows="5"
-              required
-              class="w-full rounded-md border border-neutral-300 px-3 py-2 text-neutral-900 focus:border-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            class="w-full rounded-md bg-neutral-900 px-4 py-2 text-white font-medium hover:bg-neutral-700 transition-colors"
-          >
-            Send
-          </button>
-        </form>
-        <p class="mt-4 text-sm text-neutral-500">
-          Prefer email? <a href="mailto:nickgreenquist@gmail.com" class="underline hover:text-neutral-900">nickgreenquist@gmail.com</a>
-          ·
-          DM on <a href="https://www.linkedin.com/in/nickgreenquist/" class="underline hover:text-neutral-900">LinkedIn</a>.
-        </p>
+        <GatewayCard
+          href="/contact"
+          label="Contact"
+          description="Send me a message."
+        />
       </div>
     </section>
   </main>
