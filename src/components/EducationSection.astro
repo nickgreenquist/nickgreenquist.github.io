@@ -18,14 +18,27 @@ const { sections } = coursesData;
         {section.courses.map((course) => (
           <li class="px-5 py-3">
             <details class="group/inner">
-              <summary class="cursor-pointer list-none font-medium text-neutral-800 hover:text-neutral-950 flex items-center gap-2">
+              <summary class="cursor-pointer list-none font-medium text-neutral-800 hover:text-neutral-950 flex items-center gap-2 flex-wrap">
                 <span class="text-neutral-400 transition-transform group-open/inner:rotate-90 text-xs">›</span>
                 <span>{course.title}</span>
+                {course.provider && (
+                  <a
+                    href={course.provider.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onclick="event.stopPropagation()"
+                    class="ml-1 inline-flex items-center gap-1 rounded-full border border-neutral-200 px-2 py-0.5 text-xs font-normal text-neutral-600 hover:border-neutral-900 hover:text-neutral-900"
+                  >
+                    {course.provider.name}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                )}
               </summary>
               {course.description && (
-                <p class="mt-2 ml-5 text-sm text-neutral-600 leading-relaxed">
-                  {course.description}
-                </p>
+                <p
+                  class="mt-2 ml-5 text-sm text-neutral-600 leading-relaxed [&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 hover:[&_a]:text-neutral-950"
+                  set:html={course.description}
+                ></p>
               )}
             </details>
           </li>

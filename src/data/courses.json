@@ -29,7 +29,7 @@
         },
         {
           "title": "Big Data and Machine Learning Systems",
-          "description": "This class aims to cover introductory and recent concepts in big data and machine learning systems. The class will focus on a broad spectrum of big data computational problems, algorithms and platforms. The class will be centered around several big data case studies in commercial use to understand big data and machine learning tasks across different domains and provide an in-depth understanding of the problems and algorithms used in each domain. From the computational platform perspective, this class covers popular and widely used commercial platforms including Hadoop and Mapreduce variants, Spark, streaming platforms, Tensorflow, ML platforms (MLBase, MxNet) and GPU platforms. The goal of this class is to educate students about the algorithms and systems techniques used to build scalable big data and ML platforms and how these platforms are used in the real world. This class covers the following broad topics: a. Cloud Infrastructure Blocks: AWS, Mapreduce, Hadoop, Yarn b. Big Data Algorithms: searching and indexing large data sets, implementing standard statistical algorithms, similar items, nearest neighbors, graph mining, network analytics, dimensionality reduction c. Big Data Computation Platforms: Spark, TensorFlow, MLBase, MLib, MxNet, GPU computing d. Scalable ML Algorithms: Implementing deep learning algorithms, graph and network analytics, scalable vision algorithms, scalable NLP algorithms e. Domain Specific Applications and Case Studies: vision analytics engines, NLP analytics engines, search and graph analytics"
+          "description": "This class aims to cover introductory and recent concepts in big data and machine learning systems. The class will focus on a broad spectrum of big data computational problems, algorithms and platforms. The class will be centered around several big data case studies in commercial use to understand big data and machine learning tasks across different domains and provide an in-depth understanding of the problems and algorithms used in each domain. From the computational platform perspective, this class covers popular and widely used commercial platforms including Hadoop and Mapreduce variants, Spark, streaming platforms, Tensorflow, ML platforms (MLBase, MxNet) and GPU platforms. The goal of this class is to educate students about the algorithms and systems techniques used to build scalable big data and ML platforms and how these platforms are used in the real world. <br> <br>This class covers the following broad topics: <br>a. Cloud Infrastructure Blocks: AWS, Mapreduce, Hadoop, Yarn <br>b. Big Data Algorithms: searching and indexing large data sets, implementing standard statistical algorithms, similar items, nearest neighbors, graph mining, network analytics, dimensionality reduction <br>c. Big Data Computation Platforms: Spark, TensorFlow, MLBase, MLib, MxNet, GPU computing <br>d. Scalable ML Algorithms: Implementing deep learning algorithms, graph and network analytics, scalable vision algorithms, scalable NLP algorithms <br>e. Domain Specific Applications and Case Studies: vision analytics engines, NLP analytics engines, search and graph analytics"
         },
         {
           "title": "Distributed Systems",
@@ -226,32 +226,60 @@
       "section": "Online Courses (Machine Learning)",
       "courses": [
         {
-          "title": "Machine Learning - Coursera",
-          "description": "This course provides a broad introduction to machine learning, datamining, and statistical pattern recognition. Topics include: (i) Supervised learning (parametric/non-parametric algorithms, support vector machines, kernels, neural networks). (ii) Unsupervised learning (clustering, dimensionality reduction, recommender systems, deep learning). (iii) Best practices in machine learning (bias/variance theory; innovation process in machine learning and AI). The course will also draw from numerous case studies and applications, so that you'll also learn how to apply learning algorithms to building smart robots (perception, control), text understanding (web search, anti-spam), computer vision, medical informatics, audio, database mining, and other areas."
+          "title": "Machine Learning",
+          "description": "This course provides a broad introduction to machine learning, datamining, and statistical pattern recognition. Topics include: (i) Supervised learning (parametric/non-parametric algorithms, support vector machines, kernels, neural networks). (ii) Unsupervised learning (clustering, dimensionality reduction, recommender systems, deep learning). (iii) Best practices in machine learning (bias/variance theory; innovation process in machine learning and AI). The course will also draw from numerous case studies and applications, so that you'll also learn how to apply learning algorithms to building smart robots (perception, control), text understanding (web search, anti-spam), computer vision, medical informatics, audio, database mining, and other areas.",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/learn/machine-learning"
+          }
         },
         {
-          "title": "Deep Learning Specialization - Coursera",
-          "description": "The Deep Learning Specialization is a foundational program that will help you understand the capabilities, challenges, and consequences of deep learning and prepare you to participate in the development of leading-edge AI technology."
+          "title": "Deep Learning Specialization",
+          "description": "The Deep Learning Specialization is a foundational program that will help you understand the capabilities, challenges, and consequences of deep learning and prepare you to participate in the development of leading-edge AI technology.",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/specializations/deep-learningg"
+          }
         },
         {
-          "title": "Machine Learning Crash Course - Google",
-          "description": "Google's fast-paced, practical introduction to machine learning. Machine Learning Crash Course features a series of lessons with video lectures, real-world case studies, and hands-on practice exercises."
+          "title": "Machine Learning Crash Course",
+          "description": "Google's fast-paced, practical introduction to machine learning. Machine Learning Crash Course features a series of lessons with video lectures, real-world case studies, and hands-on practice exercises.",
+          "provider": {
+            "name": "Google",
+            "url": "https://developers.google.com/machine-learning/crash-course/"
+          }
         },
         {
-          "title": "Practical Deep Learning for Coders - Part 1 - FastAI",
-          "description": "What you will learn: - How to train models that achieve state-of-the-art results in: computer vision, NLP, Tabular data, collaborative filtering - Why and how deep learning models work, and how to use that knowledge to improve the accuracy, speed, and reliability of your models - The latest deep learning techniques that really matter in practice - How to implement stochastic gradient descent and a complete training loop from scratch - How to think about the ethical implications of your work, to help ensure that you're making the world a better place and that your work isn't misused for harm"
+          "title": "Practical Deep Learning for Coders - Part 1",
+          "description": "What you will learn: - How to train models that achieve state-of-the-art results in: computer vision, NLP, Tabular data, collaborative filtering - Why and how deep learning models work, and how to use that knowledge to improve the accuracy, speed, and reliability of your models - The latest deep learning techniques that really matter in practice - How to implement stochastic gradient descent and a complete training loop from scratch - How to think about the ethical implications of your work, to help ensure that you're making the world a better place and that your work isn't misused for harm",
+          "provider": {
+            "name": "FastAI",
+            "url": "https://course.fast.ai/"
+          }
         },
         {
-          "title": "Machine Learning Specialization - Coursera",
-          "description": "It provides a broad introduction to modern machine learning, including supervised learning (multiple linear regression, logistic regression, neural networks, and decision trees), unsupervised learning (clustering, dimensionality reduction, recommender systems), and some of the best practices used in Silicon Valley for artificial intelligence and machine learning innovation (evaluating and tuning models, taking a data-centric approach to improving performance, and more.)"
+          "title": "Machine Learning Specialization",
+          "description": "It provides a broad introduction to modern machine learning, including supervised learning (multiple linear regression, logistic regression, neural networks, and decision trees), unsupervised learning (clustering, dimensionality reduction, recommender systems), and some of the best practices used in Silicon Valley for artificial intelligence and machine learning innovation (evaluating and tuning models, taking a data-centric approach to improving performance, and more.)",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/specializations/machine-learning-introduction"
+          }
         },
         {
-          "title": "Deep Learning Tensorflow Developer Specialization - Coursera",
-          "description": "Best practices for TensorFlow, a popular open-source machine learning framework."
+          "title": "Deep Learning Tensorflow Developer Specialization",
+          "description": "Best practices for TensorFlow, a popular open-source machine learning framework.",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/professional-certificates/tensorflow-in-practice"
+          }
         },
         {
-          "title": "Build GPT from Scratch: Neural Networks Zero to Hero - YouTube",
-          "description": "A course by Andrej Karpathy on building neural networks, from scratch, in code. We start with the basics of backpropagation and build up to modern deep neural networks, like GPT."
+          "title": "Build GPT from Scratch: Neural Networks Zero to Hero",
+          "description": "A course by Andrej Karpathy on building neural networks, from scratch, in code. We start with the basics of backpropagation and build up to modern deep neural networks, like GPT.",
+          "provider": {
+            "name": "YouTube",
+            "url": "https://karpathy.ai/zero-to-hero.html"
+          }
         }
       ]
     },
@@ -259,28 +287,52 @@
       "section": "Online Courses (Mathematics)",
       "courses": [
         {
-          "title": "Introduction to Probability: The Science of Uncertainty - edX",
-          "description": "The world is full of uncertainty: accidents, storms, unruly financial markets, noisy communications. The world is also full of data. Probabilistic modeling and the related field of statistical inference are the keys to analyzing data and making scientifically sound predictions. Probabilistic models use the language of mathematics. But instead of relying on the traditional \"theorem - proof\" format, we develop the material in an intuitive -- but still rigorous and mathematically precise -- manner. Furthermore, while the applications are multiple and evident, we emphasize the basic concepts and methodologies that are universally applicable. The course covers all of the basic probability concepts, including: - multiple discrete or continuous random variables, expectations, and conditional distributions - laws of large numbers - the main tools of Bayesian inference methods - an introduction to random processes (Poisson processes and Markov chains) The contents of this course are essentially the same as those of the corresponding MIT class (Probabilistic Systems Analysis and Applied Probability) -- a course that has been offered and continuously refined over more than 50 years. It is a challenging class, but it will enable you to apply the tools of probability theory to real-world applications or your research."
+          "title": "Introduction to Probability: The Science of Uncertainty",
+          "description": "The world is full of uncertainty: accidents, storms, unruly financial markets, noisy communications. The world is also full of data. Probabilistic modeling and the related field of statistical inference are the keys to analyzing data and making scientifically sound predictions. Probabilistic models use the language of mathematics. But instead of relying on the traditional \"theorem - proof\" format, we develop the material in an intuitive -- but still rigorous and mathematically precise -- manner. Furthermore, while the applications are multiple and evident, we emphasize the basic concepts and methodologies that are universally applicable. The course covers all of the basic probability concepts, including: - multiple discrete or continuous random variables, expectations, and conditional distributions - laws of large numbers - the main tools of Bayesian inference methods - an introduction to random processes (Poisson processes and Markov chains) The contents of this course are essentially the same as those of the corresponding MIT class (Probabilistic Systems Analysis and Applied Probability) -- a course that has been offered and continuously refined over more than 50 years. It is a challenging class, but it will enable you to apply the tools of probability theory to real-world applications or your research.",
+          "provider": {
+            "name": "edX",
+            "url": "https://www.edx.org/course/introduction-probability-science-mitx-6-041x-2"
+          }
         },
         {
-          "title": "Essential Math for Machine Learning: Python Edition - edX",
-          "description": "Want to study machine learning or artificial intelligence, but worried that your math skills may not be up to it? Do words like “algebra’ and “calculus” fill you with dread? Has it been so long since you studied math at school that you’ve forgotten much of what you learned in the first place. You’re not alone. machine learning and AI are built on mathematical principles like Calculus, Linear Algebra, Probability, Statistics, and Optimization; and many would-be AI practitioners find this daunting. This course is not designed to make you a mathematician. Rather, it aims to help you learn some essential foundational concepts and the notation used to express them. The course provides a hands-on approach to working with data and applying the techniques you’ve learned. This course is not a full math curriculum; it’s not designed to replace school or college math education. Instead, it focuses on the key mathematical concepts that you’ll encounter in studies of machine learning. It is designed to fill the gaps for students who missed these key concepts as part of their formal education, or who need to refresh their memories after a long break from studying math."
+          "title": "Essential Math for Machine Learning: Python Edition",
+          "description": "Want to study machine learning or artificial intelligence, but worried that your math skills may not be up to it? Do words like “algebra’ and “calculus” fill you with dread? Has it been so long since you studied math at school that you’ve forgotten much of what you learned in the first place. You’re not alone. machine learning and AI are built on mathematical principles like Calculus, Linear Algebra, Probability, Statistics, and Optimization; and many would-be AI practitioners find this daunting. This course is not designed to make you a mathematician. Rather, it aims to help you learn some essential foundational concepts and the notation used to express them. The course provides a hands-on approach to working with data and applying the techniques you’ve learned. This course is not a full math curriculum; it’s not designed to replace school or college math education. Instead, it focuses on the key mathematical concepts that you’ll encounter in studies of machine learning. It is designed to fill the gaps for students who missed these key concepts as part of their formal education, or who need to refresh their memories after a long break from studying math.",
+          "provider": {
+            "name": "edX",
+            "url": "https://www.edx.org/course/essential-math-for-machine-learning-python-edition"
+          }
         },
         {
-          "title": "Multivariable Calculus - Khan Academy",
-          "description": "Multivariable functions, partial derivatives, gradient and directional derivatives, curvature, divergence, curl, laplacian, jacobian, linear and quadratic approximations, optimization, lagrange, and constrained optimization"
+          "title": "Multivariable Calculus",
+          "description": "Multivariable functions, partial derivatives, gradient and directional derivatives, curvature, divergence, curl, laplacian, jacobian, linear and quadratic approximations, optimization, lagrange, and constrained optimization",
+          "provider": {
+            "name": "Khan Academy",
+            "url": "https://www.khanacademy.org/math/multivariable-calculus"
+          }
         },
         {
-          "title": "Statistics and Probability - Khan Academy",
-          "description": "Analyzing and summarizing categorical data, data distributions, bivariate numerical data, regression, sampling and experiments, probability, conditional probability, combinatorics, random variables, sampling distributions, confidence intervals, significance tests, two-sample inference, chi-squared goodness-of-fit, advanced regression, and analysis of variance"
+          "title": "Statistics and Probability",
+          "description": "Analyzing and summarizing categorical data, data distributions, bivariate numerical data, regression, sampling and experiments, probability, conditional probability, combinatorics, random variables, sampling distributions, confidence intervals, significance tests, two-sample inference, chi-squared goodness-of-fit, advanced regression, and analysis of variance",
+          "provider": {
+            "name": "Khan Academy",
+            "url": "https://www.khanacademy.org/math/statistics-probability"
+          }
         },
         {
-          "title": "Mathematics for Machine Learning and Data Science - Coursera",
-          "description": "Master the Toolkit of AI and Machine Learning. Mathematics for Machine Learning and Data Science is a beginner-friendly Specialization where you’ll learn the fundamental mathematics toolkit of machine learning: calculus, linear algebra, statistics, and probability."
+          "title": "Mathematics for Machine Learning and Data Science",
+          "description": "Master the Toolkit of AI and Machine Learning. Mathematics for Machine Learning and Data Science is a beginner-friendly Specialization where you’ll learn the fundamental mathematics toolkit of machine learning: calculus, linear algebra, statistics, and probability.",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science"
+          }
         },
         {
-          "title": "Mathematics for Machine Learning Specialization - Coursera",
-          "description": "Mathematics for Machine Learning. Learn about the prerequisite mathematics for applications in data science and machine learning."
+          "title": "Mathematics for Machine Learning Specialization",
+          "description": "Mathematics for Machine Learning. Learn about the prerequisite mathematics for applications in data science and machine learning.",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/specializations/mathematics-machine-learning"
+          }
         }
       ]
     },
@@ -288,56 +340,108 @@
       "section": "Online Courses (Miscl)",
       "courses": [
         {
-          "title": "Cloud Computing Concepts, Part 1 - Coursera",
-          "description": "About this course: Cloud computing systems today, whether open-source or used inside companies, are built using a common set of core techniques, algorithms, and design philosophies – all centered around distributed systems. Learn about such fundamental distributed computing \"concepts\" for cloud computing. Some of these concepts include: clouds, MapReduce, key-value/NoSQL stores, classical distributed algorithms, widely-used distributed algorithms, scalability, trending areas, and much, much more!"
+          "title": "Cloud Computing Concepts, Part 1",
+          "description": "About this course: Cloud computing systems today, whether open-source or used inside companies, are built using a common set of core techniques, algorithms, and design philosophies – all centered around distributed systems. Learn about such fundamental distributed computing \"concepts\" for cloud computing. Some of these concepts include: clouds, MapReduce, key-value/NoSQL stores, classical distributed algorithms, widely-used distributed algorithms, scalability, trending areas, and much, much more!",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/learn/cloud-computing"
+          }
         },
         {
-          "title": "11 Essential Coding Interview Questions - Udemy",
-          "description": "Learn what a coding interview is like Learn 3 problem solving techniques you'll be able to use in your next coding interview! Go through 11 of the most essential coding interview questions, coding exercises and answers! Overall, feel more confident and be ready for your next coding interview"
+          "title": "11 Essential Coding Interview Questions",
+          "description": "Learn what a coding interview is like Learn 3 problem solving techniques you'll be able to use in your next coding interview! Go through 11 of the most essential coding interview questions, coding exercises and answers! Overall, feel more confident and be ready for your next coding interview",
+          "provider": {
+            "name": "Udemy",
+            "url": "https://www.udemy.com/11-essential-coding-interview-questions/"
+          }
         },
         {
-          "title": "Dynamic Programming - Udemy",
-          "description": "Learn the importance of dynamic programming How to use the top-down approach of dynamic programming (memoization) How to use the bottom-up approach of dynamic programming (tabulation) How to solve almost any dynamic programming problem"
+          "title": "Dynamic Programming",
+          "description": "Learn the importance of dynamic programming How to use the top-down approach of dynamic programming (memoization) How to use the bottom-up approach of dynamic programming (tabulation) How to solve almost any dynamic programming problem",
+          "provider": {
+            "name": "Udemy",
+            "url": "https://www.udemy.com/course/dynamic-programming-x/"
+          }
         },
         {
-          "title": "Learning How to Learn - Coursera",
-          "description": "This course gives you easy access to the invaluable learning techniques used by experts in art, music, literature, math, science, sports, and many other disciplines. We’ll learn about the how the brain uses two very different learning modes and how it encapsulates (“chunks”) information. We’ll also cover illusions of learning, memory techniques, dealing with procrastination, and best practices shown by research to be most effective in helping you master tough subjects. Using these approaches, no matter what your skill levels in topics you would like to master, you can change your thinking and change your life. If you’re already an expert, this peep under the mental hood will give you ideas for: turbocharging successful learning, including counter-intuitive test-taking tips and insights that will help you make the best use of your time on homework and problem sets. If you’re struggling, you’ll see a structured treasure trove of practical techniques that walk you through what you need to do to get on track. If you’ve ever wanted to become better at anything, this course will help serve as your guide."
+          "title": "Learning How to Learn",
+          "description": "This course gives you easy access to the invaluable learning techniques used by experts in art, music, literature, math, science, sports, and many other disciplines. We’ll learn about the how the brain uses two very different learning modes and how it encapsulates (“chunks”) information. We’ll also cover illusions of learning, memory techniques, dealing with procrastination, and best practices shown by research to be most effective in helping you master tough subjects. Using these approaches, no matter what your skill levels in topics you would like to master, you can change your thinking and change your life. If you’re already an expert, this peep under the mental hood will give you ideas for: turbocharging successful learning, including counter-intuitive test-taking tips and insights that will help you make the best use of your time on homework and problem sets. If you’re struggling, you’ll see a structured treasure trove of practical techniques that walk you through what you need to do to get on track. If you’ve ever wanted to become better at anything, this course will help serve as your guide.",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/learn/learning-how-to-learn"
+          }
         },
         {
-          "title": "The Science of Happiness - edX",
-          "description": "The Science of Happiness explores the roots of a happy and meaningful life. Students engage with some of the most provocative and practical lessons from this science, discovering how cutting-edge research can be applied to their own lives."
+          "title": "The Science of Happiness",
+          "description": "The Science of Happiness explores the roots of a happy and meaningful life. Students engage with some of the most provocative and practical lessons from this science, discovering how cutting-edge research can be applied to their own lives.",
+          "provider": {
+            "name": "edX",
+            "url": "https://learning.edx.org/course/course-v1:BerkeleyX+GG101x+2T2020/home"
+          }
         },
         {
-          "title": "Self Authoring - Self Authoring",
-          "description": "The Past Authoring Program helps you remember, articulate and analyze key positive and negative life experiences. The Present Authoring Program has two modules. The first helps you understand and rectify your personality faults. The second helps you understand and develop your personality virtues. The Future Authoring Program helps you envision a meaningful, healthy and productive future, three to five years down the road, and to develop a detailed, implementable plan to make that future a reality."
+          "title": "Self Authoring",
+          "description": "The Past Authoring Program helps you remember, articulate and analyze key positive and negative life experiences. The Present Authoring Program has two modules. The first helps you understand and rectify your personality faults. The second helps you understand and develop your personality virtues. The Future Authoring Program helps you envision a meaningful, healthy and productive future, three to five years down the road, and to develop a detailed, implementable plan to make that future a reality.",
+          "provider": {
+            "name": "Self Authoring",
+            "url": "https://www.selfauthoring.com/"
+          }
         },
         {
-          "title": "The Modern World, Part One: Global History from 1760 to 1910 - Coursera",
-          "description": "This is a survey of modern history from a global perspective. Part One begins with the political and economic revolutions of the late 1700s and tracks the transformation of the world during the 1800s. Part One concludes as these bewildering changes seem to be running beyond the capacity of older institutions to handle them. Throughout the course we try to grasp what is happening and ask: Why? And the answers often turn on very human choices."
+          "title": "The Modern World, Part One: Global History from 1760 to 1910",
+          "description": "This is a survey of modern history from a global perspective. Part One begins with the political and economic revolutions of the late 1700s and tracks the transformation of the world during the 1800s. Part One concludes as these bewildering changes seem to be running beyond the capacity of older institutions to handle them. Throughout the course we try to grasp what is happening and ask: Why? And the answers often turn on very human choices.",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/learn/modern-world/home/welcome"
+          }
         },
         {
-          "title": "The Modern World, Part Two: Global History since 1910 - Coursera",
-          "description": "This is a survey of modern history from a global perspective. Part Two begins early in the twentieth century, as older ways of doing things and habits of thought give way. What follows is an era of cataclysmic struggles over what ideas and institutions will take their place. The course concludes in the present day, as communities everywhere are transitioning into a new era of world history. Again we work hard to grasp what is happening and ask: Why? Again we are drawn to pivotal choices made at key moments by individuals and communities.."
+          "title": "The Modern World, Part Two: Global History since 1910",
+          "description": "This is a survey of modern history from a global perspective. Part Two begins early in the twentieth century, as older ways of doing things and habits of thought give way. What follows is an era of cataclysmic struggles over what ideas and institutions will take their place. The course concludes in the present day, as communities everywhere are transitioning into a new era of world history. Again we work hard to grasp what is happening and ask: Why? Again we are drawn to pivotal choices made at key moments by individuals and communities..",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/learn/modern-world-2"
+          }
         },
         {
-          "title": "Introduction to TypeScript 2 - edX",
-          "description": "Want to write organized code for your website that you can easily manage and maintain? TypeScript is the answer to building scalable web applications. TypeScript lets you write JavaScript the way you want to. TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It works on Any browser. Any host. Any OS. TypeScript is open source and has attracted the attention of a big community of web developers who are continuously contributing to the wealth of the language making it the language for web development. TypeScript brings all the next-generation features of ECMAScript 6 like Arrow Functions, Decorators, Generics, Modules and Interfaces. In this course, you'll learn all the basics of TypeScript and will have hands-on using features of TypeScript such as types, optional static types, classes, interfaces, and modules. You will learn how TypeScript has solved many issues developers have suffered from with JavaScript. You will learn how TypeScript has made web development more fun and easier. You will be doing all this using the most recent released version of the language TypeScript 2.3."
+          "title": "Introduction to TypeScript 2",
+          "description": "Want to write organized code for your website that you can easily manage and maintain? TypeScript is the answer to building scalable web applications. TypeScript lets you write JavaScript the way you want to. TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It works on Any browser. Any host. Any OS. TypeScript is open source and has attracted the attention of a big community of web developers who are continuously contributing to the wealth of the language making it the language for web development. TypeScript brings all the next-generation features of ECMAScript 6 like Arrow Functions, Decorators, Generics, Modules and Interfaces. In this course, you'll learn all the basics of TypeScript and will have hands-on using features of TypeScript such as types, optional static types, classes, interfaces, and modules. You will learn how TypeScript has solved many issues developers have suffered from with JavaScript. You will learn how TypeScript has made web development more fun and easier. You will be doing all this using the most recent released version of the language TypeScript 2.3.",
+          "provider": {
+            "name": "edX",
+            "url": "https://www.edx.org/course/introduction-to-typescript-2"
+          }
         },
         {
-          "title": "Google Tech Dev Guide - Foundations - Tech Dev Guide",
-          "description": "Reach beyond the basics of coding with these carefully curated resources for newer programmers who have already completed 1-2 computing courses. You’re at an exciting point and we want to support you however and wherever you’re learning!"
+          "title": "Google Tech Dev Guide - Foundations",
+          "description": "Reach beyond the basics of coding with these carefully curated resources for newer programmers who have already completed 1-2 computing courses. You’re at an exciting point and we want to support you however and wherever you’re learning!",
+          "provider": {
+            "name": "Tech Dev Guide",
+            "url": "https://techdevguide.withgoogle.com/paths/foundational/"
+          }
         },
         {
-          "title": "The Bits and Bytes of Computer Networking - Coursera",
-          "description": "This course is designed to provide a full overview of computer networking. We’ll cover everything from the fundamentals of modern networking technologies and protocols to an overview of the cloud to practical applications and network troubleshooting."
+          "title": "The Bits and Bytes of Computer Networking",
+          "description": "This course is designed to provide a full overview of computer networking. We’ll cover everything from the fundamentals of modern networking technologies and protocols to an overview of the cloud to practical applications and network troubleshooting.",
+          "provider": {
+            "name": "Coursera",
+            "url": "https://www.coursera.org/learn/computer-networking"
+          }
         },
         {
-          "title": "Adobe Lightroom Classic CC & CC: Photo Editing Masterclass - Udemy",
-          "description": "Your complete guide to editing beautiful photos in Adobe Lightroom Classic CC and Adobe Lightroom CC."
+          "title": "Adobe Lightroom Classic CC & CC: Photo Editing Masterclass",
+          "description": "Your complete guide to editing beautiful photos in Adobe Lightroom Classic CC and Adobe Lightroom CC.",
+          "provider": {
+            "name": "Udemy",
+            "url": "https://www.udemy.com/course/adobe-lightroom/"
+          }
         },
         {
-          "title": "Lectures on Digital Photography - Google Courses",
-          "description": "How cameras work and how to take good pictures using them."
+          "title": "Lectures on Digital Photography",
+          "description": "How cameras work and how to take good pictures using them.",
+          "provider": {
+            "name": "Google Courses",
+            "url": "https://sites.google.com/site/marclevoylectures/home/"
+          }
         }
       ]
     }
