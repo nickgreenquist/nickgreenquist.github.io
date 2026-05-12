@@ -44,8 +44,8 @@ Every push to `master` triggers `.github/workflows/deploy.yml`:
 
 ## Domain Situation
 
-- Live at: `https://nickgreenquist.github.io/`
-- Custom domain owned: `nickgreenquist.com` (GoDaddy) — currently uses GoDaddy's "Domain Forwarding" feature which is HTTP-only and triggers browser HTTPS warnings. See Future Work P0.
+- Live at: `https://nickgreenquist.com/` (custom domain, HTTPS enforced via GitHub Pages)
+- Also reachable at `https://nickgreenquist.github.io/` (redirects to custom domain)
 
 ## Rollback
 
@@ -54,28 +54,7 @@ Every push to `master` triggers `.github/workflows/deploy.yml`:
 
 ## Future Work
 
-### P0 — Fix nickgreenquist.com forwarding (credibility hit)
-
-GoDaddy "Domain Forwarding" doesn't support HTTPS, so visiting `https://nickgreenquist.com` shows a browser security warning. Replace with proper custom-domain setup on GitHub Pages:
-
-1. In GoDaddy DNS for `nickgreenquist.com`:
-   - Remove the existing Domain Forwarding rule
-   - Add four A records on the apex (`@`) pointing to GitHub Pages IPs:
-     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - Optionally add a CNAME for `www` → `nickgreenquist.github.io`
-2. Add `public/CNAME` containing `nickgreenquist.com` (Astro copies `public/*` to the build artifact, which is how Pages picks up the custom domain on each deploy)
-3. In repo Settings → Pages, set Custom domain to `nickgreenquist.com`, wait for DNS check to pass (~5–10 min), then enable **Enforce HTTPS**
-
-### P1 — Add "Current Work" section on home page
-
-A new section between Bio and Skills (or between Skills and Links — TBD) listing currently-being-built projects with links to their deployed Streamlit apps:
-- Game recommender
-- Book recommender
-- Movie recommender
-
-Treat similarly to the Links grid but with project-specific descriptions and live-demo URLs.
-
-### P2 — Update Resume.pdf
+### P1 — Update Resume.pdf
 
 `public/Resume.pdf` is the v1 file. Refresh with current role details and recent work before the next round of job-hunting.
 

@@ -13,7 +13,7 @@ const {
   ogImage = '/me-og.jpg',
 } = Astro.props;
 
-const siteUrl = 'https://nickgreenquist.github.io';
+const siteUrl = 'https://nickgreenquist.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const absoluteOgImage = new URL(ogImage, siteUrl).toString();
 ---
