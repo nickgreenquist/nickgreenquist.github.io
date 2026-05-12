@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import GatewayCard from '../components/GatewayCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import SkillsSection from '../components/SkillsSection.astro';
 import { headline, subhead, bioParagraphs } from '../data/about';
 import mePhoto from '../assets/me.jpg';
@@ -33,6 +34,43 @@ import mePhoto from '../assets/me.jpg';
       {bioParagraphs.map((p) => (
         <p set:html={p} class="[&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 [&_a:hover]:text-neutral-950 [&_a:hover]:decoration-neutral-900"></p>
       ))}
+    </section>
+
+    <!-- Current Work -->
+    <section class="mt-10">
+      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">Current Work</h2>
+      <p class="text-neutral-700 leading-relaxed mb-4">A series of state-of-the-art two-tower neural recommenders built with PyTorch. Each model learns separate user and item embeddings from interaction history and content features, trained with full softmax and Menon popularity debiasing so results reflect genuine taste — not just what's trending. No account needed.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <ProjectCard
+          label="Movie Recommender"
+          dataset="MovieLens 32M Dataset"
+          items="9,375 movies"
+          users="~50k users"
+          demoHref="https://movie-recommender-system-two-tower-model.streamlit.app/"
+        />
+        <ProjectCard
+          label="Book Recommender"
+          dataset="Goodreads Dataset"
+          items="14,753 books"
+          users="229k users"
+          demoHref="https://book-recommender-system-two-tower-model.streamlit.app/"
+        />
+        <ProjectCard
+          label="Game Recommender"
+          dataset="Steam Dataset"
+          items="5,437 games"
+          users="66k users"
+          demoHref="https://game-recommender-system-two-tower-model.streamlit.app/"
+        />
+      </div>
+      <p class="mt-3 text-sm text-neutral-500">
+        Source:
+        <a href="https://github.com/nickgreenquist/Movie-Recommender-System-PyTorch-TwoTower-Model" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-900 hover:underline">Movies ↗</a>
+        ·
+        <a href="https://github.com/nickgreenquist/Book-Recommender-System-PyTorch-TwoTower-Model" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-900 hover:underline">Books ↗</a>
+        ·
+        <a href="https://github.com/nickgreenquist/Game-Recommender-System-PyTorch-TwoTower-Model" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-900 hover:underline">Games ↗</a>
+      </p>
     </section>
 
     <!-- Skills -->
