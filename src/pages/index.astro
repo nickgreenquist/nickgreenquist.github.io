@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import GatewayCard from '../components/GatewayCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import SkillsSection from '../components/SkillsSection.astro';
 import { headline, subhead, bioParagraphs } from '../data/about';
 import mePhoto from '../assets/me.jpg';
 ---
@@ -36,10 +35,11 @@ import mePhoto from '../assets/me.jpg';
       ))}
     </section>
 
-    <!-- Current Work -->
+    <!-- At the Keyboard -->
     <section class="mt-10">
-      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">Current Work</h2>
-      <p class="text-neutral-700 leading-relaxed mb-4">A series of state-of-the-art two-tower neural recommenders built with PyTorch. Each model learns separate user and item embeddings from interaction history and content features, trained with full softmax and Menon popularity debiasing so results reflect genuine taste — not just what's trending. No account needed.</p>
+      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard</h2>
+      <p class="text-sm text-neutral-500 mb-4">What I'm currently building.</p>
+      <p class="text-neutral-700 leading-relaxed mb-4">A series of state-of-the-art two-tower neural recommenders built with PyTorch. Each model learns separate user and item embeddings from interaction history and content features, trained with full softmax and A. Menon popularity debiasing so results reflect genuine taste — not just what's trending. No account needed.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <ProjectCard
           label="Movie Recommender"
@@ -76,44 +76,33 @@ import mePhoto from '../assets/me.jpg';
     <!-- Publications -->
     <section class="mt-10">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">Publications</h2>
-      <ol class="space-y-4 list-none">
-        <li class="space-y-0.5">
-          <a
-            href="https://link.springer.com/chapter/10.1007/978-3-031-36625-3_12"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-medium text-neutral-900 underline decoration-neutral-300 underline-offset-2 hover:decoration-neutral-700"
-          >Pyrorank: A Novel Nature-Inspired Algorithm to Promote Diversity in Recommender Systems ↗</a>
-          <p class="text-sm text-neutral-500">Doruk Kilitcioglu, Nicholas Greenquist &amp; Anasse Bari</p>
-          <p class="text-sm text-neutral-500">Advances in Swarm Intelligence. ICSI 2023 · Jul 2023</p>
-        </li>
-        <li class="space-y-0.5">
-          <a
-            href="https://ieeexplore.ieee.org/abstract/document/9403110"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-medium text-neutral-900 underline decoration-neutral-300 underline-offset-2 hover:decoration-neutral-700"
-          >GPU Accelerated Matrix Factorization for Recommender Systems ↗</a>
-          <p class="text-sm text-neutral-500">Doruk Kilitcioglu, Nicholas Greenquist, Mohamed Zahran &amp; Anasse Bari</p>
-          <p class="text-sm text-neutral-500">IEEE 6th International Conference on Big Data Analytics (ICBDA) · Apr 2021</p>
-        </li>
-        <li class="space-y-0.5">
-          <a
-            href="https://ieeexplore.ieee.org/document/8713194"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-medium text-neutral-900 underline decoration-neutral-300 underline-offset-2 hover:decoration-neutral-700"
-          >GKB: A Predictive Analytics Framework to Generate Online Product Recommendations ↗</a>
-          <p class="text-sm text-neutral-500">Nicholas Greenquist, Doruk Kilitcioglu &amp; Anasse Bari</p>
-          <p class="text-sm text-neutral-500">IEEE 4th International Conference on Big Data Analysis (ICBDA) · Mar 2019</p>
-        </li>
-      </ol>
+      <div class="grid grid-cols-1 gap-3">
+        <GatewayCard
+          href="https://link.springer.com/chapter/10.1007/978-3-031-36625-3_12"
+          label="Pyrorank: A Novel Nature-Inspired Algorithm to Promote Diversity in Recommender Systems"
+          description="Doruk Kilitcioglu, Nicholas Greenquist & Anasse Bari · ICSI 2023 · Jul 2023"
+          external
+        />
+        <GatewayCard
+          href="https://ieeexplore.ieee.org/abstract/document/9403110"
+          label="GPU Accelerated Matrix Factorization for Recommender Systems"
+          description="Doruk Kilitcioglu, Nicholas Greenquist, Mohamed Zahran & Anasse Bari · ICBDA · Apr 2021"
+          external
+        />
+        <GatewayCard
+          href="https://ieeexplore.ieee.org/document/8713194"
+          label="GKB: A Predictive Analytics Framework to Generate Online Product Recommendations"
+          description="Nicholas Greenquist, Doruk Kilitcioglu & Anasse Bari · ICBDA · Mar 2019"
+          external
+        />
+      </div>
     </section>
 
-    <!-- Skills -->
-    <section class="mt-12">
-      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">Skills</h2>
-      <SkillsSection />
+    <!-- Away from the Keyboard -->
+    <section class="mt-10">
+      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">Away from the Keyboard</h2>
+      <p class="text-sm text-neutral-500 mb-4">What's keeping me busy in the real world.</p>
+      <p class="text-sm text-neutral-400 italic">More here soon.</p>
     </section>
 
     <!-- Gateway grid -->
