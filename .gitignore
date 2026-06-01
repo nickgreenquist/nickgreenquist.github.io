@@ -23,5 +23,8 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# claude code local tooling
+.claude/
+
 # legacy v1 local assets kept off git (kept locally only)
 img/map/
