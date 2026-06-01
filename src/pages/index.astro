@@ -5,6 +5,45 @@ import GatewayCard from '../components/GatewayCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { headline, subhead, bioParagraphs } from '../data/about';
 import mePhoto from '../assets/me.jpg';
+
+// Shared data for the four recommenders in the "At the Keyboard" section.
+const movie = {
+  label: 'Movie Recommender',
+  dataset: 'MovieLens 32M',
+  items: '9,375 movies',
+  users: '~50k users',
+  result: '8.7× MRR over the MSE baseline (0.115 vs 0.013)',
+  demoHref: 'https://movie-recommender-system-two-tower-model.streamlit.app/',
+  codeHref: 'https://github.com/nickgreenquist/Movie-Recommender-System-PyTorch-TwoTower-Model',
+};
+const book = {
+  label: 'Book Recommender',
+  dataset: 'Goodreads',
+  items: '14,753 books',
+  users: '229k users',
+  result: '3.4× Hit@10 over the MSE baseline (16.0% vs 4.7%)',
+  demoHref: 'https://book-recommender-system-two-tower-model.streamlit.app/',
+  codeHref: 'https://github.com/nickgreenquist/Book-Recommender-System-PyTorch-TwoTower-Model',
+};
+const steam = {
+  label: 'Steam Game Recommender',
+  dataset: 'Steam',
+  items: '5,437 games',
+  users: '66k users',
+  result: 'Wide & Deep ranker: +16% NDCG@10 over retrieval-only',
+  demoHref: 'https://game-recommender-system-two-tower-model.streamlit.app/',
+  codeHref: 'https://github.com/nickgreenquist/Game-Recommender-System-PyTorch-TwoTower-Model',
+};
+const amazon = {
+  label: 'Amazon Games Recommender',
+  dataset: 'Amazon Video Games',
+  items: '16,882 games',
+  users: '50,626 users',
+  result: 'Sampled NDCG@10 0.519 — within 3.2% (relative) of published SASRec’s 0.536',
+  demoHref: 'https://amazon-video-game-recommender-system-pytorch-transformer-model.streamlit.app/',
+  codeHref: 'https://github.com/nickgreenquist/Amazon-Video-Game-Recommender-System-PyTorch-Transformer-Model',
+};
+const streamlitNote = 'These demos run on Streamlit’s free tier and sleep after a few hours of inactivity. If you land on a “Wake up” screen, just click the button — the app will be ready in about 15–30 seconds.';
 ---
 
 <Layout
@@ -38,41 +77,34 @@ import mePhoto from '../assets/me.jpg';
     <!-- At the Keyboard -->
     <section class="mt-10">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard</h2>
-      <p class="text-neutral-500 mb-4">What I'm currently building.</p>
-      <p class="text-neutral-700 leading-relaxed mb-4">A series of state-of-the-art two-tower neural recommenders built with PyTorch. Each model learns separate user and item embeddings from interaction history and content features, trained with full softmax and A. Menon popularity debiasing so results reflect genuine taste — not just what's trending. No account needed.</p>
-      <p class="text-neutral-700 leading-relaxed mb-4">Currently extending the Game model into a two-stage pipeline — the two-tower retriever now feeds its top candidates into a Wide & Deep ranking model that reorders them on richer content and cross features, the same retrieval-then-rank design used in large-scale production systems.</p>
-      <p class="text-sm text-neutral-500 mb-4">Note: These demos run on Streamlit's free tier and sleep after a few hours of inactivity. If you land on a "Wake up" screen, just click the button — the app will be ready in about 15–30 seconds.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <ProjectCard
-          label="Movie Recommender"
-          dataset="MovieLens 32M Dataset"
-          items="9,375 movies"
-          users="~50k users"
-          demoHref="https://movie-recommender-system-two-tower-model.streamlit.app/"
-        />
-        <ProjectCard
-          label="Book Recommender"
-          dataset="Goodreads Dataset"
-          items="14,753 books"
-          users="229k users"
-          demoHref="https://book-recommender-system-two-tower-model.streamlit.app/"
-        />
-        <ProjectCard
-          label="Game Recommender"
-          dataset="Steam Dataset"
-          items="5,437 games"
-          users="66k users"
-          demoHref="https://game-recommender-system-two-tower-model.streamlit.app/"
-        />
-      </div>
-      <p class="mt-3 text-sm text-neutral-500">
-        Source:
-        <a href="https://github.com/nickgreenquist/Movie-Recommender-System-PyTorch-TwoTower-Model" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-900 hover:underline">Movies ↗</a>
-        ·
-        <a href="https://github.com/nickgreenquist/Book-Recommender-System-PyTorch-TwoTower-Model" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-900 hover:underline">Books ↗</a>
-        ·
-        <a href="https://github.com/nickgreenquist/Game-Recommender-System-PyTorch-TwoTower-Model" target="_blank" rel="noopener noreferrer" class="hover:text-neutral-900 hover:underline">Games ↗</a>
+      <p class="text-neutral-500 mb-4">A body of work in production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit.</p>
+      <p class="mb-8 rounded-md border border-amber-300 border-l-4 border-l-amber-500 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+        <span class="font-semibold">Note:</span> {streamlitNote}
       </p>
+
+      <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-700 mb-2">Retrieval · Two-Tower</h3>
+      <p class="text-neutral-700 leading-relaxed mb-3">Two towers — one for the user, one for the item — embed into a shared space where a dot product retrieves taste matches. Users are represented by the <em>features</em> of what they’ve enjoyed, not a user ID, so anyone gets recommendations from just a few examples. Both represent the user by pooling their interaction history through several behavior-partitioned pools, and both train with a full softmax over the entire catalog — with a logit adjustment from Menon et al. (2021) added just before the loss to debias popular items. The Movie and Book models are nearly the same architecture on two datasets — the Books variant adds author and shelf-affinity towers, leveraging content features the movie dataset doesn’t have.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+        {[movie, book].map((r) => (
+          <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
+        ))}
+      </div>
+
+      <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-700 mb-2">Two-Stage · Retrieve → Rank</h3>
+      <p class="text-neutral-700 leading-relaxed mb-3">Same two-tower retriever as above for candidate generation — but paired with an entirely new model that is <em>not</em> two-tower: a Wide &amp; Deep ranker. The ranker rescores the retriever’s top candidates, unlocking the power of user×item cross-features that a dot product can’t capture (at more than 10× the training cost). Retrieve-then-rank is the two-stage design used in industry-scale recommenders.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+        {[steam].map((r) => (
+          <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
+        ))}
+      </div>
+
+      <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-700 mb-2">Sequential · Transformer</h3>
+      <p class="text-neutral-700 leading-relaxed mb-3">An ablation study isolating sequence modeling itself. A three-stage progression — bag-of-items baseline → causal attention without positional embeddings → full SASRec — measures what each architectural piece contributes, on a deliberately minimal feature set (item-ID embeddings only, no genre/tag/price towers) so the gains come from the sequence model rather than side features. The user tower is purely the <em>ordered sequence</em> of item IDs encoded by a causal Transformer, and final sampled NDCG@10 (0.519) lands within 3.2% — relative — of the published SASRec baseline (0.536).</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {[amazon].map((r) => (
+          <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
+        ))}
+      </div>
     </section>
 
     <!-- Away from the Keyboard -->

@@ -1,24 +1,45 @@
 ---
 interface Props {
   label: string;
-  dataset: string;
-  items: string;
-  users: string;
+  dataset?: string;
+  items?: string;
+  users?: string;
+  result?: string;
   demoHref: string;
+  codeHref?: string;
 }
 
-const { label, dataset, items, users, demoHref } = Astro.props;
+const { label, dataset, items, users, result, demoHref, codeHref } = Astro.props;
+const meta = [dataset, items, users].filter(Boolean).join(' · ');
 ---
 
-<a
-  href={demoHref}
-  target="_blank"
-  rel="noopener noreferrer"
-  class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all hover:border-neutral-900 hover:shadow-md"
->
-  <div class="flex items-center justify-between">
-    <h3 class="font-semibold text-neutral-900">{label}</h3>
-    <span class="text-neutral-400 group-hover:text-neutral-900 group-hover:translate-x-0.5 transition-all">→</span>
+<div class="flex flex-col">
+  <a
+    href={demoHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all hover:border-neutral-900 hover:shadow-md"
+  >
+    <div class="flex items-center justify-between">
+      <h3 class="font-semibold text-neutral-900">{label}</h3>
+      <span class="text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">→</span>
+    </div>
+    {meta && <p class="mt-1 text-sm text-neutral-600">Trained on {meta}</p>}
+  </a>
+
+  <div class="mt-2 flex items-baseline justify-between gap-3">
+    {result ? (
+      <p class="text-sm text-neutral-600"><span class="font-medium text-emerald-600">↑</span> {result}</p>
+    ) : <span></span>}
+    {codeHref && (
+      <a
+        href={codeHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex-shrink-0 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:underline"
+      >
+        GitHub ↗
+      </a>
+    )}
   </div>
-  <p class="mt-1 text-sm text-neutral-600">Trained on {dataset} · {items} · {users}</p>
-</a>
+</div>
