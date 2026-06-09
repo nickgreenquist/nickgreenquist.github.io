@@ -5,12 +5,14 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  ogType?: string;
 }
 
 const {
   title = 'Nick Greenquist',
   description = 'Senior Software Engineer at Google working on Machine Learning and Recommendation Systems.',
   ogImage = '/me-og.jpg',
+  ogType = 'website',
 } = Astro.props;
 
 const siteUrl = 'https://nickgreenquist.com';
@@ -33,7 +35,7 @@ const absoluteOgImage = new URL(ogImage, siteUrl).toString();
 		<link rel="icon" href="/favicon.ico" />
 
 		<!-- Open Graph -->
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={absoluteOgImage} />

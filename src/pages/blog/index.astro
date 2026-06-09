@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { postPath, formatDate, byNewest, categoryLabel } from '../../utils/blog';
+
+const posts = (await getCollection('blog')).sort(byNewest);
+---
+
+<Layout
+  title="Blog — Nick Greenquist"
+  description="Writing on machine learning, recommender systems, and software projects."
+>
+  <main class="mx-auto max-w-3xl px-6 py-10 sm:py-16">
+    <header class="space-y-3">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">Blog</h1>
+      <p class="text-lg text-neutral-600">
+        Writing on machine learning, recommender systems, and the occasional side quest.
+      </p>
+      <p class="text-sm text-neutral-400">
+        <a href="/blog/feed.xml" class="hover:text-neutral-700 transition-colors">RSS feed</a>
+      </p>
+    </header>
+
+    <ul class="mt-10 divide-y divide-neutral-200">
+      {posts.map((post) => (
+        <li class="py-6 first:pt-0">
+          <div class="flex items-center gap-3 text-sm text-neutral-500">
+            <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+            <span class="inline-block rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600">
+              {categoryLabel(post.data.category)}
+            </span>
+          </div>
+          <h2 class="mt-1.5 text-xl font-semibold tracking-tight">
+            <a href={postPath(post)} class="text-neutral-900 hover:text-neutral-600 transition-colors">
+              {post.data.title}
+            </a>
+          </h2>
+          {post.data.description && (
+            <p class="mt-1 text-neutral-600 leading-relaxed">{post.data.description}</p>
+          )}
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>
