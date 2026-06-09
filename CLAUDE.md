@@ -75,11 +75,13 @@ Migrated from the standalone Jekyll repo (`github.com/nickgreenquist/blog`) into
 
 `public/Resume.pdf` is the v1 file. Refresh with current role details and recent work before the next round of job-hunting.
 
-### P2 — Recover & republish the unpublished ML "from scratch" series
+### P2 — Republish the unpublished ML "from scratch" series
 
-The June 2026 migration brought over only the **11 published** posts. The old `blog` repo's git history (`github.com/nickgreenquist/blog`) also holds a substantial ML-from-scratch series that was written and later unpublished. **Eventually I want to recover and republish these — not a priority right now.**
+The June 2026 migration brought over only the **11 published** posts. A substantial ML-from-scratch series was written and later unpublished. **Eventually I want to republish these — not a priority right now.**
 
-Recoverable from that repo's history (this is why the repo must not be deleted):
+**Recovered (June 2026):** all 12 posts and their 7 referenced image dirs now live in **`drafts/`** at the repo root — see `drafts/README.md`. `drafts/` sits *outside* the Astro content collection (loader `base` is `./src/content/blog`), so nothing there is loaded, built, routed, or fed to RSS — version-controlled only, invisible to the live site. The files are in **original Jekyll/kramdown form** (Jekyll-isms not yet converted). To publish one: convert the Jekyll-isms (see "Blog migration notes"), add the frontmatter schema fields, move the `.md` into `src/content/blog/`, and copy any referenced asset dir into `public/blog/assets/`.
+
+The series (all recovered into `drafts/blog/posts/`):
 
 - Gradient Descent for Linear Regression — `2019-04-13` (~2,000 words)
 - Ridge Regression / L2 — `2019-04-15` (~2,000)
@@ -91,16 +93,12 @@ Recoverable from that repo's history (this is why the repo must not be deleted):
 - Decision Tree from Scratch — `2020-10-01`
 - Gradient Boosting — `2020-10-05`
 
-(History also contains a personal `first-garden` post and an earlier `effective-engineer-tldr-part-1` that's superseded by the published version.)
-
-Pull a post back out of the old repo's history:
+The old repo's history also still holds a personal `first-garden` post and an earlier `effective-engineer-tldr-part-1` (superseded by the published version) — **not** recovered into `drafts/`. The repo must still not be deleted (see the migration note above); to pull anything else back out:
 
 ```bash
 git log --all --diff-filter=D --name-only -- '_posts/*'   # list every deleted post
 git show <commit>^:_posts/<file>                          # print one post's full content
 ```
-
-Their images live in that history too (asset dirs `GradientDescent`, `RidgeRegression`, `SGD`, `Softmax`, `SVM`, `Kernels`, `Multiclass`) — deliberately **not** copied into `public/blog/assets/` during the migration. To republish: convert the Jekyll-isms the same way (see "Blog migration notes"), copy the needed asset dirs into `public/blog/assets/`, and drop the `.md` files into `src/content/blog/`.
 
 ## v2 Migration Notes (May 2026)
 
