@@ -62,7 +62,7 @@ Migrated from the standalone Jekyll repo (`github.com/nickgreenquist/blog`) into
 - Adding a post: drop a `.md` file in `src/content/blog/` with the frontmatter schema; the listing, route, RSS feed, and (for new posts) URL all derive automatically.
 
 > [!IMPORTANT]
-> **Going live requires disabling Pages on the old `blog` repo.** GitHub Pages routes `nickgreenquist.com/blog/*` to the project repo named `blog` (which still has Pages enabled on `master`), and that **shadows** the `/blog/` pages built here. After this site deploys, run `gh api -X DELETE repos/nickgreenquist/blog/pages` (or rename/archive the repo) to make the new blog visible. The old repo is otherwise left untouched as a content backup.
+> **Do not delete the old `blog` repo.** Its GitHub Pages was disabled in June 2026 so this site's `/blog/` could take over the custom domain — GitHub had been routing `nickgreenquist.com/blog/*` to that project repo and shadowing these pages. That cutover is **complete and live**. The repo is now kept purely as an archive, and its **git history holds ~10 unpublished ML posts** never migrated here (see Future Work → "Recover the unpublished ML series"). Deleting the repo would permanently destroy that history. Archive it if you want it off your active list, but don't delete it.
 
 ## Rollback
 
@@ -74,6 +74,33 @@ Migrated from the standalone Jekyll repo (`github.com/nickgreenquist/blog`) into
 ### P1 — Update Resume.pdf
 
 `public/Resume.pdf` is the v1 file. Refresh with current role details and recent work before the next round of job-hunting.
+
+### P2 — Recover & republish the unpublished ML "from scratch" series
+
+The June 2026 migration brought over only the **11 published** posts. The old `blog` repo's git history (`github.com/nickgreenquist/blog`) also holds a substantial ML-from-scratch series that was written and later unpublished. **Eventually I want to recover and republish these — not a priority right now.**
+
+Recoverable from that repo's history (this is why the repo must not be deleted):
+
+- Gradient Descent for Linear Regression — `2019-04-13` (~2,000 words)
+- Ridge Regression / L2 — `2019-04-15` (~2,000)
+- Stochastic Gradient Descent — `2019-04-18` (~2,000)
+- Softmax: Partial Derivative — `2020-08-29`
+- SVM from Scratch, Part I (Math) & Part II (Code) — `2020-08-30`, `2020-09-01`
+- Kernelized Ridge Regression (Math) — `2020-09-05` (plus a short "Kernelized SVM" stub)
+- Multiclass Classification with SVM — `2020-09-30`
+- Decision Tree from Scratch — `2020-10-01`
+- Gradient Boosting — `2020-10-05`
+
+(History also contains a personal `first-garden` post and an earlier `effective-engineer-tldr-part-1` that's superseded by the published version.)
+
+Pull a post back out of the old repo's history:
+
+```bash
+git log --all --diff-filter=D --name-only -- '_posts/*'   # list every deleted post
+git show <commit>^:_posts/<file>                          # print one post's full content
+```
+
+Their images live in that history too (asset dirs `GradientDescent`, `RidgeRegression`, `SGD`, `Softmax`, `SVM`, `Kernels`, `Multiclass`) — deliberately **not** copied into `public/blog/assets/` during the migration. To republish: convert the Jekyll-isms the same way (see "Blog migration notes"), copy the needed asset dirs into `public/blog/assets/`, and drop the `.md` files into `src/content/blog/`.
 
 ## v2 Migration Notes (May 2026)
 
