@@ -1,5 +1,5 @@
 ---
-title: "$200 vs $200k: Item Content Features With an LLM Instead of Hand-Labeled Tagging"
+title: "$200 vs $200k: Generating Item Features With an LLM Instead of Hand Tagging"
 description: "A controlled two-tower recommender experiment on MovieLens 32M — and what it means for a team setting up recommendations with no tagging budget."
 date: "2026-06-10"
 slug: "llm-vs-genome-content-features"
