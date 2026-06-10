@@ -15,6 +15,16 @@
   margin-right: auto;
 }
 
+/* --- Blog post inline code --- */
+/* @tailwindcss/typography wraps inline `code` in literal backtick glyphs via
+   ::before/::after content. Drop them so tokens like `survival` render as clean
+   monospace instead of `survival` with visible backticks. The plugin's rule uses
+   :where() (zero specificity), so this later, equal-specificity rule overrides it. */
+.prose :where(code)::before,
+.prose :where(code)::after {
+  content: none;
+}
+
 /* Embedded PDF (Recommender Systems slides) */
 .post-pdf {
   width: 100%;
