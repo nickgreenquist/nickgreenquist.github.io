@@ -3,7 +3,10 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import GatewayCard from '../components/GatewayCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { headline, subhead, bioParagraphs } from '../data/about';
+import JourneyTimeline from '../components/JourneyTimeline.astro';
+import PhotoGrid from '../components/PhotoGrid.astro';
+import { headline, subhead, bioIntro, journeyLead, journey } from '../data/about';
+import { photos, portfolioUrl, instagramUrl } from '../data/photography';
 import mePhoto from '../assets/me.jpg';
 
 import { movie, book, steam, amazon } from '../data/projects';
@@ -32,14 +35,16 @@ import { movie, book, steam, amazon } from '../data/projects';
 
     <!-- About -->
     <section class="mt-10 space-y-4 text-neutral-700 leading-relaxed">
-      {bioParagraphs.map((p) => (
-        <p set:html={p} class="[&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 [&_a:hover]:text-neutral-950 [&_a:hover]:decoration-neutral-900"></p>
-      ))}
+      <p set:html={bioIntro} class="[&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 [&_a:hover]:text-neutral-950 [&_a:hover]:decoration-neutral-900"></p>
+      <p>{journeyLead}</p>
+      <div class="py-2">
+        <JourneyTimeline steps={journey} />
+      </div>
     </section>
 
     <!-- At the Keyboard -->
     <section class="mt-10">
-      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard</h2>
+      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard — Personal Projects</h2>
       <p class="text-neutral-500 mb-4">A body of work in production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit. Two-tower retrieval, two-stage retrieve-then-rank, and sequential Transformer models.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[movie, book, steam, amazon].map((r) => (
@@ -59,7 +64,7 @@ import { movie, book, steam, amazon } from '../data/projects';
     </section>
 
     <!-- Publications -->
-    <section class="mt-10">
+    <section id="publications" class="mt-10 scroll-mt-20">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">Publications</h2>
       <p class="text-neutral-500 mb-4">Peer-reviewed research in recommendation systems.</p>
       <div class="grid grid-cols-1 gap-3">
@@ -84,14 +89,33 @@ import { movie, book, steam, amazon } from '../data/projects';
       </div>
     </section>
 
-    <!-- Away from the Keyboard -->
+    <!-- Through the Lens -->
     <section class="mt-10">
+      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">Through the Lens — Photography</h2>
+      <p class="text-neutral-500 mb-4">Whenever I have a free moment I'm out with my camera. A few favorites below — each links into its gallery. I post more frequently to <a href={instagramUrl} target="_blank" rel="noopener noreferrer" class="underline decoration-neutral-400 underline-offset-2 hover:text-neutral-950 hover:decoration-neutral-900">Instagram</a>.</p>
+      <PhotoGrid photos={photos} />
+      <a
+        href={portfolioUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group mt-4 block rounded-md border border-neutral-200 border-l-4 border-l-neutral-900 bg-neutral-50 px-4 py-3 transition-all hover:border-neutral-900 hover:shadow-md"
+      >
+        <span class="flex items-center justify-between font-semibold text-neutral-900">
+          See the full portfolio
+          <span class="text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">→</span>
+        </span>
+        <span class="mt-1 block text-sm text-neutral-600">Wildlife and travel photography from 30+ galleries around the world.</span>
+      </a>
+    </section>
+
+    <!-- Away from the Keyboard -->
+    <section id="away-from-the-keyboard" class="mt-10 scroll-mt-20">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">Away from the Keyboard</h2>
-      <p class="text-neutral-500 mb-4">What's keeping me busy in the real world.</p>
+      <p class="text-neutral-500 mb-4">Reading, fitness, travel — and above all, being a dad.</p>
       <div class="space-y-4 text-neutral-700 leading-relaxed [&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 [&_a:hover]:text-neutral-950 [&_a:hover]:decoration-neutral-900">
         <p><strong >New Dad</strong> — I became a dad this past year — easily the most important thing that's happened in my life. Most of my time and energy these days goes into being the best father I can be.</p>
-        <p><strong >Photography</strong> — Whenever I have a free moment I'm out with my camera. Best work lives on my <a href="https://nickgreenquist.myportfolio.com/" target="_blank" rel="noopener noreferrer">portfolio</a>; I also post more frequently to <a href="https://www.instagram.com/nickgreenquist/" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>
         <p><strong >Travel</strong> — We've kept traveling even as new parents — our son has already been to Cancun, Mexico and to Campo Grande, Brazil for his first birthday and to meet his Brazilian family. Next up is a summer camping trip with our towable trailer. I keep my travel map up to date <a href="/map">here</a>.</p>
+        <p><strong >Fitness</strong> — Old habits from wrestling die hard: physical fitness is still an important part of my routine, and the best way I know to clear my head. I lift weights 5-6x a week and try to walk 10k+ steps a day.</p>
         <p><strong >Books</strong> — I'm always reading or listening to audiobooks. Check out my <a href="https://www.goodreads.com/user/show/26809953-nick-greenquist" target="_blank" rel="noopener noreferrer">Goodreads</a> to see what I've recently finished and what I'm currently reading — I keep it up to date.</p>
         <p><strong >Pokémon</strong> — Having a kid sent me straight back to my childhood: I've gotten back into collecting Pokémon cards with the hope of passing the hobby on to my son when he's ready. My goal is to complete the Pokédex — one card for every one of the 1000+ Pokémon — and you can follow my progress in <a href="https://docs.google.com/spreadsheets/d/1FStZBCxWdJ_uC8c_WV24eZsVzI-EmIZHouPKxaG6pcY/edit?usp=sharing" target="_blank" rel="noopener noreferrer">this live tracker</a>.</p>
       </div>
