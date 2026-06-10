@@ -13,7 +13,7 @@ Personal portfolio site for Nick Greenquist — built on Astro + Tailwind, deplo
 
 ## Project Structure
 
-- `src/pages/` — top-level pages: `index.astro` (gateway), `education.astro`, `wrestling.astro`, `map.astro`, `contact.astro`, plus the blog (`blog/index.astro` listing, `blog/[...slug].astro` post route, `blog/feed.xml.ts` RSS)
+- `src/pages/` — top-level pages: `index.astro` (gateway), `projects.astro` (recommender-system deep dives), `education.astro`, `wrestling.astro`, `map.astro`, `contact.astro`, plus the blog (`blog/index.astro` listing, `blog/[...slug].astro` post route, `blog/feed.xml.ts` RSS)
 - `src/content/blog/*.md` — 11 blog posts; `src/content.config.ts` defines the collection schema (`title`, `description`, `date` as `YYYY-MM-DD` string, `slug`, `category`, optional `image`)
 - `src/utils/blog.ts` — `postPath()` (URL builder), `formatDate()`, `byNewest()`, `categoryLabel()`
 - `src/layouts/Layout.astro` — global head with OG/Twitter meta tags (`ogType` prop → `article` for posts), sticky brand-only header, footer with GitHub/LinkedIn/Instagram links
@@ -22,6 +22,7 @@ Personal portfolio site for Nick Greenquist — built on Astro + Tailwind, deplo
   - `about.ts` — headline, subhead, bio paragraphs
   - `courses.json` — 9 sections, 74 courses (extracted from v1's `courses/index.html` via cheerio)
   - `skills.ts` — 4 skill groups (Languages, ML/AI, Web, Tools)
+  - `projects.ts` — the four recommender projects + Streamlit wake-up note (shared by `index.astro` and `projects.astro`)
 - `src/assets/` — `me.jpg`, `wrestling/*.jpg` (Astro auto-converts to responsive WebP at build time)
 - `public/` — `Resume.pdf`, `me-og.jpg` (social card image), favicons. Files here keep stable URLs.
 - `public/blog/assets/` — blog post images/PDF (referenced by absolute `/blog/assets/...` URLs, matching the old Jekyll paths)

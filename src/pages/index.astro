@@ -6,44 +6,7 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { headline, subhead, bioParagraphs } from '../data/about';
 import mePhoto from '../assets/me.jpg';
 
-// Shared data for the four recommenders in the "At the Keyboard" section.
-const movie = {
-  label: 'Movie Recommender',
-  dataset: 'MovieLens 32M',
-  items: '9,375 movies',
-  users: '~50k users',
-  result: '8.7× MRR over the MSE baseline (0.115 vs 0.013)',
-  demoHref: 'https://movie-recommender-system-two-tower-model.streamlit.app/',
-  codeHref: 'https://github.com/nickgreenquist/Movie-Recommender-System-PyTorch-TwoTower-Model',
-};
-const book = {
-  label: 'Book Recommender',
-  dataset: 'Goodreads',
-  items: '14,753 books',
-  users: '229k users',
-  result: '3.4× Hit@10 over the MSE baseline (16.0% vs 4.7%)',
-  demoHref: 'https://book-recommender-system-two-tower-model.streamlit.app/',
-  codeHref: 'https://github.com/nickgreenquist/Book-Recommender-System-PyTorch-TwoTower-Model',
-};
-const steam = {
-  label: 'Steam Game Recommender',
-  dataset: 'Steam',
-  items: '5,437 games',
-  users: '66k users',
-  result: 'Wide & Deep ranker: +16% NDCG@10 over retrieval-only',
-  demoHref: 'https://game-recommender-system-two-tower-model.streamlit.app/',
-  codeHref: 'https://github.com/nickgreenquist/Game-Recommender-System-PyTorch-TwoTower-Model',
-};
-const amazon = {
-  label: 'Amazon Games Recommender',
-  dataset: 'Amazon Video Games',
-  items: '16,882 games',
-  users: '50,626 users',
-  result: 'Sampled NDCG@10 0.519 — within 3.2% (relative) of published SASRec’s 0.536',
-  demoHref: 'https://amazon-video-game-recommender-system-pytorch-transformer-model.streamlit.app/',
-  codeHref: 'https://github.com/nickgreenquist/Amazon-Video-Game-Recommender-System-PyTorch-Transformer-Model',
-};
-const streamlitNote = 'These demos run on Streamlit’s free tier and sleep after a few hours of inactivity. If you land on a “Wake up” screen, just click the button — the app will be ready in about 15–30 seconds.';
+import { movie, book, steam, amazon } from '../data/projects';
 ---
 
 <Layout
@@ -77,34 +40,22 @@ const streamlitNote = 'These demos run on Streamlit’s free tier and sleep afte
     <!-- At the Keyboard -->
     <section class="mt-10">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard</h2>
-      <p class="text-neutral-500 mb-4">A body of work in production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit.</p>
-      <p class="mb-8 rounded-md border border-neutral-200 border-l-4 border-l-neutral-400 bg-neutral-50 px-4 py-3 text-sm text-neutral-600">
-        <span class="font-semibold">Note:</span> {streamlitNote}
-      </p>
-
-      <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-700 mb-2">Retrieval · Two-Tower</h3>
-      <p class="text-neutral-700 leading-relaxed mb-3">Two towers — one for the user, one for the item — embed into a shared space where a dot product retrieves top recommendations. Users are represented by the <em>features</em> of what they’ve enjoyed, not a user ID, so anyone gets recommendations from just a few examples. Both represent the user by pooling their interaction history through several behavior-partitioned pools, and both train with a full softmax over the entire catalog — with a logit adjustment from Menon et al. (2021) added just before the loss to debias popular items.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-        {[movie, book].map((r) => (
-          <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
-        ))}
-      </div>
-
-      <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-700 mb-2">Two-Stage · Retrieve → Rank</h3>
-      <p class="text-neutral-700 leading-relaxed mb-3">Same two-tower retriever as above for candidate generation — but paired with an entirely new model that is <em>not</em> two-tower: a Wide &amp; Deep ranker. The ranker rescores the retriever’s top candidates, unlocking the power of user×item cross-features that a dot product can’t capture (at more than 10× the training cost). Retrieve-then-rank is the two-stage design used in industry-scale recommenders.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-        {[steam].map((r) => (
-          <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
-        ))}
-      </div>
-
-      <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-700 mb-2">Sequential · Transformer</h3>
-      <p class="text-neutral-700 leading-relaxed mb-3">An ablation study isolating sequence modeling itself. A three-stage progression — bag-of-items baseline → causal attention without positional embeddings → full SASRec — measures what each architectural piece contributes, on a deliberately minimal feature set (item-ID embeddings only, no item metadata) so the gains come from the sequence model rather than side features. The user tower is purely the <em>ordered sequence</em> of item IDs encoded by a causal Transformer, and final sampled NDCG@10 (0.519) lands within 3.2% — relative — of the published SASRec baseline (0.536).</p>
+      <p class="text-neutral-500 mb-4">A body of work in production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit. Two-tower retrieval, two-stage retrieve-then-rank, and sequential Transformer models.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {[amazon].map((r) => (
+        {[movie, book, steam, amazon].map((r) => (
           <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
         ))}
       </div>
+      <a
+        href="/projects"
+        class="group mt-4 block rounded-md border border-neutral-200 border-l-4 border-l-neutral-900 bg-neutral-50 px-4 py-3 transition-all hover:border-neutral-900 hover:shadow-md"
+      >
+        <span class="flex items-center justify-between font-semibold text-neutral-900">
+          Want the full technical deep-dive?
+          <span class="text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">→</span>
+        </span>
+        <span class="mt-1 block text-sm text-neutral-600">The architecture, design decisions, and results behind each of these systems — in much more depth — on the Projects page.</span>
+      </a>
     </section>
 
     <!-- Publications -->
@@ -167,6 +118,11 @@ const streamlitNote = 'These demos run on Streamlit’s free tier and sleep afte
           label="Photography"
           description="Wildlife and travel photography portfolio."
           external
+        />
+        <GatewayCard
+          href="/projects"
+          label="Projects"
+          description="Recommender systems in depth — architecture, design, and results."
         />
         <GatewayCard
           href="/blog"
