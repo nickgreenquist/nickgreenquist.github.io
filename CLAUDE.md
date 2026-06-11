@@ -1,35 +1,16 @@
 # nickgreenquist.github.io
 
-Personal portfolio site for Nick Greenquist — built on Astro + Tailwind, deployed to GitHub Pages via GitHub Actions. The site uses a **gateway model**: the home page is a hub of cards linking to professional and personal destinations (GitHub, LinkedIn, photography, wrestling, etc.) rather than hosting all that content directly.
+Personal portfolio site for Nick Greenquist — Astro + Tailwind, static, deployed to GitHub Pages via GitHub Actions. **Gateway model**: the home page is a hub of cards linking out (GitHub, LinkedIn, photography, wrestling, blog) rather than hosting everything inline. Live at `https://nickgreenquist.com/` (`nickgreenquist.github.io` redirects to it).
 
 ## Stack
 
-- **Framework**: Astro (static mode, TypeScript strict)
-- **Styling**: Tailwind CSS v4 via `@tailwindcss/vite`; `@tailwindcss/typography` (`prose`) for blog post bodies
-- **Blog**: Astro content collection (`src/content/blog/*.md`); markdown pipeline adds `remark-math` + `rehype-katex` (math) and Shiki (code); `@astrojs/rss` feed at `/blog/feed.xml`
-- **Hosting**: GitHub Pages
-- **Deployment**: GitHub Actions (`.github/workflows/deploy.yml`)
-- **Contact form**: Formspree endpoint `https://formspree.io/f/maqvayqy`
+- **Astro** static mode, TypeScript strict
+- **Tailwind CSS v4** via `@tailwindcss/vite`; `@tailwindcss/typography` (`prose`) for blog bodies
+- **Blog**: Astro content collection; markdown pipeline adds `remark-math` + `rehype-katex` and Shiki; `@astrojs/rss` feed at `/blog/feed.xml`
+- **Contact form**: Formspree `https://formspree.io/f/maqvayqy`
+- **Deploy**: GitHub Actions (`.github/workflows/deploy.yml`), Node 22 (Astro needs `>=22.12.0`)
 
-## Project Structure
-
-- `src/pages/` — top-level pages: `index.astro` (gateway), `projects.astro` (recommender-system deep dives), `education.astro`, `wrestling.astro`, `map.astro`, `contact.astro`, plus the blog (`blog/index.astro` listing, `blog/[...slug].astro` post route, `blog/feed.xml.ts` RSS)
-- `src/content/blog/*.md` — 11 blog posts; `src/content.config.ts` defines the collection schema (`title`, `description`, `date` as `YYYY-MM-DD` string, `slug`, `category`, optional `image`)
-- `src/utils/blog.ts` — `postPath()` (URL builder), `formatDate()`, `byNewest()`, `categoryLabel()`
-- `src/layouts/Layout.astro` — global head with OG/Twitter meta tags (`ogType` prop → `article` for posts), sticky brand-only header, footer with GitHub/LinkedIn/Instagram links
-- `src/components/` — `GatewayCard`, `ProjectCard`, `JourneyTimeline`, `PhotoGrid`, `EducationSection`, `SkillsSection`, `Gallery`
-- `src/data/`
-  - `about.ts` — headline, subhead, bio intro paragraph, and the `journey` timeline steps (lifeguard → RIT → internships → NYU → Google → Dad) rendered by `JourneyTimeline` on the home page
-  - `courses.json` — 9 sections, 74 courses (extracted from v1's `courses/index.html` via cheerio)
-  - `skills.ts` — 4 skill groups (Languages, ML/AI, Web, Tools)
-  - `projects.ts` — the four recommender projects + Streamlit wake-up note (shared by `index.astro` and `projects.astro`)
-  - `photography.ts` — the six "Through the Lens" photos on the home page (gallery cover shots downloaded from the Adobe Portfolio CDN into `src/assets/photography/`; each tile links to its portfolio gallery)
-- `src/assets/` — `me.jpg`, `wrestling/*.jpg`, `photography/*.jpg` (Astro auto-converts to responsive WebP at build time), `journey/` (timeline logos used by `JourneyTimeline`: RIT/NYU/Google SVGs from Wikimedia Commons, `slor.jpg` from the Spring Lake Ocean Rescue Instagram profile)
-- `public/` — `Resume.pdf`, `me-og.jpg` (social card image), favicons. Files here keep stable URLs.
-- `public/blog/assets/` — blog post images/PDF (referenced by absolute `/blog/assets/...` URLs, matching the old Jekyll paths)
-- `public/blog/<category>/<yyyy>/<mm>/<dd>/<slug>.html` — static redirect stubs from the old Jekyll `.html` permalinks to the new trailing-slash URLs
-
-## Local Development
+## Commands
 
 ```bash
 npm install
@@ -38,102 +19,41 @@ npm run build    # produces dist/
 npm run preview  # serves built dist/
 ```
 
-## Deployment
+## Structure
 
-Every push to `master` triggers `.github/workflows/deploy.yml`:
-1. `npm ci` + `npm run build`
-2. Uploads `dist/` as the GitHub Pages artifact (`actions/upload-pages-artifact@v3`)
-3. Publishes via `actions/deploy-pages@v4`
+- `src/pages/` — `index.astro` (gateway), `projects.astro`, `education.astro`, `wrestling.astro`, `map.astro`, `contact.astro`; blog under `blog/` (`index.astro` listing, `[...slug].astro` route, `feed.xml.ts` RSS)
+- `src/content/blog/*.md` — post bodies + frontmatter; schema in `src/content.config.ts`: `title`, `description`, `date` (`YYYY-MM-DD` string), `slug`, `category`, optional `image`
+- `src/utils/blog.ts` — `postPath()`, `formatDate()`, `byNewest()`, `categoryLabel()`
+- `src/layouts/Layout.astro` — global head, OG/Twitter meta (`ogType` prop → `article` for posts)
+- `src/components/` — GatewayCard, ProjectCard, JourneyTimeline, PhotoGrid, EducationSection, SkillsSection, Gallery
+- `src/data/` — `about.ts` (bio + journey timeline), `courses.json`, `skills.ts`, `projects.ts`, `photography.ts`
+- `src/assets/` — images optimized through `astro:assets` (auto WebP at build)
+- `public/` — served verbatim at stable URLs: `Resume.pdf`, OG/social images, favicons, and `blog/` (see below)
 
-**Important**: GitHub Pages source must stay set to **"GitHub Actions"** (Settings → Pages → Source). The legacy "Deploy from a branch" option will not work because Astro requires a build step.
+## Deployment gotcha
 
-**Node version**: workflow pins to Node 22 (Astro requires `>=22.12.0`).
-
-## Domain Situation
-
-- Live at: `https://nickgreenquist.com/` (custom domain, HTTPS enforced via GitHub Pages)
-- Also reachable at `https://nickgreenquist.github.io/` (redirects to custom domain)
+GitHub Pages **Source must stay "GitHub Actions"** (Settings → Pages), not "Deploy from a branch" — Astro needs the build step. Every push to `master` builds and publishes `dist/`.
 
 ## Blog
 
-Migrated from the standalone Jekyll repo (`github.com/nickgreenquist/blog`) into this site in June 2026 — see "Blog migration notes" below.
+Two `blog` dirs with opposite build roots — **don't consolidate**:
+- `src/content/blog/` — post bodies, **processed** (collection schema, KaTeX/Shiki, routed by `[...slug].astro`, fed to listing + RSS).
+- `public/blog/` — served **verbatim** at stable URLs: post images under `assets/` (referenced by absolute `/blog/assets/...`, NOT `astro:assets`) and old Jekyll `.html` redirect stubs.
 
-- **URLs are preserved exactly** from Jekyll: `/blog/<category>/<yyyy>/<mm>/<dd>/<slug>/`. Categories are lowercase (`projects`, `datascience`, `miscl`) because that's what Jekyll served. The slug preserves original casing (e.g. `Learning-How-to-Learn`), so it's stored explicitly in frontmatter rather than derived from the (lowercased) collection id.
-- **Old `.html` permalinks** redirect to the new trailing-slash URLs via static stubs in `public/blog/.../<slug>.html` (meta-refresh + canonical). Generated by the migration script alongside the posts.
-- Post images live in `public/blog/assets/` and are referenced by absolute URL (not optimized through `astro:assets`, matching the original).
-- Adding a post: drop a `.md` file in `src/content/blog/` with the frontmatter schema; the listing, route, RSS feed, and (for new posts) URL all derive automatically.
+URLs preserved from Jekyll: `/blog/<category>/<yyyy>/<mm>/<dd>/<slug>/` — categories lowercase; `slug` keeps original casing, so it's explicit in frontmatter. Add a post: drop a `.md` in `src/content/blog/` with the frontmatter schema — listing, route, RSS, and URL all derive automatically.
 
-### Porting a project Markdown file into a published post
-
-Some posts are authored as documentation **in another repo** (a project's `docs/*.md`) and published here as a snapshot — the canonical copy stays in the project repo (single source of truth); this site gets a point-in-time copy rendered natively through the content collection (so it keeps prose styling, RSS, OG tags, KaTeX, and anchors). Re-run these steps to publish or re-sync one. **First done June 2026** for `llm-vs-genome-content-features` (category `projects`), ported from the Two-Tower recommender repo's `docs/llm_vs_genome_ablation.md`; its figures live in `public/blog/assets/LLMvsGenome/`.
-
-1. **Frontmatter** — prepend the schema block (`title`, `description`, `date` `YYYY-MM-DD`, `slug`, `category`, optional `image`). `title` comes from the source's H1 (quote it in YAML if it contains `:` or `$`); `description` is the meta/OG/listing blurb; `image` is the OG card as a `/blog/assets/...` URL. `slug` preserves casing and sets the permalink `/blog/<category>/<yyyy>/<mm>/<dd>/<slug>/`.
-2. **Drop the body H1** — the route renders `post.data.title` as the page `<h1>`, so delete the source's leading `# …` line (and any now-leading blank lines) or the title renders twice. Keep any subtitle/deck line below it.
-3. **Copy figures + rewrite paths** — put images under `public/blog/assets/<Dir>/`, then rewrite every source image path (`figures/x.png`, `../assets/…`, etc.) to the absolute `/blog/assets/<Dir>/x.png`. Covers both Markdown `![](…)` and raw `<img src="…">`. Raw HTML (tables, `<img>`) passes through `.md` untouched.
-4. **Escape literal dollar signs `$` → `\$`** — the Markdown pipeline runs `remark-math` + `rehype-katex`, so an unescaped `$…$` pair is parsed as KaTeX math and mangles dollar amounts (and can throw a build error). Escape every *prose* `$`. Do **not** escape `$` you actually want rendered as math, and note `\$` inside a `` `code span` `` renders the backslash literally — so only touch prose. (Precedent: `effective-engineer-tldr.md` uses `\$4`; `cu2rec.md` keeps `$…$` for real math.)
-5. **In-page anchors just work** — Astro auto-generates GitHub-style heading IDs (github-slugger), so `[§N](#…)` links written against GitHub's rendering keep resolving, *including* the double-hyphen IDs that come from removed punctuation (e.g. `## 4. Does it work? — …` → `#4-does-it-work--the-universal-setting`).
-6. **Build & verify** — `npm run build`, then grep `dist/blog/<category>/<yyyy>/<mm>/<dd>/<slug>/index.html`: confirm **no `katex` spans** wrap dollar amounts, every image `src` points at `/blog/assets/<Dir>/`, and the heading `id="…"` values match the `href="#…"` anchors. Optionally `npm run preview` + screenshot to eyeball tables/figures. New posts need **no** old `.html` redirect stub — those exist only for migrated Jekyll permalinks.
+**Authoring gotchas:**
+- Escape literal `$` → `\$` in prose, or `remark-math` parses `$…$` as KaTeX and breaks the build. Don't escape real math.
+- Porting a project's `docs/*.md` (precedent: `llm-vs-genome-content-features` from the Two-Tower repo): add frontmatter, drop the source H1 (route renders `title` as the `<h1>`), copy figures to `public/blog/assets/<Dir>/` and rewrite image paths to absolute `/blog/assets/<Dir>/...`. Verify with `npm run build`.
 
 > [!IMPORTANT]
-> **Do not delete the old `blog` repo.** Its GitHub Pages was disabled in June 2026 so this site's `/blog/` could take over the custom domain — GitHub had been routing `nickgreenquist.com/blog/*` to that project repo and shadowing these pages. That cutover is **complete and live**. The repo is now kept purely as an archive, and its **git history holds ~10 unpublished ML posts** never migrated here (see Future Work → "Recover the unpublished ML series"). Deleting the repo would permanently destroy that history. Archive it if you want it off your active list, but don't delete it.
+> **Don't delete the old Jekyll blog repo** (`github.com/nickgreenquist/blog`). Its Pages was disabled June 2026 so this site's `/blog/` could own the domain (cutover complete). Its git history is the only copy of ~10 unpublished ML posts. Archive it if you want — never delete.
 
 ## Rollback
 
-- `v1-final` git tag preserves the pre-rewrite v1 site
-- Emergency rollback: `git reset --hard v1-final && git push origin master --force-with-lease`
+`v1-final` tag preserves the pre-rewrite v1 site: `git reset --hard v1-final && git push origin master --force-with-lease`.
 
-## Future Work
+## Future work
 
-### P1 — Update Resume.pdf
-
-`public/Resume.pdf` is the v1 file. Refresh with current role details and recent work before the next round of job-hunting.
-
-### P2 — Republish the unpublished ML "from scratch" series
-
-The June 2026 migration brought over only the **11 published** posts. A substantial ML-from-scratch series was written and later unpublished. **Eventually I want to republish these — not a priority right now.**
-
-**Recovered (June 2026):** all 12 posts and their 7 referenced image dirs now live in **`drafts/`** at the repo root — see `drafts/README.md`. `drafts/` sits *outside* the Astro content collection (loader `base` is `./src/content/blog`), so nothing there is loaded, built, routed, or fed to RSS — version-controlled only, invisible to the live site. The files are in **original Jekyll/kramdown form** (Jekyll-isms not yet converted). To publish one: convert the Jekyll-isms (see "Blog migration notes"), add the frontmatter schema fields, move the `.md` into `src/content/blog/`, and copy any referenced asset dir into `public/blog/assets/`.
-
-The series (all recovered into `drafts/blog/posts/`):
-
-- Gradient Descent for Linear Regression — `2019-04-13` (~2,000 words)
-- Ridge Regression / L2 — `2019-04-15` (~2,000)
-- Stochastic Gradient Descent — `2019-04-18` (~2,000)
-- Softmax: Partial Derivative — `2020-08-29`
-- SVM from Scratch, Part I (Math) & Part II (Code) — `2020-08-30`, `2020-09-01`
-- Kernelized Ridge Regression (Math) — `2020-09-05` (plus a short "Kernelized SVM" stub)
-- Multiclass Classification with SVM — `2020-09-30`
-- Decision Tree from Scratch — `2020-10-01`
-- Gradient Boosting — `2020-10-05`
-
-The old repo's history also still holds a personal `first-garden` post and an earlier `effective-engineer-tldr-part-1` (superseded by the published version) — **not** recovered into `drafts/`. The repo must still not be deleted (see the migration note above); to pull anything else back out:
-
-```bash
-git log --all --diff-filter=D --name-only -- '_posts/*'   # list every deleted post
-git show <commit>^:_posts/<file>                          # print one post's full content
-```
-
-## v2 Migration Notes (May 2026)
-
-The v1 site (2014-era jQuery 1.11 + Bootstrap 3 template) was fully rewritten in Astro/Tailwind. Highlights:
-
-- Built on a `v2` branch with master kept live throughout; force-pushed `v2:master` once verified. `v1-final` tag preserves the old state.
-- All jQuery removed; legacy `/spaceelements` directory sunset
-- `/wrestling` rebuilt as a native Astro page (not preserved as static HTML)
-- `/map` ports the v1 Google MyMaps iframe into a responsive container
-- `/education` is a dedicated page for the course accordion (was inline on v1 home)
-- Bio rewritten as a narrative arc (Senior SWE @ Google lead → "winding road" career history including lifeguarding, RIT/wrestling captain, four internships, NYU → personal hobbies)
-- Skills condensed from 6 percentage-bar groups to 4 tag rows (Languages, ML/AI, Web, Tools)
-- Contact moved to its own page with a working Formspree form (v1 used a deprecated Formspree URL pattern that had been silently failing for years)
-- Hero refined through several iterations: photo right of name (research-backed L-to-R entry point), `w-32 rounded-2xl` (no crop), top-aligned
-- OG/Twitter meta tags added globally
-- Deployment migrated from GitHub Pages "Deploy from a branch" to GitHub Actions (required for the Astro build step)
-
-## Blog migration notes (June 2026)
-
-The Jekyll blog (`github.com/nickgreenquist/blog`, 11 posts, 2018–2024) was folded into this Astro site to retire the separate Ruby/Jekyll toolchain and unify design + deploy. Conversion specifics:
-
-- **Jekyll-isms converted**: Liquid `{{ "/x" | absolute_url }}` → `/blog/x`; kramdown image attrs `{:width="Npx" .center-image}` → `<img width class>`; per-post `<style>` and MathJax `<script>` blocks removed; `eqnarray`/`equation` LaTeX envs rewritten to KaTeX-compatible `aligned` (math now rendered by `rehype-katex`).
-- **Gist embeds inlined**: 14 `<script src="gist…js">` embeds (4 CUDA in cu2rec, 9 Go + 1 protobuf in algorand) were fetched via the GitHub API and inlined as Shiki-highlighted fenced code blocks.
-- **Assets pruned**: 8 orphaned asset dirs (from posts deleted before migration — `Garden`, `GradientDescent`, `Kernels`, `Multiclass`, `RidgeRegression`, `SGD`, `Softmax`, `SVM`) were dropped; only the 8 referenced dirs were kept.
-- **Content fix**: algorand's dead `[Algorand](https://github.com/...)` placeholder link was reworded (no real repo URL existed).
+- **Update `public/Resume.pdf`** — still the v1 file.
+- **Republish the unpublished ML "from-scratch" series** (low priority) — 12 posts recovered into `drafts/` (outside the content collection, so invisible to the build) in original Jekyll/kramdown form. To publish: convert Jekyll-isms (Liquid URLs, kramdown img attrs, MathJax→KaTeX `aligned`), add frontmatter, move to `src/content/blog/`, copy assets to `public/blog/assets/`. See `drafts/README.md`.
