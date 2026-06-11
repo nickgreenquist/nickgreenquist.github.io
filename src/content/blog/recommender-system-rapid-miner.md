@@ -3,7 +3,7 @@ title: "Recommender System with Rapid Miner"
 description: "A step-by-step guide to prototyping a user-kNN collaborative filtering book recommender in RapidMiner."
 date: "2018-03-02"
 slug: "recommender-system-rapid-miner"
-category: datascience
+category: miscl
 ---
 
 **User k-NN Collaborative Filtering for Item Recommendations - A step by step guide in Rapid Miner**

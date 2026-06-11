@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { menuSectionLinks, menuBottomLinks } from '../data/links';
 
 interface Props {
   title?: string;
@@ -49,42 +50,78 @@ const absoluteOgImage = new URL(ogImage, siteUrl).toString();
 		<meta name="twitter:image" content={absoluteOgImage} />
 	</head>
 	<body class="bg-neutral-50 text-neutral-900 antialiased font-sans">
-		<header class="sticky top-0 z-10 border-b border-neutral-200 bg-neutral-50/85 backdrop-blur">
-			<div class="mx-auto max-w-3xl px-6 py-4">
-				<a href="/" class="text-lg sm:text-xl font-bold tracking-tight text-neutral-900 hover:text-neutral-700 transition-colors">
+		<header id="top" class="sticky top-0 z-50 border-b border-neutral-200 bg-neutral-50/85 backdrop-blur">
+			<div class="mx-auto max-w-3xl px-6 py-4 flex items-center justify-between gap-4">
+				<a href="/" class="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 hover:text-neutral-700 transition-colors">
 					Nick Greenquist
 				</a>
+				<details data-menu class="group relative">
+					<summary aria-label="Open links menu" class="flex cursor-pointer list-none select-none items-center text-neutral-600 transition-colors hover:text-neutral-900 [&::-webkit-details-marker]:hidden">
+						<svg class="h-8 w-10 sm:h-9 sm:w-11" viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+							<line x1="3" y1="6" x2="27" y2="6" />
+							<line x1="3" y1="12" x2="27" y2="12" />
+							<line x1="3" y1="18" x2="27" y2="18" />
+						</svg>
+					</summary>
+					<nav class="absolute right-0 mt-2 flex w-48 flex-col rounded-lg border border-neutral-200 bg-white p-2 text-sm shadow-lg">
+						{
+							menuSectionLinks.map((link) => (
+								<a
+									href={link.href}
+									target={link.external ? '_blank' : undefined}
+									rel={link.external ? 'noopener noreferrer' : undefined}
+									class="rounded-md px-3 py-2 text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+								>
+									{link.label}
+								</a>
+							))
+						}
+						<hr class="my-1 border-neutral-200" />
+						{
+							menuBottomLinks.map((link) => (
+								<a
+									href={link.href}
+									target={link.external ? '_blank' : undefined}
+									rel={link.external ? 'noopener noreferrer' : undefined}
+									class="rounded-md px-3 py-2 text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+								>
+									{link.label}
+								</a>
+							))
+						}
+					</nav>
+				</details>
 			</div>
 		</header>
 		<slot />
-		<footer class="mx-auto max-w-3xl px-6 py-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm text-neutral-500">
-			<a href="/" class="hover:text-neutral-900 transition-colors">← Home</a>
-			<div class="flex items-center gap-5">
-				<a
-					href="https://github.com/nickgreenquist"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="hover:text-neutral-900 transition-colors"
-				>
-					GitHub
-				</a>
-				<a
-					href="https://www.linkedin.com/in/nickgreenquist/"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="hover:text-neutral-900 transition-colors"
-				>
-					LinkedIn
-				</a>
-				<a
-					href="https://www.instagram.com/nickgreenquist/"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="hover:text-neutral-900 transition-colors"
-				>
-					Instagram
-				</a>
-			</div>
+		<footer class="mx-auto max-w-3xl px-6 py-12 flex justify-center text-sm text-neutral-500">
+			<a
+				href="#top"
+				data-back-to-top
+				class="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 px-4 py-2 font-medium transition-colors hover:border-neutral-900 hover:text-neutral-900"
+			>
+				<span aria-hidden="true">↑</span>
+				Back to top
+			</a>
 		</footer>
+		<script>
+			const menus = document.querySelectorAll('details[data-menu]');
+			document.addEventListener('click', (event) => {
+				menus.forEach((menu) => {
+					if (menu.hasAttribute('open') && !menu.contains(event.target as Node)) {
+						menu.removeAttribute('open');
+					}
+				});
+			});
+			document.addEventListener('keydown', (event) => {
+				if (event.key === 'Escape') {
+					menus.forEach((menu) => menu.removeAttribute('open'));
+				}
+			});
+			document.querySelector('[data-back-to-top]')?.addEventListener('click', (event) => {
+				event.preventDefault();
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+		</script>
 	</body>
 </html>

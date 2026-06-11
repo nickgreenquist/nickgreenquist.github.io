@@ -4,6 +4,21 @@ import Layout from '../../layouts/Layout.astro';
 import { postPath, formatDate, byNewest, categoryLabel } from '../../utils/blog';
 
 const posts = (await getCollection('blog')).sort(byNewest);
+
+// Filter buttons are derived from the posts themselves, so a new category
+// shows up automatically once a post uses it. Sorted by post count (desc),
+// then alphabetically by label for a stable order.
+const counts = posts.reduce<Record<string, number>>((acc, post) => {
+  acc[post.data.category] = (acc[post.data.category] ?? 0) + 1;
+  return acc;
+}, {});
+const categories = Object.keys(counts).sort(
+  (a, b) => counts[b] - counts[a] || categoryLabel(a).localeCompare(categoryLabel(b)),
+);
+const filters = [
+  { value: 'all', label: 'All', count: posts.length },
+  ...categories.map((value) => ({ value, label: categoryLabel(value), count: counts[value] })),
+];
 ---
 
 <Layout
@@ -21,9 +36,27 @@ const posts = (await getCollection('blog')).sort(byNewest);
       </p>
     </header>
 
+    <div
+      class="mt-8 flex flex-wrap gap-2"
+      role="group"
+      aria-label="Filter posts by category"
+    >
+      {filters.map((filter) => (
+        <button
+          type="button"
+          class="filter-btn rounded-full border border-neutral-200 px-3 py-1 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-100"
+          data-filter={filter.value}
+          aria-pressed={filter.value === 'all' ? 'true' : 'false'}
+        >
+          {filter.label}
+          <span class="ml-1 text-xs text-neutral-400">{filter.count}</span>
+        </button>
+      ))}
+    </div>
+
     <ul class="mt-10 divide-y divide-neutral-200">
       {posts.map((post) => (
-        <li class="py-6 first:pt-0">
+        <li class="post py-6 first:pt-0" data-category={post.data.category}>
           <div class="flex items-center gap-3 text-sm text-neutral-500">
             <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
             <span class="inline-block rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600">
@@ -43,3 +76,57 @@ const posts = (await getCollection('blog')).sort(byNewest);
     </ul>
   </main>
 </Layout>
+
+<style>
+  /* Active filter pill. Also drop the top padding on whichever post is first
+     visible after a filter, so the list always hugs the divider cleanly. */
+  .filter-btn[aria-pressed='true'],
+  .filter-btn[aria-pressed='true']:hover {
+    background-color: #171717;
+    border-color: #171717;
+    color: #fff;
+  }
+  .filter-btn[aria-pressed='true'] .text-neutral-400 {
+    color: #d4d4d4;
+  }
+  .post.is-first {
+    padding-top: 0;
+  }
+</style>
+
+<script>
+  const buttons = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('.filter-btn'),
+  );
+  const posts = Array.from(document.querySelectorAll<HTMLElement>('.post'));
+  const known = new Set(buttons.map((b) => b.dataset.filter));
+
+  function apply(filter: string) {
+    let firstVisible = true;
+    for (const post of posts) {
+      const show = filter === 'all' || post.dataset.category === filter;
+      post.hidden = !show;
+      post.classList.toggle('is-first', show && firstVisible);
+      if (show) firstVisible = false;
+    }
+    for (const button of buttons) {
+      button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
+    }
+  }
+
+  for (const button of buttons) {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.filter ?? 'all';
+      apply(filter);
+      // Keep the active filter in the URL hash so the view is shareable.
+      history.replaceState(
+        null,
+        '',
+        filter === 'all' ? location.pathname + location.search : `#${filter}`,
+      );
+    });
+  }
+
+  const initial = location.hash.slice(1);
+  apply(known.has(initial) ? initial : 'all');
+</script>

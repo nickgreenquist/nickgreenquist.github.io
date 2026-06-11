@@ -28,7 +28,6 @@ export function byNewest(a: Post, b: Post): number {
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
-  datascience: 'Data Science',
   projects: 'Projects',
   miscl: 'Misc',
 };

@@ -3,7 +3,7 @@ title: "Recommender Systems Overview"
 description: "Slides from a presentation I gave on recommender systems for my NYU Big Data Science class."
 date: "2018-04-21"
 slug: "recommender-systems-overview"
-category: datascience
+category: miscl
 ---
 
 *Below is a presentation I did for my Big Data Science class on Recommender Systems*

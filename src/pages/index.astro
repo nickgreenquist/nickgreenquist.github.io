@@ -1,15 +1,20 @@
 ---
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import GatewayCard from '../components/GatewayCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import JourneyTimeline from '../components/JourneyTimeline.astro';
 import PhotoGrid from '../components/PhotoGrid.astro';
 import { headline, subhead, bioIntro, journeyLead, journey } from '../data/about';
-import { photos, portfolioUrl, instagramUrl } from '../data/photography';
+import { photos, portfolioUrl } from '../data/photography';
+import { gatewayLinks } from '../data/links';
+import { postPath, formatDate, byNewest, categoryLabel } from '../utils/blog';
 import mePhoto from '../assets/me.jpg';
 
 import { movie, book, steam, amazon } from '../data/projects';
+
+const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
 ---
 
 <Layout
@@ -45,27 +50,63 @@ import { movie, book, steam, amazon } from '../data/projects';
     <!-- At the Keyboard -->
     <section class="mt-10">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard — Personal Projects</h2>
-      <p class="text-neutral-500 mb-4">A body of work in production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit. Two-tower retrieval, two-stage retrieve-then-rank, and sequential Transformer models.</p>
+      <p class="text-neutral-500 mb-4">A body of work in production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[movie, book, steam, amazon].map((r) => (
           <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
         ))}
       </div>
-      <a
-        href="/projects"
-        class="group mt-4 block rounded-md border border-neutral-200 border-l-4 border-l-neutral-900 bg-neutral-50 px-4 py-3 transition-all hover:border-neutral-900 hover:shadow-md"
-      >
-        <span class="flex items-center justify-between font-semibold text-neutral-900">
-          Want the full technical deep-dive?
-          <span class="text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">→</span>
-        </span>
-        <span class="mt-1 block text-sm text-neutral-600">The architecture, design decisions, and results behind each of these systems — in much more depth — on the Projects page.</span>
-      </a>
+      <div class="mt-3">
+        <GatewayCard
+          href="/projects"
+          label="Want the full technical deep-dive?"
+          description="The architecture, design decisions, and results behind each of these systems — in much more depth — on the Projects page."
+        />
+      </div>
+    </section>
+
+    <!-- From the Blog -->
+    <section class="mt-10">
+      <div class="flex items-center justify-between gap-4 mb-4">
+        <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Latest Blog Posts</h2>
+        <a href="/blog" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
+          See all posts
+          <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 gap-3">
+        {recentPosts.map((post) => (
+          <a
+            href={postPath(post)}
+            class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all hover:border-neutral-900 hover:shadow-md"
+          >
+            <div class="flex items-center gap-3 text-sm text-neutral-500">
+              <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
+              <span class="inline-block rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600">
+                {categoryLabel(post.data.category)}
+              </span>
+            </div>
+            <div class="mt-1.5 flex items-center justify-between gap-3">
+              <h3 class="font-semibold text-neutral-900">{post.data.title}</h3>
+              <span class="flex-shrink-0 text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">→</span>
+            </div>
+            {post.data.description && (
+              <p class="mt-1 text-sm text-neutral-600">{post.data.description}</p>
+            )}
+          </a>
+        ))}
+      </div>
     </section>
 
     <!-- Publications -->
     <section id="publications" class="mt-10 scroll-mt-20">
-      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">Publications</h2>
+      <div class="flex items-center justify-between gap-4 mb-1">
+        <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Publications</h2>
+        <a href="https://scholar.google.com/citations?user=28QAvAcAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
+          See all publications
+          <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        </a>
+      </div>
       <p class="text-neutral-500 mb-4">Peer-reviewed research in recommendation systems.</p>
       <div class="grid grid-cols-1 gap-3">
         <GatewayCard
@@ -91,21 +132,15 @@ import { movie, book, steam, amazon } from '../data/projects';
 
     <!-- Through the Lens -->
     <section class="mt-10">
-      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">Through the Lens — Photography</h2>
-      <p class="text-neutral-500 mb-4">Whenever I have a free moment I'm out with my camera. A few favorites below — each links into its gallery. I post more frequently to <a href={instagramUrl} target="_blank" rel="noopener noreferrer" class="underline decoration-neutral-400 underline-offset-2 hover:text-neutral-950 hover:decoration-neutral-900">Instagram</a>.</p>
+      <div class="flex items-center justify-between gap-4 mb-1">
+        <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Photography</h2>
+        <a href={portfolioUrl} target="_blank" rel="noopener noreferrer" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
+          See full portfolio
+          <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        </a>
+      </div>
+      <p class="text-neutral-500 mb-4">Whenever I have a free moment I'm out with my camera. A few favorites below — each links into its gallery.</p>
       <PhotoGrid photos={photos} />
-      <a
-        href={portfolioUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group mt-4 block rounded-md border border-neutral-200 border-l-4 border-l-neutral-900 bg-neutral-50 px-4 py-3 transition-all hover:border-neutral-900 hover:shadow-md"
-      >
-        <span class="flex items-center justify-between font-semibold text-neutral-900">
-          See the full portfolio
-          <span class="text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">→</span>
-        </span>
-        <span class="mt-1 block text-sm text-neutral-600">Wildlife and travel photography from 30+ galleries around the world.</span>
-      </a>
     </section>
 
     <!-- Away from the Keyboard -->
@@ -125,66 +160,16 @@ import { movie, book, steam, amazon } from '../data/projects';
     <section class="mt-12">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">Links</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <GatewayCard
-          href="https://github.com/nickgreenquist"
-          label="GitHub"
-          description="Personal projects — recommender systems and ML."
-          external
-        />
-        <GatewayCard
-          href="https://www.linkedin.com/in/nickgreenquist/"
-          label="LinkedIn"
-          description="Professional and career details."
-          external
-        />
-        <GatewayCard
-          href="https://nickgreenquist.myportfolio.com/"
-          label="Photography"
-          description="Wildlife and travel photography portfolio."
-          external
-        />
-        <GatewayCard
-          href="/projects"
-          label="Projects"
-          description="Recommender systems in depth — architecture, design, and results."
-        />
-        <GatewayCard
-          href="/blog"
-          label="Blog"
-          description="Thoughts on machine learning, systems, and projects."
-        />
-        <GatewayCard
-          href="/map"
-          label="Travel Map"
-          description="Everywhere I've been on Earth."
-        />
-        <GatewayCard
-          href="/wrestling"
-          label="Wrestling"
-          description="What it took, what it gave back."
-        />
-        <GatewayCard
-          href="/education"
-          label="Education"
-          description="Every course I've taken — NYU, RIT, and online."
-        />
-        <GatewayCard
-          href="/Resume.pdf"
-          label="Resume"
-          description="PDF, kept current."
-          external
-        />
-        <GatewayCard
-          href="https://www.goodreads.com/user/show/26809953-nick-greenquist"
-          label="Reading"
-          description="My reading list on Goodreads"
-          external
-        />
-        <GatewayCard
-          href="/contact"
-          label="Contact"
-          description="Send me a message."
-        />
+        {
+          gatewayLinks.map((link) => (
+            <GatewayCard
+              href={link.href}
+              label={link.label}
+              description={link.description}
+              external={link.external}
+            />
+          ))
+        }
       </div>
     </section>
   </main>
