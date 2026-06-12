@@ -6,6 +6,7 @@ Personal portfolio site for Nick Greenquist — Astro + Tailwind, static, deploy
 
 - **Astro** static mode, TypeScript strict
 - **Tailwind CSS v4** via `@tailwindcss/vite`; `@tailwindcss/typography` (`prose`) for blog bodies
+- **Dark mode**: `.dark` on `<html>` remaps the `neutral-*`/`white` CSS vars in `global.css` (toggle + pre-paint script in `Layout.astro`) — new UI must use `neutral-*`/`white` utilities, never hardcoded hex or literal `text-white`, or it won't theme.
 - **Blog**: Astro content collection; markdown pipeline adds `remark-math` + `rehype-katex` and Shiki; `@astrojs/rss` feed at `/blog/feed.xml`
 - **Contact form**: Formspree `https://formspree.io/f/maqvayqy`
 - **Deploy**: GitHub Actions (`.github/workflows/deploy.yml`), Node 22 (Astro needs `>=22.12.0`)

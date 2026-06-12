@@ -1,6 +1,74 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Enable class-based dark mode: `dark:` variants apply under `html.dark`. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* --- Theme tokens ---------------------------------------------------------
+   The whole site is monochrome (the neutral scale + white/black + one emerald
+   accent), so dark mode is a single remap: under `.dark` we redefine the
+   neutral-scale CSS variables that Tailwind v4 utilities resolve at runtime.
+   Every existing `bg-neutral-50` / `text-neutral-900` / `bg-white` therefore
+   flips automatically — no per-element `dark:` classes needed. Each step keeps
+   its ROLE but inverts its tone (low numbers = darkest surfaces, high numbers =
+   brightest text), so contrast relationships are preserved. */
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* raised surfaces (cards, dropdown, inputs) — lighter than the page bg */
+  --color-white: #161619;
+
+  /* backgrounds & borders (darkest → lighter) */
+  --color-neutral-50: #0c0c0e;   /* page background */
+  --color-neutral-100: #1c1c20;  /* subtle fills: tags, hover states */
+  --color-neutral-200: #2a2a2f;  /* subtle borders / dividers */
+  --color-neutral-300: #3a3a41;  /* stronger borders (form inputs) */
+
+  /* text (faint → strongest) */
+  --color-neutral-400: #71717a;  /* faint text / underline decoration */
+  --color-neutral-500: #8b8b94;  /* muted text */
+  --color-neutral-600: #a3a3ad;  /* secondary body text */
+  --color-neutral-700: #c4c4cc;  /* body text / primary-button hover */
+  --color-neutral-800: #d8d8de;  /* strong text */
+  --color-neutral-900: #ededf0;  /* headings / primary-button bg / strong border */
+  --color-neutral-950: #fafafa;  /* strongest heading text */
+
+  /* nudge the lone accent brighter so it pops on dark */
+  --color-emerald-600: #34d399;
+}
+
+/* --- Theme toggle: View-Transitions circular reveal -----------------------
+   The new theme is clipped to a circle that grows from the toggle's click
+   point, sweeping over the old theme. Progressive enhancement: browsers
+   without `startViewTransition` (or users with reduced-motion) get an instant
+   swap from the toggle's JS. */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+  ::view-transition-new(root) {
+    z-index: 9999;
+    animation: theme-reveal 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes theme-reveal {
+    from {
+      clip-path: circle(0 at var(--theme-x, 50%) var(--theme-y, 50%));
+    }
+    to {
+      clip-path: circle(var(--theme-r, 150vmax) at var(--theme-x, 50%) var(--theme-y, 50%));
+    }
+  }
+}
+
 /* --- Blog post media --- */
 /* Images carry explicit width attributes (ported from the old Jekyll
    `{:width="Npx"}` syntax); keep them responsive and rounded. */
@@ -35,4 +103,18 @@
 .post-pdf-actions {
   margin-bottom: 0.75rem;
   font-weight: 500;
+}
+
+/* --- Code blocks (Shiki dual-theme) ---------------------------------------
+   astro.config sets `themes: { light: 'github-light', dark: 'github-dark' }`
+   with `defaultColor: 'light'`, so each token renders github-light inline and
+   exposes the github-dark colors as `--shiki-dark*` custom properties. Under
+   `.dark` we swap to those. */
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }

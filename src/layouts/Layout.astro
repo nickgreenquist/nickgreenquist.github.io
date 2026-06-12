@@ -28,6 +28,19 @@ const absoluteOgImage = new URL(ogImage, siteUrl).toString();
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 
+		<!-- Resolve the theme before first paint to avoid a flash of the wrong theme. -->
+		<script is:inline>
+			(() => {
+				const stored = localStorage.getItem('theme');
+				const dark = stored
+					? stored === 'dark'
+					: window.matchMedia('(prefers-color-scheme: dark)').matches;
+				document.documentElement.classList.toggle('dark', dark);
+			})();
+		</script>
+		<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0c0c0e" media="(prefers-color-scheme: dark)" />
+
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonicalUrl} />
@@ -55,6 +68,24 @@ const absoluteOgImage = new URL(ogImage, siteUrl).toString();
 				<a href="/" class="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 hover:text-neutral-700 transition-colors">
 					Nick Greenquist
 				</a>
+				<div class="flex items-center gap-1 sm:gap-2">
+				<button
+					id="theme-toggle"
+					type="button"
+					aria-label="Toggle dark mode"
+					title="Toggle dark mode"
+					class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-md text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+				>
+					<!-- Moon: shown in light mode (click → dark) -->
+					<svg class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+					</svg>
+					<!-- Sun: shown in dark mode (click → light) -->
+					<svg class="hidden h-5 w-5 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<circle cx="12" cy="12" r="4" />
+						<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+					</svg>
+				</button>
 				<details data-menu class="group relative">
 					<summary aria-label="Open links menu" class="flex cursor-pointer list-none select-none items-center text-neutral-600 transition-colors hover:text-neutral-900 [&::-webkit-details-marker]:hidden">
 						<svg class="h-8 w-10 sm:h-9 sm:w-11" viewBox="0 0 30 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -91,8 +122,8 @@ const absoluteOgImage = new URL(ogImage, siteUrl).toString();
 						}
 					</nav>
 				</details>
-			</div>
-		</header>
+				</div>
+			</header>
 		<slot />
 		<footer class="mx-auto max-w-3xl px-6 py-12 flex justify-center text-sm text-neutral-500">
 			<a
@@ -121,6 +152,36 @@ const absoluteOgImage = new URL(ogImage, siteUrl).toString();
 			document.querySelector('[data-back-to-top]')?.addEventListener('click', (event) => {
 				event.preventDefault();
 				window.scrollTo({ top: 0, behavior: 'smooth' });
+			});
+
+			// Theme toggle. The new theme is revealed in a circle growing from the
+			// click point via the View Transitions API; reduced-motion users and
+			// browsers without it get an instant swap. (The pre-paint script in
+			// <head> sets the initial class so there's no flash on load.)
+			const root = document.documentElement;
+			const themeToggle = document.getElementById('theme-toggle');
+			themeToggle?.addEventListener('click', (event) => {
+				const next = root.classList.contains('dark') ? 'light' : 'dark';
+				const apply = () => {
+					root.classList.toggle('dark', next === 'dark');
+					localStorage.setItem('theme', next);
+				};
+				const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				if (!document.startViewTransition || reduce) {
+					apply();
+					return;
+				}
+				const rect = themeToggle.getBoundingClientRect();
+				const x = event.clientX || rect.left + rect.width / 2;
+				const y = event.clientY || rect.top + rect.height / 2;
+				const r = Math.hypot(
+					Math.max(x, window.innerWidth - x),
+					Math.max(y, window.innerHeight - y),
+				);
+				root.style.setProperty('--theme-x', `${x}px`);
+				root.style.setProperty('--theme-y', `${y}px`);
+				root.style.setProperty('--theme-r', `${r}px`);
+				document.startViewTransition(apply);
 			});
 		</script>
 	</body>

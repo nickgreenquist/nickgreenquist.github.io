@@ -11,6 +11,12 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
+    // Dual Shiki themes: light renders inline, dark exposed as --shiki-dark*
+    // custom properties that src/styles/global.css activates under `.dark`.
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark' },
+      defaultColor: 'light',
+    },
   },
   vite: {
     plugins: [tailwindcss()]
