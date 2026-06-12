@@ -95,9 +95,12 @@ function pick(label: string): SiteLink {
   return link;
 }
 
+/** Hamburger menu labels "Reading" as "Goodreads"; the gateway grid keeps "Reading". */
+const goodreads: SiteLink = { ...pick('Reading'), label: 'Goodreads' };
+
 /**
  * Header hamburger menu — same links as the section above, stacked, with the
- * social links (GitHub, Instagram, LinkedIn) grouped at the bottom and Contact
+ * social links (GitHub, LinkedIn, Instagram) grouped at the bottom and Contact
  * pinned last. Split into two groups so the menu can render a divider between.
  */
 export const menuSectionLinks: SiteLink[] = [
@@ -108,20 +111,22 @@ export const menuSectionLinks: SiteLink[] = [
   pick('Travel Map'),
   pick('Wrestling'),
   pick('Education'),
-  pick('Reading'),
+  goodreads,
 ];
 
 export const menuBottomLinks: SiteLink[] = [
   pick('Resume'),
   pick('GitHub'),
-  instagram,
   pick('LinkedIn'),
+  instagram,
   pick('Contact'),
 ];
 
 /**
- * Home page "Links" grid — same links as the hamburger menu, in the same
- * order (section links, then the social/resume/contact group). Rendering both
- * from this single list keeps the grid and the menu in sync.
+ * Home page "Links" grid — same links and order as the hamburger menu, except
+ * "Reading" keeps its label here (the menu relabels it "Goodreads").
  */
-export const gatewayLinks: SiteLink[] = [...menuSectionLinks, ...menuBottomLinks];
+export const gatewayLinks: SiteLink[] = [
+  ...menuSectionLinks.map((l) => (l === goodreads ? pick('Reading') : l)),
+  ...menuBottomLinks,
+];
