@@ -12,7 +12,7 @@
 
 - [x] **1. Dark mode + delightful toggle** — `ADD` · effort M · the one thing every standout has that we don't; the toggle transition is itself a craft signal — **DONE** (`.dark` remaps neutral/white CSS vars in `global.css`; View-Transitions circular-reveal toggle + no-FOUC pre-paint in `Layout.astro`; dual Shiki themes; `dark:prose-invert`)
 - [x] **2. JSON-LD `Person` schema** in `Layout.astro` — `ADD` · effort XS · highest-ROI SEO win across all 40 sites (only leerob.com had it) — **DONE** (sitewide `Person` schema; `sameAs` derived from `src/data/links.ts` — GitHub, LinkedIn, Instagram, photography portfolio, Scholar, Goodreads)
-- [ ] **3. `@astrojs/sitemap` + RSS `<link rel="alternate">` in `<head>`** — `ADD` · effort XS · free SEO + feed autodiscovery
+- [x] **3. `@astrojs/sitemap` + RSS `<link rel="alternate">` in `<head>`** — `ADD` · effort XS · free SEO + feed autodiscovery — **DONE** (sitemap integration emits 19 page URLs; `site` set to canonical `https://nickgreenquist.com`; RSS autodiscovery `<link>` in `Layout.astro`; `public/robots.txt` points at `sitemap-index.xml`)
 - [ ] **4. Subtle motion: spring hover-lifts + scroll-reveal** — `ADD` · effort S · cheapest "clean → alive" lever; gate behind `prefers-reduced-motion`
 - [ ] **5. Update `public/Resume.pdf`** (still v1) — `MODIFY` · effort S · portfolio's #1 conversion asset
 - [ ] **6. `/uses` page** (dev setup + camera gear) — `ADD` · effort S · on-brand (engineer + photographer), evergreen
@@ -71,7 +71,7 @@ The research kept "discovering" things already done — named here so generic ad
 ### Tier 1 — high impact, low effort
 - [x] **Dark mode + signature toggle.** Tailwind v4 `@custom-variant dark` + CSS variables + inline pre-paint script (set class before first paint → no FOUC/CLS). Make the toggle the delight: antfu-style circular `clip-path` reveal via `document.startViewTransition` (Astro `<ClientRouter/>`). Gate behind `prefers-reduced-motion`. *This is our "one signature move."* — **DONE.** Implemented via a `.dark` neutral/white CSS-var remap (no per-element `dark:` churn); `startViewTransition` runs without `<ClientRouter/>` (same-document toggle).
 - [x] **JSON-LD `Person` schema** in `Layout.astro` (see appendix). — **DONE** (LinkedIn + other `sameAs` URLs sourced from `src/data/links.ts`, resolving the appendix TODO).
-- [ ] **`@astrojs/sitemap`** integration + **`<link rel="alternate" type="application/rss+xml" href="/blog/feed.xml">`** in `<head>` + `public/robots.txt` pointing at the sitemap.
+- [x] **`@astrojs/sitemap`** integration + **`<link rel="alternate" type="application/rss+xml" href="/blog/feed.xml">`** in `<head>` + `public/robots.txt` pointing at the sitemap. — **DONE.**
 - [ ] **Skip-to-content link** (`<a href="#main" class="sr-only focus:not-sr-only">Skip to content</a>` + `id="main"` on `<main>`).
 - [ ] **Hidden `console.log` greeting** (styled message + "code's on GitHub →").
 
@@ -191,7 +191,7 @@ console.log('%c👋 Hey, fellow dev. Code: https://github.com/nickgreenquist', '
 ---
 
 ## Notes / open questions for later
-- Confirm `astro.config` has `site` set (needed for sitemap + correct canonical/OG absolute URLs).
+- ~~Confirm `astro.config` has `site` set (needed for sitemap + correct canonical/OG absolute URLs).~~ **Done** — set to `https://nickgreenquist.com` (was `nickgreenquist.github.io`).
 - Confirm `[...slug].astro` OG image wiring before building per-post OG cards.
 - Pull exact LinkedIn URL from `src/data/links.ts` for JSON-LD `sameAs`.
 - Light visual audit still available: can screenshot the deployed site at desktop/mobile and mark up spacing/contrast/hover details vs. the reference sites above.

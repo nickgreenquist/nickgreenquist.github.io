@@ -1,13 +1,17 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://nickgreenquist.github.io',
+  // Canonical domain (matches public/CNAME and the hardcoded siteUrl in
+  // Layout.astro / feed.xml.ts). Required for correct sitemap + canonical URLs.
+  site: 'https://nickgreenquist.com',
+  integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
