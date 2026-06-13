@@ -28,7 +28,7 @@ export const journey: JourneyStep[] = [
   {
     years: "Six summers",
     logo: slorLogo,
-    logoWidth: "w-[88%]",
+    logoWidth: "w-[82%]",
     href: "https://www.springlakeboro.org/",
     title: "Ocean Lifeguard — Spring Lake, NJ",
     blurb: `My Baywatch career: six summers guarding the Jersey Shore with <a href="https://www.instagram.com/springlakeoceanrescue/" target="_blank" rel="noopener noreferrer">Spring Lake Ocean Rescue</a>.`,
