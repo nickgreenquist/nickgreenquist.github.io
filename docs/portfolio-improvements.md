@@ -13,7 +13,7 @@
 - [x] **1. Dark mode + delightful toggle** — `ADD` · effort M · the one thing every standout has that we don't; the toggle transition is itself a craft signal — **DONE** (`.dark` remaps neutral/white CSS vars in `global.css`; View-Transitions circular-reveal toggle + no-FOUC pre-paint in `Layout.astro`; dual Shiki themes; `dark:prose-invert`)
 - [x] **2. JSON-LD `Person` schema** in `Layout.astro` — `ADD` · effort XS · highest-ROI SEO win across all 40 sites (only leerob.com had it) — **DONE** (sitewide `Person` schema; `sameAs` derived from `src/data/links.ts` — GitHub, LinkedIn, Instagram, photography portfolio, Scholar, Goodreads)
 - [x] **3. `@astrojs/sitemap` + RSS `<link rel="alternate">` in `<head>`** — `ADD` · effort XS · free SEO + feed autodiscovery — **DONE** (sitemap integration emits 19 page URLs; `site` set to canonical `https://nickgreenquist.com`; RSS autodiscovery `<link>` in `Layout.astro`; `public/robots.txt` points at `sitemap-index.xml`)
-- [ ] **4. Subtle motion: spring hover-lifts + scroll-reveal** — `ADD` · effort S · cheapest "clean → alive" lever; gate behind `prefers-reduced-motion`
+- [x] **4. Subtle motion: spring hover-lifts + scroll-reveal** — `ADD` · effort S · cheapest "clean → alive" lever; gate behind `prefers-reduced-motion` — **DONE** (4px spring hover-lift on all cards via `motion-safe:`; IntersectionObserver scroll-reveal on home sections, gated by a `.motion-ready` class only set when JS+motion allowed; also fixed a dark-mode bug — blog filter pill's hardcoded hex)
 - [ ] **5. Update `public/Resume.pdf`** (still v1) — `MODIFY` · effort S · portfolio's #1 conversion asset
 - [ ] **6. `/uses` page** (dev setup + camera gear) — `ADD` · effort S · on-brand (engineer + photographer), evergreen
 - [ ] **7. Skip-to-content link + hidden `console.log` greeting** — `ADD` · effort XS · one a11y fix, one dev easter egg
@@ -76,7 +76,7 @@ The research kept "discovering" things already done — named here so generic ad
 - [ ] **Hidden `console.log` greeting** (styled message + "code's on GitHub →").
 
 ### Tier 2 — medium effort, real polish
-- [ ] **Motion pass.** Spring/eased hover-lift + slight scale on project/blog cards (extend existing `hover:shadow-md`); small `translateY(12px)→0` + opacity scroll-reveals per `<section>` (CSS `animation-timeline: view()` + IntersectionObserver fallback). Distances small, durations <400ms, all behind `prefers-reduced-motion`.
+- [x] **Motion pass.** Spring/eased hover-lift + slight scale on project/blog cards (extend existing `hover:shadow-md`); small `translateY(12px)→0` + opacity scroll-reveals per `<section>` (CSS `animation-timeline: view()` + IntersectionObserver fallback). Distances small, durations <400ms, all behind `prefers-reduced-motion`. — **DONE** (used IntersectionObserver; hover-lift 4px @200ms spring, reveal 12px @350ms ease-out — both ≤400ms).
 - [ ] **`/uses` page** — dev setup + camera/photography gear. List on uses.tech for a backlink.
 - [ ] **Per-page OG images for blog posts.** Verify `[...slug].astro` passes each post's frontmatter `image` to Layout's `ogImage` prop — otherwise every shared blog link falls back to `/me-og.jpg`. Wire it through, or generate per-post OG cards at build (Satori/`@vercel/og`).
 - [ ] **Mono accent font** for dates/tags/code metadata (currently all-sans).

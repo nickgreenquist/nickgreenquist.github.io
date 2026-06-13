@@ -59,6 +59,12 @@ const personSchema = {
 					? stored === 'dark'
 					: window.matchMedia('(prefers-color-scheme: dark)').matches;
 				document.documentElement.classList.toggle('dark', dark);
+				// Mark the doc motion-ready only when JS runs AND motion is allowed,
+				// so scroll-reveal elements start hidden from first paint (no flash)
+				// while no-JS / reduced-motion visitors never get a hidden state.
+				if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+					document.documentElement.classList.add('motion-ready');
+				}
 			})();
 		</script>
 		<meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
@@ -212,6 +218,27 @@ const personSchema = {
 				root.style.setProperty('--theme-r', `${r}px`);
 				document.startViewTransition(apply);
 			});
+
+			// Scroll-reveal: reveal each [data-reveal] once as it enters the viewport.
+			// Only runs when motion-ready (JS + motion allowed); otherwise the CSS
+			// never hid them. Falls back to revealing all if IntersectionObserver
+			// is unavailable, so nothing can stay stuck invisible.
+			if (root.classList.contains('motion-ready')) {
+				const revealEls = document.querySelectorAll('[data-reveal]');
+				if ('IntersectionObserver' in window) {
+					const io = new IntersectionObserver((entries, observer) => {
+						for (const entry of entries) {
+							if (entry.isIntersecting) {
+								entry.target.classList.add('is-visible');
+								observer.unobserve(entry.target);
+							}
+						}
+					}, { rootMargin: '0px 0px -8% 0px' });
+					revealEls.forEach((el) => io.observe(el));
+				} else {
+					revealEls.forEach((el) => el.classList.add('is-visible'));
+				}
+			}
 		</script>
 	</body>
 </html>

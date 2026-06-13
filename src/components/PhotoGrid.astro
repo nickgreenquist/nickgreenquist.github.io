@@ -15,7 +15,7 @@ const { photos } = Astro.props;
       href={photo.href}
       target="_blank"
       rel="noopener noreferrer"
-      class="group relative block aspect-square overflow-hidden rounded-lg border border-neutral-200 transition-all hover:border-neutral-900 hover:shadow-md"
+      class="group relative block aspect-square overflow-hidden rounded-lg border border-neutral-200 transition-all duration-200 ease-spring hover:border-neutral-900 hover:shadow-lg motion-safe:hover:-translate-y-1"
     >
       <Image
         src={photo.image}

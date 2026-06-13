@@ -39,7 +39,7 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
     </section>
 
     <!-- About -->
-    <section class="mt-10 space-y-4 text-neutral-700 leading-relaxed">
+    <section data-reveal class="mt-10 space-y-4 text-neutral-700 leading-relaxed">
       <p set:html={bioIntro} class="[&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 [&_a:hover]:text-neutral-950 [&_a:hover]:decoration-neutral-900"></p>
       <p>{journeyLead}</p>
       <div class="py-2">
@@ -48,7 +48,7 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
     </section>
 
     <!-- At the Keyboard -->
-    <section class="mt-10">
+    <section data-reveal class="mt-10">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard — Personal Projects</h2>
       <p class="text-neutral-500 mb-4">A body of work in production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -66,7 +66,7 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
     </section>
 
     <!-- From the Blog -->
-    <section class="mt-10">
+    <section data-reveal class="mt-10">
       <div class="flex items-center justify-between gap-4 mb-4">
         <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Latest Blog Posts</h2>
         <a href="/blog" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
@@ -78,7 +78,7 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
         {recentPosts.map((post) => (
           <a
             href={postPath(post)}
-            class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all hover:border-neutral-900 hover:shadow-md"
+            class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all duration-200 ease-spring hover:border-neutral-900 hover:shadow-lg motion-safe:hover:-translate-y-1"
           >
             <div class="flex items-center gap-3 text-sm text-neutral-500">
               <time datetime={post.data.date}>{formatDate(post.data.date)}</time>
@@ -99,7 +99,7 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
     </section>
 
     <!-- Publications -->
-    <section id="publications" class="mt-10 scroll-mt-20">
+    <section data-reveal id="publications" class="mt-10 scroll-mt-20">
       <div class="flex items-center justify-between gap-4 mb-1">
         <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Publications</h2>
         <a href="https://scholar.google.com/citations?user=28QAvAcAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
@@ -131,7 +131,7 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
     </section>
 
     <!-- Through the Lens -->
-    <section class="mt-10">
+    <section data-reveal class="mt-10">
       <div class="flex items-center justify-between gap-4 mb-1">
         <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Photography</h2>
         <a href={portfolioUrl} target="_blank" rel="noopener noreferrer" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
@@ -144,7 +144,7 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
     </section>
 
     <!-- Away from the Keyboard -->
-    <section id="away-from-the-keyboard" class="mt-10 scroll-mt-20">
+    <section data-reveal id="away-from-the-keyboard" class="mt-10 scroll-mt-20">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">Away from the Keyboard</h2>
       <p class="text-neutral-500 mb-4">Reading, fitness, travel — and above all, being a dad.</p>
       <div class="space-y-4 text-neutral-700 leading-relaxed [&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 [&_a:hover]:text-neutral-950 [&_a:hover]:decoration-neutral-900">
@@ -157,7 +157,7 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
     </section>
 
     <!-- Gateway grid -->
-    <section class="mt-12">
+    <section data-reveal class="mt-12">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">Links</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {
