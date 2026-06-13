@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { menuSectionLinks, menuBottomLinks } from '../data/links';
+import { menuSectionLinks, menuBottomLinks, gatewayLinks } from '../data/links';
 
 interface Props {
   title?: string;
@@ -19,6 +19,29 @@ const {
 const siteUrl = 'https://nickgreenquist.com';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 const absoluteOgImage = new URL(ogImage, siteUrl).toString();
+
+// JSON-LD Person schema (sitewide). `sameAs` profile URLs are derived from the
+// single source of truth in src/data/links.ts so they can't drift.
+const sameAsLabels = ['GitHub', 'LinkedIn', 'Instagram', 'Photography', 'Publications', 'Reading'];
+const sameAs = sameAsLabels
+  .map((label) => gatewayLinks.find((link) => link.label === label)?.href)
+  .filter((href): href is string => Boolean(href));
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nick Greenquist',
+  url: `${siteUrl}/`,
+  image: `${siteUrl}/me-og.jpg`,
+  jobTitle: 'Senior Software Engineer',
+  worksFor: { '@type': 'Organization', name: 'Google' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'New York University' },
+    { '@type': 'CollegeOrUniversity', name: 'Rochester Institute of Technology' },
+  ],
+  knowsAbout: ['Machine Learning', 'Recommender Systems', 'Distributed Systems'],
+  sameAs,
+};
 ---
 
 <!doctype html>
@@ -61,6 +84,9 @@ const absoluteOgImage = new URL(ogImage, siteUrl).toString();
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={absoluteOgImage} />
+
+		<!-- Structured data: Person (helps Google's Knowledge Graph) -->
+		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 	</head>
 	<body class="bg-neutral-50 text-neutral-900 antialiased font-sans">
 		<header id="top" class="sticky top-0 z-50 border-b border-neutral-200 bg-neutral-50/85 backdrop-blur">
