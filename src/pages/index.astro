@@ -14,7 +14,7 @@ import mePhoto from '../assets/me.jpg';
 
 import { movie, book, steam, amazon } from '../data/projects';
 
-const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 2);
+const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 3);
 ---
 
 <Layout
