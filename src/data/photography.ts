@@ -7,7 +7,6 @@ import india from '../assets/photography/india.jpg';
 import maldives from '../assets/photography/maldives.jpg';
 
 export const portfolioUrl = 'https://nickgreenquist.myportfolio.com/';
-export const instagramUrl = 'https://www.instagram.com/nickgreenquist/';
 
 export interface Photo {
   image: ImageMetadata;
