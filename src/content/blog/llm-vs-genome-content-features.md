@@ -5,6 +5,7 @@ date: "2026-06-10"
 slug: "llm-vs-genome-content-features"
 category: projects
 image: "/blog/assets/LLMvsGenome/pixar_movies.jpeg"
+pinned: true
 ---
 
 *A controlled two-tower recommender experiment on MovieLens 32M — and what it means for a team setting up recommendations with no tagging budget.*

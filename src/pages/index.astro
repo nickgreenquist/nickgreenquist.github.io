@@ -14,7 +14,11 @@ import mePhoto from '../assets/me.jpg';
 
 import { movie, book, steam, amazon } from '../data/projects';
 
-const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 3);
+// Featured posts: those flagged `pinned: true` in frontmatter, newest-first.
+// Falls back to the latest 3 if nothing is pinned yet.
+const allPosts = (await getCollection('blog')).sort(byNewest);
+const pinned = allPosts.filter((post) => post.data.pinned);
+const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
 ---
 
 <Layout
@@ -68,14 +72,14 @@ const recentPosts = (await getCollection('blog')).sort(byNewest).slice(0, 3);
     <!-- From the Blog -->
     <section data-reveal class="mt-10">
       <div class="flex items-center justify-between gap-4 mb-4">
-        <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Latest Blog Posts</h2>
+        <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Featured Blog Posts</h2>
         <a href="/blog" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
           See all posts
           <span class="transition-transform group-hover:translate-x-0.5">→</span>
         </a>
       </div>
       <div class="grid grid-cols-1 gap-3">
-        {recentPosts.map((post) => (
+        {featuredPosts.map((post) => (
           <a
             href={postPath(post)}
             class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all duration-200 ease-spring hover:border-neutral-900 hover:shadow-lg motion-safe:hover:-translate-y-1"
