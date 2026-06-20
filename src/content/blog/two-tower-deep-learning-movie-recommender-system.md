@@ -4,7 +4,7 @@ description: "Building a two-tower deep learning movie recommender system from s
 date: "2024-02-04"
 slug: "two-tower-deep-learning-movie-recommender-system"
 category: projects
-pinned: true
+pinned: 3
 ---
 
 <img src="/blog/assets/MovieLens/main.jpg" alt="Main" width="800" class="post-img-center" loading="lazy" />

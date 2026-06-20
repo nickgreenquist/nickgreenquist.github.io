@@ -14,10 +14,12 @@ import mePhoto from '../assets/me.jpg';
 
 import { movie, book, steam, amazon } from '../data/projects';
 
-// Featured posts: those flagged `pinned: true` in frontmatter, newest-first.
-// Falls back to the latest 3 if nothing is pinned yet.
+// Featured posts: those with a `pinned` number in frontmatter, ordered by it
+// (lower first). Falls back to the latest 3 if nothing is pinned yet.
 const allPosts = (await getCollection('blog')).sort(byNewest);
-const pinned = allPosts.filter((post) => post.data.pinned);
+const pinned = allPosts
+  .filter((post) => post.data.pinned != null)
+  .sort((a, b) => a.data.pinned! - b.data.pinned!);
 const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
 ---
 

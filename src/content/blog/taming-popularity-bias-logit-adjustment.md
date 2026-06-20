@@ -5,7 +5,7 @@ date: "2026-06-14"
 slug: "taming-popularity-bias-logit-adjustment"
 category: projects
 image: "/blog/assets/PopularityBias/ww2_poster_board.png"
-pinned: true
+pinned: 2
 ---
 
 *My recommender kept handing everyone the same blockbusters. Here's how I got it to surface the niche films that actually fit each user's taste.*
