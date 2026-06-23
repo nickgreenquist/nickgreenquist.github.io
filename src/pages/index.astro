@@ -56,7 +56,7 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
     <!-- At the Keyboard -->
     <section data-reveal class="mt-10">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard — Personal Projects</h2>
-      <p class="text-neutral-500 mb-4">A body of work in production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit.</p>
+      <p class="text-neutral-500 mb-4">Production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[movie, book, steam, amazon].map((r) => (
           <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />

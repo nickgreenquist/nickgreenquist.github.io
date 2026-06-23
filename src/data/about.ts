@@ -8,7 +8,7 @@ export const headline = "Nick Greenquist";
 
 export const subhead = "Senior Software Engineer @ Google · Machine Learning · Recommender Systems";
 
-export const bioIntro = `Hello! I'm a Senior Software Engineer at <a href="https://google.com">Google</a>, working on the <a href="https://play.google.com/store/games">Google Play Store Personalization</a> team — building and scaling the recommender systems that help billions of Android users discover their next favorite app or game.`;
+export const bioIntro = `Hello! I'm a Senior Software Engineer at <a href="https://google.com">Google</a>, working on the <a href="https://play.google.com/store/games">Google Play Store Personalization</a> team where I help build and scale the recommender systems that connect billions of Android users with their next favorite app or game.`;
 
 export const journeyLead = `The road here was a bit winding:`;
 
