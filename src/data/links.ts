@@ -34,7 +34,7 @@ export const links: SiteLink[] = [
   {
     href: '/projects',
     label: 'Projects',
-    description: 'Recommender systems in depth — architecture, design, and results.',
+    description: 'Recommender systems (in depth writeups).',
   },
   {
     href: 'https://scholar.google.com/citations?user=28QAvAcAAAAJ&hl=en',
@@ -45,7 +45,7 @@ export const links: SiteLink[] = [
   {
     href: '/blog',
     label: 'Blog',
-    description: 'Thoughts on machine learning, systems, and projects.',
+    description: 'Thoughts on machine learning and projects.',
   },
   {
     href: '/map',
@@ -55,23 +55,23 @@ export const links: SiteLink[] = [
   {
     href: '/wrestling',
     label: 'Wrestling',
-    description: 'What it took, what it gave back.',
+    description: 'What it took and what it gave back.',
   },
   {
     href: '/education',
     label: 'Education',
-    description: "Every course I've taken — NYU, RIT, and online.",
+    description: "Every course I've taken.",
   },
   {
     href: '/Resume.pdf',
     label: 'Resume',
-    description: 'PDF, kept current.',
+    description: 'PDF (kept current).',
     external: true,
   },
   {
     href: 'https://www.goodreads.com/user/show/26809953-nick-greenquist',
     label: 'Reading',
-    description: 'My reading list on Goodreads',
+    description: 'My full reading history on Goodreads',
     external: true,
   },
   {

@@ -1,6 +1,6 @@
 ---
 title: "$200 vs $200k: Generating Item Features With an LLM Instead of Hand Tagging"
-description: "A controlled two-tower recommender experiment on MovieLens 32M — and what it means for a team setting up recommendations with no tagging budget."
+description: "A controlled two-tower recommender experiment on MovieLens 32M and what it means for a team setting up recommendations with no tagging budget."
 date: "2026-06-10"
 slug: "llm-vs-genome-content-features"
 category: projects
@@ -8,7 +8,7 @@ image: "/blog/assets/LLMvsGenome/pixar_movies.jpeg"
 pinned: 1
 ---
 
-*A controlled two-tower recommender experiment on MovieLens 32M — and what it means for a team setting up recommendations with no tagging budget.*
+*A controlled two-tower recommender experiment on MovieLens 32M and what it means for a team setting up recommendations with no tagging budget.*
 
 > *A hand-curated tag genome and LLM-extracted features are the same idea, one generation apart. Both turn cheap signals into a dense, per-item content matrix. The first took fifteen years of community data. The second needs nothing but an item's public web text — synopsis, cast, plot, scraped and run through an LLM — and it built the whole corpus in a day.*
 

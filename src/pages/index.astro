@@ -56,7 +56,7 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
     <!-- At the Keyboard -->
     <section data-reveal class="mt-10">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard — Personal Projects</h2>
-      <p class="text-neutral-500 mb-4">Production-grade recommender systems — built from scratch in PyTorch, all deployed live on Streamlit.</p>
+      <p class="text-neutral-500 mb-4">Production-grade recommender systems: built in PyTorch and deployed live on Streamlit.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[movie, book, steam, amazon].map((r) => (
           <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
@@ -66,7 +66,7 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
         <GatewayCard
           href="/projects"
           label="Want the full technical deep-dive?"
-          description="The architecture, design decisions, and results behind each of these systems — in much more depth — on the Projects page."
+          description="The full design and results behind each of these systems on the Projects page."
         />
       </div>
     </section>
@@ -145,20 +145,20 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
           <span class="transition-transform group-hover:translate-x-0.5">→</span>
         </a>
       </div>
-      <p class="text-neutral-500 mb-4">Whenever I have a free moment I'm out with my camera. A few favorites below — each links into its gallery.</p>
+      <p class="text-neutral-500 mb-4">Whenever I have a free moment I'm out with my camera. A few favorites gallery links below.</p>
       <PhotoGrid photos={photos} />
     </section>
 
     <!-- Away from the Keyboard -->
     <section data-reveal id="away-from-the-keyboard" class="mt-10 scroll-mt-20">
       <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">Away from the Keyboard</h2>
-      <p class="text-neutral-500 mb-4">Reading, fitness, travel — and above all, being a dad.</p>
+      <p class="text-neutral-500 mb-4">Reading, fitness, travel and above all: being a dad.</p>
       <div class="space-y-4 text-neutral-700 leading-relaxed [&_a]:underline [&_a]:decoration-neutral-400 [&_a]:underline-offset-2 [&_a:hover]:text-neutral-950 [&_a:hover]:decoration-neutral-900">
-        <p><strong >New Dad</strong> — I became a dad this past year — easily the most important thing that's happened in my life. Most of my time and energy these days goes into being the best father I can be.</p>
-        <p><strong >Travel</strong> — We've kept traveling even as new parents — our son has already been to Cancun, Mexico and to Campo Grande, Brazil for his first birthday and to meet his Brazilian family. Next up is a summer camping trip with our towable trailer. I keep my travel map up to date <a href="/map">here</a>.</p>
-        <p><strong >Fitness</strong> — Old habits from wrestling die hard: physical fitness is still an important part of my routine, and the best way I know to clear my head. I lift weights 5-6x a week and try to walk 10k+ steps a day.</p>
-        <p><strong >Books</strong> — I'm always reading or listening to audiobooks. Check out my <a href="https://www.goodreads.com/user/show/26809953-nick-greenquist" target="_blank" rel="noopener noreferrer">Goodreads</a> to see what I've recently finished and what I'm currently reading — I keep it up to date.</p>
-        <p><strong >Pokémon</strong> — Having a kid sent me straight back to my childhood: I've gotten back into collecting Pokémon cards with the hope of passing the hobby on to my son when he's ready. My goal is to complete the Pokédex — one card for every one of the 1000+ Pokémon — and you can follow my progress in <a href="https://docs.google.com/spreadsheets/d/1FStZBCxWdJ_uC8c_WV24eZsVzI-EmIZHouPKxaG6pcY/edit?usp=sharing" target="_blank" rel="noopener noreferrer">this live tracker</a>.</p>
+        <p><strong >New Dad</strong>: I became a dad this past year. It is easily the most important thing that's happened in my life. Most of my time and energy these days goes into being the best father I can be.</p>
+        <p><strong >Travel</strong>: We've kept traveling even as new parents (at least trying to). Our son has already been to Cancun, Mexico and to Campo Grande, Brazil for his first birthday and to meet his Brazilian family. Next up is a summer camping trip with our trailer. I keep my travel map up to date <a href="/map">here</a>.</p>
+        <p><strong >Fitness</strong>: Old habits from wrestling die hard; physical fitness is still an important part of my routine, and the best way I know to clear my head. I lift weights 5-6x a week and try to walk 10k+ steps a day.</p>
+        <p><strong >Books</strong>: I'm always reading or listening to audiobooks. Check out my <a href="https://www.goodreads.com/user/show/26809953-nick-greenquist" target="_blank" rel="noopener noreferrer">Goodreads</a> to see what I've recently finished and what I'm currently reading.</p>
+        <p><strong >Pokémon</strong>: Having a kid sent me straight back to my childhood: I've gotten back into collecting Pokémon cards with the hope of passing the hobby on to my son when he's ready. My goal is to complete the Pokédex (one card for every one of the 1000+ Pokémon) and you can follow my progress in <a href="https://docs.google.com/spreadsheets/d/1FStZBCxWdJ_uC8c_WV24eZsVzI-EmIZHouPKxaG6pcY/edit?usp=sharing" target="_blank" rel="noopener noreferrer">this live tracker</a>.</p>
       </div>
     </section>
 
