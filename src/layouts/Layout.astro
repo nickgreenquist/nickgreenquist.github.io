@@ -106,6 +106,21 @@ const personSchema = {
 
 		<!-- Structured data: Person (helps Google's Knowledge Graph) -->
 		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+		<!--
+			GoatCounter analytics — privacy-friendly, cookieless, no sampling.
+			PROD-only so dev page loads aren't counted.
+		-->
+		{
+			import.meta.env.PROD && (
+				<script
+					is:inline
+					data-goatcounter="https://nickgreenquist.goatcounter.com/count"
+					async
+					src="//gc.zgo.at/count.js"
+				/>
+			)
+		}
 	</head>
 	<body class="bg-neutral-50 text-neutral-900 antialiased font-sans">
 		<header id="top" class="sticky top-0 z-50 border-b border-neutral-200 bg-neutral-50/85 backdrop-blur">
