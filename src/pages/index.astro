@@ -147,6 +147,37 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
       </div>
       <p class="text-neutral-500 mb-4">Whenever I have a free moment I'm out with my camera. A few favorites gallery links below.</p>
       <PhotoGrid photos={photos} />
+
+      <!-- Recognition -->
+      <div class="mt-8">
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-3">Recognition</h3>
+        <div class="grid grid-cols-1 gap-3">
+          <GatewayCard
+            href="https://g1.globo.com/ms/mato-grosso-do-sul/noticia/2022/01/13/norte-americano-conhece-pantanal-e-registra-flagrantes-exclusivos-da-fauna-pantaneira-veja-fotos.ghtml"
+            label="G1 (Globo) — Featured Story"
+            description="Featured for wildlife photography from the Pantanal, Brazil (2022)."
+            external
+          />
+          <GatewayCard
+            href="https://www.instagram.com/p/DL5-_mMvNZ-/"
+            label="Pantanal Brazil Safaris — Featured Photography"
+            description="Featured for wildlife photography of a Canindé macaw (2025)."
+            external
+          />
+          <GatewayCard
+            href="https://njmonthly.com/articles/arts-entertainment/the-winners-of-new-jersey-monthly-and-unique-photos-2025-cover-search-contest/"
+            label="New Jersey Monthly — Magazine Cover Search Competition"
+            description="Honorable Mention for 'New Residents of Cape May,' selected from 1,509 submissions (2025)."
+            external
+          />
+          <GatewayCard
+            href="https://www.aharts.org/"
+            label="Atlantic Highlands Arts Council — Juried Gallery (Sold)"
+            description="Piece selected for the 'Black & White & Monochrome' juried exhibition and sold (2022)."
+            external
+          />
+        </div>
+      </div>
     </section>
 
     <!-- Away from the Keyboard -->
