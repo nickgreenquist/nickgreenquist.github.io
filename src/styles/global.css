@@ -104,6 +104,17 @@
   margin-left: auto;
   margin-right: auto;
 }
+/* A paragraph holding several images side by side (e.g. a row of movie
+   posters). `prose` makes images block-level, which would stack them. */
+.prose p.poster-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.prose p.poster-row img {
+  margin: 0;
+}
 
 /* --- Blog post inline code --- */
 /* @tailwindcss/typography wraps inline `code` in literal backtick glyphs via
