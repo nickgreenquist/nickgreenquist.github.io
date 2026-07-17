@@ -28,7 +28,7 @@ in `CLAUDE.md` for the conversion recipe.
 | 2020-09-01-SVM_Code.md | SVM from Scratch, Part II (Code) |
 | 2020-09-05-kernel_ridge_regression_math.md | Kernelized Ridge Regression (Math) |
 | 2020-09-07-kernel_ridge_regression_code.md | Kernelized Ridge Regression Part II (Code) |
-| 2020-09-10-kernel_ridge_regression_code.md | Kernelized SVM (short stub) |
+| 2020-09-10-kernelized_SVM.md | Kernelized SVM (short stub) |
 | 2020-09-30-multiclass_classification.md | Multiclass Classification with SVM |
 | 2020-10-01-decision-trees.md | Decision Tree from Scratch |
 | 2020-10-05-gradient-boosting-machines.md | Gradient Boosting |

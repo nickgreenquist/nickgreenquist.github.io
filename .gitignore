@@ -25,6 +25,7 @@ pnpm-debug.log*
 
 # claude code local tooling
 .claude/
+.playwright-mcp/
 
 # legacy v1 local assets kept off git (kept locally only)
 img/map/

@@ -1,13 +1,13 @@
 # nickgreenquist.github.io
 
-Personal portfolio site for Nick Greenquist — Astro + Tailwind, static, deployed to GitHub Pages via GitHub Actions. **Gateway model**: the home page is a hub of cards linking out (GitHub, LinkedIn, photography, wrestling, blog) rather than hosting everything inline. Live at `https://nickgreenquist.com/` (`nickgreenquist.github.io` redirects to it).
+Personal portfolio site for Nick Greenquist — Astro + Tailwind, static, deployed to GitHub Pages via GitHub Actions. **Single-scroll home**: `index.astro` is one identity-first page (hero → about/journey → recommender cards → featured posts → publications → photography → personal → links tail); deep dives live on subpages. Live at `https://nickgreenquist.com/` (`nickgreenquist.github.io` redirects to it). Remaining polish backlog: `docs/portfolio-improvements.md`.
 
 ## Stack
 
 - **Astro** static mode, TypeScript strict
 - **Tailwind CSS v4** via `@tailwindcss/vite`; `@tailwindcss/typography` (`prose`) for blog bodies
 - **Dark mode**: `.dark` on `<html>` remaps the `neutral-*`/`white` CSS vars in `global.css` (toggle + pre-paint script in `Layout.astro`) — new UI must use `neutral-*`/`white` utilities, never hardcoded hex or literal `text-white`, or it won't theme.
-- **Blog**: Astro content collection; markdown pipeline adds `remark-math` + `rehype-katex` and Shiki; `@astrojs/rss` feed at `/blog/feed.xml`
+- **Blog**: Astro content collection; markdown pipeline adds `remark-math` + `rehype-katex` and Shiki (dual light/dark themes); `@astrojs/rss` feed at `/blog/feed.xml`; `@astrojs/sitemap`
 - **Contact form**: Formspree `https://formspree.io/f/maqvayqy`
 - **Deploy**: GitHub Actions (`.github/workflows/deploy.yml`), Node 22 (Astro needs `>=22.12.0`)
 
@@ -22,12 +22,12 @@ npm run preview  # serves built dist/
 
 ## Structure
 
-- `src/pages/` — `index.astro` (gateway), `projects.astro`, `education.astro`, `wrestling.astro`, `map.astro`, `contact.astro`; blog under `blog/` (`index.astro` listing, `[...slug].astro` route, `feed.xml.ts` RSS)
+- `src/pages/` — `index.astro` (single-scroll home), `projects.astro`, `education.astro`, `wrestling.astro`, `map.astro`, `contact.astro`; blog under `blog/` (`index.astro` listing, `[...slug].astro` route, `feed.xml.ts` RSS)
 - `src/content/blog/*.md` — post bodies + frontmatter; schema in `src/content.config.ts`: `title`, `description`, `date` (`YYYY-MM-DD` string), `slug`, `category`, optional `image`
 - `src/utils/blog.ts` — `postPath()`, `formatDate()`, `byNewest()`, `categoryLabel()`
 - `src/layouts/Layout.astro` — global head, OG/Twitter meta (`ogType` prop → `article` for posts)
-- `src/components/` — GatewayCard, ProjectCard, JourneyTimeline, PhotoGrid, EducationSection, SkillsSection, Gallery
-- `src/data/` — `about.ts` (bio + journey timeline), `courses.json`, `skills.ts`, `projects.ts`, `photography.ts`
+- `src/components/` — GatewayCard, RecommenderCard, ProjectCard, JourneyTimeline, PhotoGrid, EducationSection, Gallery
+- `src/data/` — `about.ts` (bio + journey timeline), `courses.json`, `links.ts`, `projects.ts`, `photography.ts`
 - `src/assets/` — images optimized through `astro:assets` (auto WebP at build)
 - `public/` — served verbatim at stable URLs: `Resume.pdf`, OG/social images, favicons, and `blog/` (see below)
 
