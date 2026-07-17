@@ -10,6 +10,9 @@ const llmPost = posts.find((p) => p.data.slug === 'llm-vs-genome-content-feature
 const popBiasPost = posts.find(
   (p) => p.data.slug === 'taming-popularity-bias-logit-adjustment',
 );
+const askPost = posts.find(
+  (p) => p.data.slug === 'llm-search-discovery-movie-recommender',
+);
 ---
 
 <Layout
@@ -34,7 +37,7 @@ const popBiasPost = posts.find(
       <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-700 mb-2">Retrieval · Two-Tower</h2>
       <p class="text-neutral-700 leading-relaxed mb-3">Two towers — one for the user, one for the item — embed into a shared space where a dot product retrieves top recommendations. Users are represented by the <em>features</em> of what they’ve enjoyed, not a user ID, so anyone gets recommendations from just a few examples. Both represent the user by pooling their interaction history through several behavior-partitioned pools, and both train with a full softmax over the entire catalog — with a logit adjustment from Menon et al. (2020) added just before the loss to debias popular items (a <a href="#popularity-bias" class="underline decoration-neutral-400 underline-offset-2 hover:text-neutral-950 hover:decoration-neutral-900">study of its own</a>).</p>
       <div class="space-y-4 text-neutral-700 leading-relaxed mb-6">
-        <p><strong>Movie</strong> — The flagship two-tower build, trained on MovieLens 32M. Once it was mature, it became the starting point for a standalone research project on LLM-generated content features (<a href="#llm-content-features" class="underline decoration-neutral-400 underline-offset-2 hover:text-neutral-950 hover:decoration-neutral-900">below</a>).</p>
+        <p><strong>Movie</strong> — The flagship two-tower build, trained on MovieLens 32M. Once it was mature, it became the foundation everything else sits on: a natural-language front-end (<a href="#llm-front-end" class="underline decoration-neutral-400 underline-offset-2 hover:text-neutral-950 hover:decoration-neutral-900">below</a>) and a standalone research project on LLM-generated content features (<a href="#llm-content-features" class="underline decoration-neutral-400 underline-offset-2 hover:text-neutral-950 hover:decoration-neutral-900">below</a>).</p>
         <p><strong>Book</strong> — The first of the series, and the one with the longest experiment ladder: every architecture change — loss function, projection MLPs, partitioned history pooling, popularity debiasing — had to beat the incumbent both on offline metrics and in side-by-side comparisons of real recommendation lists before being promoted to production. The biggest single lesson: training with in-batch negatives quietly punishes canonical popular books (they show up as negatives in nearly every batch), and switching to full softmax over the catalog fixed it.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
@@ -42,6 +45,29 @@ const popBiasPost = posts.find(
           <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
         ))}
       </div>
+    </section>
+
+    <section id="llm-front-end" class="scroll-mt-20">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-neutral-700 mb-2">Interface · LLM Front-End</h2>
+      <p class="text-neutral-700 leading-relaxed mb-3">The Movie demo’s landing tab, and the one piece of this work a visitor can use without knowing what a two-tower model is: describe what you want in plain English — <em>“slow, atmospheric sci-fi like Blade Runner and Arrival, nothing before 2000, no horror”</em> — and get a board of films back. The LLM here is the <em>interface</em>, never the recommender. A single forced tool call to Claude Haiku parses the sentence into the structured input the user tower already consumes — liked and disliked titles, mood as closed-vocabulary genome tags, soft genre hints, hard year/genre/people/topic filters — and a deterministic pipeline resolves that object into weighted movie anchors, filters, and re-rank terms. The trained model still does every bit of the retrieval, scoring all 9,375 films in one matmul. The LLM never names a movie, and its output is consumed internally and discarded rather than rendered — there’s no chatbot in the app, though a debug panel will show you the parsed fields. That split is the point: classical model for fast, large-catalog retrieval; LLM for natural-language understanding at the edge. At ~9k items you could hand the whole catalog to an LLM directly, so this demonstrates the <em>pattern that scales</em> — to catalogs too large for any context window — rather than a cost saving at demo scale. Tuning the prompt and resolution logic against 500 synthetic queries lifted the “good board” rate from <strong>32.0% to 50.8%</strong>.</p>
+      {askPost && (
+        <a
+          href={postPath(askPost)}
+          class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all duration-200 ease-spring hover:border-neutral-900 hover:shadow-lg motion-safe:hover:-translate-y-1 mb-10"
+        >
+          <div class="flex items-center gap-3 text-sm text-neutral-500">
+            <time datetime={askPost.data.date}>{formatDate(askPost.data.date)}</time>
+            <span class="inline-block rounded-full bg-neutral-100 px-2.5 py-0.5 text-xs font-medium text-neutral-600">
+              {categoryLabel(askPost.data.category)}
+            </span>
+          </div>
+          <div class="mt-1.5 flex items-center justify-between gap-3">
+            <h3 class="font-semibold text-neutral-900">{askPost.data.title}</h3>
+            <span class="flex-shrink-0 text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">→</span>
+          </div>
+          <p class="mt-1 text-sm text-neutral-600">Full write-up — the architecture, worked examples, what the LLM actually emits, and what a query costs.</p>
+        </a>
+      )}
     </section>
 
     <section id="llm-content-features" class="scroll-mt-20">

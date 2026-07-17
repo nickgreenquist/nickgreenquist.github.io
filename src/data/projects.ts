@@ -1,6 +1,10 @@
 // The four recommenders shown on the home page and detailed on /projects.
+// The home grid uses only emoji/shortLabel/arch/demoHref; /projects uses the rest.
 export interface Project {
   label: string;
+  emoji: string;
+  shortLabel: string;
+  arch: string;
   dataset: string;
   items: string;
   users: string;
@@ -11,6 +15,9 @@ export interface Project {
 
 export const movie: Project = {
   label: 'Movie Recommender',
+  emoji: '🎬',
+  shortLabel: 'Movies',
+  arch: 'Two-tower retrieval + LLM search',
   dataset: 'MovieLens 32M',
   items: '9,375 movies',
   users: '~50k users',
@@ -21,6 +28,9 @@ export const movie: Project = {
 
 export const book: Project = {
   label: 'Book Recommender',
+  emoji: '📚',
+  shortLabel: 'Books',
+  arch: 'Two-tower retrieval',
   dataset: 'Goodreads',
   items: '14,753 books',
   users: '229k users',
@@ -31,6 +41,9 @@ export const book: Project = {
 
 export const steam: Project = {
   label: 'Steam Game Recommender',
+  emoji: '🎮',
+  shortLabel: 'Steam Games',
+  arch: 'Two-tower retrieval + Ranker',
   dataset: 'Steam Games Dataset',
   items: '5,437 games',
   users: '66k users',
@@ -41,6 +54,9 @@ export const steam: Project = {
 
 export const amazon: Project = {
   label: 'Amazon Games Recommender',
+  emoji: '🕹️',
+  shortLabel: 'Amazon Games',
+  arch: 'Sequential Transformer',
   dataset: 'Amazon Video Games',
   items: '16,882 games',
   users: '50,626 users',

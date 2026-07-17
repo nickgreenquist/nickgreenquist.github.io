@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import GatewayCard from '../components/GatewayCard.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import RecommenderCard from '../components/RecommenderCard.astro';
 import JourneyTimeline from '../components/JourneyTimeline.astro';
 import PhotoGrid from '../components/PhotoGrid.astro';
 import { headline, subhead, bioIntro, journeyLead, journey } from '../data/about';
@@ -55,19 +55,18 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
 
     <!-- At the Keyboard -->
     <section data-reveal class="mt-10">
-      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-1">At the Keyboard — Personal Projects</h2>
+      <div class="flex items-center justify-between gap-4 mb-1">
+        <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">At the Keyboard</h2>
+        <a href="/projects" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
+          Full deep-dive
+          <span class="transition-transform group-hover:translate-x-0.5">→</span>
+        </a>
+      </div>
       <p class="text-neutral-500 mb-4">Production-grade recommender systems: built in PyTorch and deployed live on Streamlit.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[movie, book, steam, amazon].map((r) => (
-          <ProjectCard label={r.label} dataset={r.dataset} items={r.items} users={r.users} result={r.result} demoHref={r.demoHref} codeHref={r.codeHref} />
+          <RecommenderCard emoji={r.emoji} shortLabel={r.shortLabel} arch={r.arch} demoHref={r.demoHref} />
         ))}
-      </div>
-      <div class="mt-3">
-        <GatewayCard
-          href="/projects"
-          label="Want the full technical deep-dive?"
-          description="The full design and results behind each of these systems on the Projects page."
-        />
       </div>
     </section>
 

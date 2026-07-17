@@ -1,0 +1,25 @@
+---
+interface Props {
+  emoji: string;
+  shortLabel: string;
+  arch: string;
+  demoHref: string;
+}
+
+const { emoji, shortLabel, arch, demoHref } = Astro.props;
+---
+
+<a
+  href={demoHref}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all duration-200 ease-spring hover:border-neutral-900 hover:shadow-lg motion-safe:hover:-translate-y-1"
+>
+  <div class="flex items-center justify-between gap-3">
+    <h3 class="text-lg font-semibold text-neutral-900">
+      <span aria-hidden="true" class="mr-2">{emoji}</span>{shortLabel}
+    </h3>
+    <span class="flex-shrink-0 text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">↗</span>
+  </div>
+  <p class="mt-1 text-sm text-neutral-600">{arch}</p>
+</a>
