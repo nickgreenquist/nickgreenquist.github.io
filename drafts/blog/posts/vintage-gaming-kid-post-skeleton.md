@@ -1,8 +1,25 @@
 ---
 title: "TBD — something plain, e.g. 'A Game Boy With No Internet'"
 category: Misc
-status: SKELETON v1 — ultra short post
+status: SKELETON v2 — ultra short post
+framing: PLAN POST, not a results post
 ---
+
+<!--
+FRAMING DECISION (settled — do not drift from this):
+This is a "here's what I built and why" post, NOT "here's how it worked."
+Noah is 1. Nothing has been tested on an actual child. That is fine — the
+device exists, the reasoning stands, the research backs the premise. A plan
+post is a complete genre on its own.
+
+The risk is sounding smug about unproven parenting theory. That is a TONE
+problem, not a timing problem, and one sentence of self-awareness solves it.
+Do not fake a conclusion. Do not claim it worked. The closing line does the
+work: "ask me in four years."
+
+A "how it actually went" follow-up is a DIFFERENT post for later, not a
+replacement for this one.
+-->
 
 <!--
 VOICE: same as the Pokedex post. Open with the gripe. Plain declarative sentences.
@@ -49,6 +66,17 @@ reading as smug. Keep it.
 - The whitelist is literally which files are on the card. I control it completely.
 - One game at a time: Pokémon Red first. Silver and Emerald later, when I decide.
 - **Do NOT write up the Etcher failure / DTB rabbit hole here.** Different post.
+
+**Hardware context (background — probably doesn't go in the post):**
+- Consensus on R36S vs Miyoo Mini Plus: R36S wins on paper, Miyoo wins in practice.
+  Miyoo's OnionOS is far better optimised despite weaker hardware; R36S has real
+  reliability complaints (overheating, high negative-review rate) and no manufacturer.
+- R36S genuinely wins on: dual analogue sticks, comfort for long sessions. Neither
+  matters for GB/GBC/GBA Pokémon.
+- Form factor: R36S is horizontal (GBA-like), Miyoo is vertical (classic Game Boy).
+- ⚠️ **Miyoo Mini Plus has built-in WiFi** — so if the post leans on "no wifi hardware,"
+  that claim is specific to the R36S. Don't recommend the Miyoo in the same breath as
+  a no-internet argument without noting it.
 
 ## 4. The compromise
 *(2-4 sentences. This is the honest section — don't skip it.)*
