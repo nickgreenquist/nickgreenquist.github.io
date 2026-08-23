@@ -1,6 +1,6 @@
 ---
 title: "Completing the Pokédex (in TCG)"
-description: "Building a complete 1,025-card National Pokédex binder: the master list that did not exist, the cheapest-card problem, and the page-and-pocket layout that made it safe to build."
+description: "With the help of Claude Code, I completed a correctly-ordered list of all 1,025 Pokémon (National Dex order)."
 date: "2026-08-22"
 slug: "completing-the-tcg-pokedex"
 category: miscl
