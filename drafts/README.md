@@ -33,6 +33,16 @@ in `CLAUDE.md` for the conversion recipe.
 | 2020-10-01-decision-trees.md | Decision Tree from Scratch |
 | 2020-10-05-gradient-boosting-machines.md | Gradient Boosting |
 
+### Other drafts
+
+Not part of the recovered series — new posts in progress, kept here so they stay out
+of the content collection (a file in `src/content/blog/` must satisfy the full
+frontmatter schema or the build fails).
+
+| File | Status |
+|------|--------|
+| vintage-gaming-kid-post-skeleton.md | Skeleton/outline. Retro handheld (R36S) as an ad-free first console for a kid. Title TBD. |
+
 ### assets/ (7 dirs)
 
 Image directories referenced by the posts above (`GradientDescent`, `Kernels`,
