@@ -29,3 +29,8 @@ pnpm-debug.log*
 
 # legacy v1 local assets kept off git (kept locally only)
 img/map/
+
+# Source photos for the Pokédex binder post — ~800 MB of full-resolution shots that
+# scripts/build_binder_assets.mjs encodes into public/blog/assets/PokedexBinder/.
+# Kept locally only; the committed WebPs are the published derivatives.
+binder_photos/

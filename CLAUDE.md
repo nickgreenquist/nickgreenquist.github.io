@@ -50,10 +50,17 @@ URLs preserved from Jekyll: `/blog/<category>/<yyyy>/<mm>/<dd>/<slug>/` — cate
 **Interactive widgets in a post.** `completing-the-tcg-pokedex` is the first post that ships
 its own JS: a 69-page binder flipbook. Its CSS/JS and the vendored StPageFlip runtime live in
 `public/blog/assets/PokedexBinder/` (see the `README.md` there for why it is plain HTML rather
-than React) and are edited in place. The 69 page images are encoded from ~800 MB of source
-photos that live in the sibling `Pokemon-TCG-Binder-Tracker` repo — run
-`node scripts/build_binder_assets.mjs` there if they ever change. Shared figure styles for the
-post (`page-pair`) are in `src/styles/global.css` alongside `poster-row`, not inline in the post.
+than React) and are edited in place. Shared figure styles for the post (`page-pair`) are in
+`src/styles/global.css` alongside `poster-row`, not inline in the post.
+
+The 69 page images are the one part of that post needing a build step: `binder_photos/`
+holds ~800 MB of full-resolution shots (gitignored, and the only copy — never delete it), and
+`scripts/build_binder_assets.mjs` encodes them into `public/blog/assets/PokedexBinder/`.
+It uses `sharp`, which Astro already provides, so no extra install. Only run it if the photos
+change. `scripts/test_binder_flipbook.mjs` is a 30-check Playwright suite for the widget;
+Playwright is deliberately **not** in `package.json` (its postinstall downloads browsers,
+which would run on every CI deploy), so install it ad hoc when you want to run it:
+`npm i --no-save playwright && npx playwright install chromium`.
 
 > [!IMPORTANT]
 > **Don't delete the old Jekyll blog repo** (`github.com/nickgreenquist/blog`). Its Pages was disabled June 2026 so this site's `/blog/` could own the domain (cutover complete). Its git history is the only copy of ~10 unpublished ML posts. Archive it if you want — never delete.
