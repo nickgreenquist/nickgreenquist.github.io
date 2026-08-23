@@ -116,6 +116,66 @@
   margin: 0;
 }
 
+/* A figure pairing two images that document the same thing two ways (the binder
+   layout tool's page next to a photo of that page in the binder). The sources have
+   very different aspect ratios — the screenshot is 1.87:1, the photo 0.76:1 — so the
+   columns are weighted 2.474:1, the ratio that lands both at the SAME height instead
+   of one towering over the other. Stacks below 640px. */
+.page-pair {
+  margin: 2.5rem 0;
+}
+.page-pair-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.page-pair-item {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.page-pair-plan { flex: 2.474 1 0; }
+.page-pair-real { flex: 1 1 0; }
+.page-pair img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  max-width: none;
+  border-radius: 0.5rem;
+  background: #0b0b0e;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+}
+/* currentColor keeps the labels legible in both themes with no media query. */
+.page-pair-label {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  margin: 0.5rem 0 0;
+  opacity: 0.65;
+}
+.page-pair figcaption {
+  font-size: 0.9375rem;
+  margin-top: 0.9rem;
+  opacity: 0.75;
+  font-style: italic;
+}
+/* Same breakout the flipbook uses: 1040px inside a >=1140px viewport always leaves
+   >40px of gutter, so it can never cause horizontal overflow. */
+@media (min-width: 1140px) {
+  .page-pair {
+    width: 1040px;
+    margin-left: calc(50% - 520px);
+  }
+}
+@media (max-width: 640px) {
+  .page-pair-row {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .page-pair-plan,
+  .page-pair-real { flex: none; }
+}
+
 /* --- Blog post inline code --- */
 /* @tailwindcss/typography wraps inline `code` in literal backtick glyphs via
    ::before/::after content. Drop them so tokens like `survival` render as clean

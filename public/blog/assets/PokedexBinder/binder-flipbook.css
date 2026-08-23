@@ -1,0 +1,343 @@
+/* ===========================================================================
+   Pokédex binder flipbook — presentation layer
+   ---------------------------------------------------------------------------
+   Self-contained: no Tailwind, no framework, no build step. Every rule is
+   scoped under `.pdxb` so the widget can be dropped into a plain markdown post
+   that renders inside a `prose` container without either side leaking styles.
+
+   The stage stays dark in both site themes on purpose: all 69 photos are cards
+   sitting in a black binder page, so a dark surround reads as one continuous
+   object instead of a bright frame with dark holes punched in it. Only the
+   outer chrome follows the light/dark theme.
+   ========================================================================= */
+
+.pdxb {
+  /* Chrome — the parts that sit against the page background. */
+  --pdxb-frame:       #17171c;
+  --pdxb-frame-edge:  rgba(255, 255, 255, 0.10);
+  --pdxb-stage:       #0b0b0e;
+  --pdxb-text:        #ededf0;
+  --pdxb-muted:       #8b8b94;
+  --pdxb-btn:         rgba(255, 255, 255, 0.07);
+  --pdxb-btn-hover:   rgba(255, 255, 255, 0.14);
+  --pdxb-accent:      #34d399;
+  --pdxb-accent-ink:  #04241a;
+  --pdxb-shadow:      0 18px 45px -20px rgba(0, 0, 0, 0.55);
+
+  margin: 2.5rem 0;
+  border-radius: 16px;
+  background: var(--pdxb-frame);
+  border: 1px solid var(--pdxb-frame-edge);
+  box-shadow: var(--pdxb-shadow);
+  padding: 0.875rem;
+  color: var(--pdxb-text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* In light mode the widget is a dark slab on a white page — soften the landing
+   with a deeper drop shadow rather than a hard edge. */
+:root:not(.dark) .pdxb {
+  --pdxb-shadow: 0 22px 50px -22px rgba(0, 0, 0, 0.45), 0 2px 6px -2px rgba(0, 0, 0, 0.12);
+}
+
+/* --- Break out of the prose column on wide screens -------------------------
+   The post column is 720px of content inside a 768px `max-w-3xl` main. A
+   two-page spread wants more than that. The media-query floor (1140px) is set
+   so the 1040px breakout always leaves >40px of gutter on each side — it can
+   never cause horizontal overflow, scrollbar included. */
+@media (min-width: 1140px) {
+  .pdxb {
+    width: 1040px;
+    margin-left: calc(50% - 520px);
+  }
+}
+
+/* --- Reset the `prose` typography plugin's opinions ------------------------
+   Tailwind Typography targets `.prose :where(img)`, and `:where()` drops the
+   inner specificity to zero — so a plain `.pdxb img` (0,1,1) wins cleanly. */
+.pdxb img {
+  margin: 0;
+  border-radius: 0;
+  max-width: none;
+  display: block;
+}
+.pdxb p,
+.pdxb div,
+.pdxb button {
+  margin: 0;
+}
+.pdxb button {
+  font: inherit;
+  color: inherit;
+}
+
+/* --- Header ---------------------------------------------------------------- */
+.pdxb-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.125rem 0.25rem 0.75rem;
+}
+.pdxb-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.pdxb-title .pdxb-region {
+  color: var(--pdxb-muted);
+  font-weight: 400;
+}
+.pdxb-count {
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--pdxb-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* --- Stage ----------------------------------------------------------------- */
+.pdxb-stage {
+  position: relative;
+  border-radius: 10px;
+  background: var(--pdxb-stage);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  /* Reserve height before the flip runtime measures itself, so the article
+     below does not jump when the widget initializes. */
+  aspect-ratio: 1000 / 1345;
+}
+/* Once the flip runtime owns the height, drop the placeholder ratio. */
+.pdxb[data-ready="1"] .pdxb-stage {
+  aspect-ratio: auto;
+}
+.pdxb-book {
+  margin: 0 auto;
+}
+/* StPageFlip stamps its `minWidth` setting onto the mount as an inline
+   min-width. That same setting decides the one-page/two-page breakpoint, so it
+   has to stay at 330 — but on a phone narrower than that the book spills out of
+   the stage and the outer column of cards gets clipped. The runtime only ever
+   clamps page width DOWN to the measured block width, so removing the floor
+   here costs nothing and lets narrow screens size themselves honestly. */
+.pdxb .stf__parent {
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+.pdxb-page {
+  background: #0e0e12;
+  overflow: hidden;
+}
+.pdxb-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+/* Pages whose image has not been fetched yet get a quiet shimmer rather than a
+   white hole, since only a window of pages around the reader is ever loaded. */
+.pdxb-page:not([data-loaded]) {
+  background:
+    linear-gradient(100deg, #0e0e12 30%, #17171d 50%, #0e0e12 70%)
+    0 0 / 300% 100%;
+  animation: pdxb-shimmer 1.6s ease-in-out infinite;
+}
+@keyframes pdxb-shimmer {
+  from { background-position: 150% 0; }
+  to   { background-position: -50% 0; }
+}
+
+/* Spine shading down the middle of an open spread — sells the "one binder,
+   two facing pages" read. Hidden in single-page (portrait) mode. */
+.pdxb-spine {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(
+    to right,
+    transparent calc(50% - 42px),
+    rgba(0, 0, 0, 0.30) calc(50% - 10px),
+    rgba(0, 0, 0, 0.42) 50%,
+    rgba(0, 0, 0, 0.30) calc(50% + 10px),
+    transparent calc(50% + 42px)
+  );
+}
+.pdxb[data-spread="1"] .pdxb-spine { opacity: 1; }
+
+/* --- Overlay chips on the stage -------------------------------------------- */
+.pdxb-badge {
+  position: absolute;
+  z-index: 25;
+  bottom: 0.625rem;
+  right: 0.625rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.66);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(8px);
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  color: #e6e6ea;
+  pointer-events: none;
+}
+.pdxb-expand {
+  position: absolute;
+  z-index: 25;
+  top: 0.625rem;
+  right: 0.625rem;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(8px);
+  color: #e6e6ea;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+.pdxb-expand:hover { opacity: 1; background: rgba(0, 0, 0, 0.82); }
+.pdxb-expand svg { width: 15px; height: 15px; }
+
+/* --- Controls -------------------------------------------------------------- */
+.pdxb-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 0.25rem 0.625rem;
+}
+.pdxb-nav {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--pdxb-btn);
+  color: var(--pdxb-text);
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+.pdxb-nav:hover:not(:disabled) { background: var(--pdxb-btn-hover); }
+.pdxb-nav:disabled { opacity: 0.28; cursor: default; }
+.pdxb-nav svg { width: 17px; height: 17px; }
+
+.pdxb-scrub {
+  flex: 1;
+  min-width: 0;
+  height: 1.5rem;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.pdxb-scrub::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+}
+.pdxb-scrub::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+}
+.pdxb-scrub::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border: none;
+  border-radius: 999px;
+  background: var(--pdxb-accent);
+}
+.pdxb-scrub::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 999px;
+  background: var(--pdxb-accent);
+}
+.pdxb-scrub:focus-visible { outline: 2px solid var(--pdxb-accent); outline-offset: 4px; }
+
+/* --- Generation jump chips -------------------------------------------------- */
+.pdxb-gens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3125rem;
+  padding: 0.125rem 0.25rem 0.25rem;
+}
+.pdxb-gen {
+  padding: 0.3125rem 0.5625rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: var(--pdxb-btn);
+  color: var(--pdxb-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.pdxb-gen:hover { background: var(--pdxb-btn-hover); color: var(--pdxb-text); }
+.pdxb-gen[aria-current="true"] {
+  background: var(--pdxb-accent);
+  color: var(--pdxb-accent-ink);
+}
+
+.pdxb-hint {
+  padding: 0.375rem 0.25rem 0.125rem;
+  font-size: 0.6875rem;
+  color: var(--pdxb-muted);
+}
+
+/* --- Focus + fullscreen ------------------------------------------------------ */
+.pdxb :focus-visible {
+  outline: 2px solid var(--pdxb-accent);
+  outline-offset: 2px;
+}
+.pdxb:fullscreen {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #0b0b0e;
+}
+.pdxb:fullscreen .pdxb-stage { background: transparent; box-shadow: none; }
+
+/* --- Motion preferences ------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .pdxb-page:not([data-loaded]) { animation: none; }
+  .pdxb-spine { transition: none; }
+}
+
+/* --- Narrow screens ----------------------------------------------------------- */
+@media (max-width: 640px) {
+  /* Claw back most of the article's 1.5rem side padding. A binder page is 16
+     cards; every pixel of width is legibility. The 1rem left behind keeps the
+     rounded frame from touching the screen edge. */
+  .pdxb {
+    margin-inline: -1rem;
+    padding: 0.625rem;
+    border-radius: 12px;
+  }
+  .pdxb-head { padding-bottom: 0.5rem; }
+  .pdxb-title { font-size: 0.875rem; }
+  .pdxb-count { font-size: 0.6875rem; }
+  /* 9 chips have to fit without becoming a third row. */
+  .pdxb-gens { gap: 0.25rem; }
+  .pdxb-gen { padding: 0.3125rem 0.4375rem; font-size: 0.6875rem; }
+  .pdxb-hint { display: none; }
+}

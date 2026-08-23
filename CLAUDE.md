@@ -47,6 +47,14 @@ URLs preserved from Jekyll: `/blog/<category>/<yyyy>/<mm>/<dd>/<slug>/` — cate
 - Escape literal `$` → `\$` in prose, or `remark-math` parses `$…$` as KaTeX and breaks the build. Don't escape real math.
 - Porting a project's `docs/*.md` (precedent: `llm-vs-genome-content-features` from the Two-Tower repo): add frontmatter, drop the source H1 (route renders `title` as the `<h1>`), copy figures to `public/blog/assets/<Dir>/` and rewrite image paths to absolute `/blog/assets/<Dir>/...`. Verify with `npm run build`.
 
+**Interactive widgets in a post.** `completing-the-tcg-pokedex` is the first post that ships
+its own JS: a 69-page binder flipbook. Its CSS/JS and the vendored StPageFlip runtime live in
+`public/blog/assets/PokedexBinder/` (see the `README.md` there for why it is plain HTML rather
+than React) and are edited in place. The 69 page images are encoded from ~800 MB of source
+photos that live in the sibling `Pokemon-TCG-Binder-Tracker` repo — run
+`node scripts/build_binder_assets.mjs` there if they ever change. Shared figure styles for the
+post (`page-pair`) are in `src/styles/global.css` alongside `poster-row`, not inline in the post.
+
 > [!IMPORTANT]
 > **Don't delete the old Jekyll blog repo** (`github.com/nickgreenquist/blog`). Its Pages was disabled June 2026 so this site's `/blog/` could own the domain (cutover complete). Its git history is the only copy of ~10 unpublished ML posts. Archive it if you want — never delete.
 
