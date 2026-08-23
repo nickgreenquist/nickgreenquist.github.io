@@ -156,4 +156,4 @@ I've wanted this binder since I was a kid. I have a son now, and that's the actu
 
 ## Appendix
 
-Everything behind this project is in **[nickgreenquist/Pokemon-TCG-Binder-Tracker](https://github.com/nickgreenquist/Pokemon-TCG-Binder-Tracker)**. The finished list is [`pokedex.csv`](https://github.com/nickgreenquist/Pokemon-TCG-Binder-Tracker/blob/main/pokedex.csv).
+Everything behind this project is in **[nickgreenquist/Pokemon-TCG-Binder-Tracker](https://github.com/nickgreenquist/Pokemon-TCG-Binder-Tracker)**. The finished list is [`pokedex.csv`](https://github.com/nickgreenquist/Pokemon-TCG-Binder-Tracker/blob/main/pokedex.csv), and the [live tracker](https://docs.google.com/spreadsheets/d/1FStZBCxWdJ_uC8c_WV24eZsVzI-EmIZHouPKxaG6pcY/edit?usp=sharing) is the copy I actually work from.
