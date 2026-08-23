@@ -57,7 +57,12 @@ The 69 page images are the one part of that post needing a build step: `binder_p
 holds ~800 MB of full-resolution shots (gitignored, and the only copy — never delete it), and
 `scripts/build_binder_assets.mjs` encodes them into `public/blog/assets/PokedexBinder/`.
 It uses `sharp`, which Astro already provides, so no extra install. Only run it if the photos
-change. `scripts/test_binder_flipbook.mjs` is a 30-check Playwright suite for the widget;
+change. `scripts/build_binder_rules_figure.mjs` builds the one annotated figure (the pages
+10/11 spread marked up to show the energy-leader and fresh-page rules) by compositing an SVG
+overlay onto the already-encoded `page-10.webp`/`page-11.webp` — it never touches the source
+photos, so it is safe to re-run. `scripts/build_dex_list_figure.mjs` builds the Bulbapedia
+regional-forms figure and takes a screenshot path as its argument (see its header for how that
+screenshot is captured); its output is committed, so it only needs re-running if the figure changes. `scripts/test_binder_flipbook.mjs` is a 30-check Playwright suite for the widget;
 Playwright is deliberately **not** in `package.json` (its postinstall downloads browsers,
 which would run on every CI deploy), so install it ad hoc when you want to run it:
 `npm i --no-save playwright && npx playwright install chromium`.

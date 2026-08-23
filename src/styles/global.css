@@ -159,10 +159,90 @@
   opacity: 0.75;
   font-style: italic;
 }
+/* A single wide figure (annotated spreads). Same visual treatment as .page-pair,
+   minus the two-column row. */
+.figure-wide {
+  margin: 2.5rem 0;
+}
+.figure-wide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  max-width: none;
+  border-radius: 0.5rem;
+  background: #0b0b0e;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+}
+.figure-wide figcaption {
+  font-size: 0.9375rem;
+  margin-top: 0.9rem;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+/* Decorative Poke Ball that opens the TCG binder post. Its colors are brand-fixed
+   rather than themed (a Poke Ball is red/white/black in both themes); the black
+   outline is what keeps it legible on either background. */
+.post-flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: 0 0 1.75rem;
+}
+/* flex:none so the ball never squashes when the label wraps on narrow screens */
+.post-flourish svg {
+  width: 64px;
+  height: 64px;
+  flex: none;
+}
+.post-flourish span {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+@media (max-width: 480px) {
+  .post-flourish svg { width: 48px; height: 48px; }
+  .post-flourish span { font-size: 1rem; }
+}
+
+/* A row of card images at equal width (the art-override examples). Each card links
+   to its TCGplayer page, so the anchors are the flex children, not the images. */
+.figure-cards {
+  margin: 2.5rem 0;
+}
+.figure-cards-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+.figure-cards-row > a {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.figure-cards img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 0.5rem;
+}
+.figure-cards figcaption {
+  font-size: 0.9375rem;
+  margin-top: 0.9rem;
+  opacity: 0.75;
+  font-style: italic;
+  text-align: center;
+}
+
 /* Same breakout the flipbook uses: 1040px inside a >=1140px viewport always leaves
    >40px of gutter, so it can never cause horizontal overflow. */
 @media (min-width: 1140px) {
-  .page-pair {
+  .page-pair,
+  .figure-wide {
     width: 1040px;
     margin-left: calc(50% - 520px);
   }
