@@ -35,13 +35,8 @@ in `CLAUDE.md` for the conversion recipe.
 
 ### Other drafts
 
-Not part of the recovered series — new posts in progress, kept here so they stay out
-of the content collection (a file in `src/content/blog/` must satisfy the full
-frontmatter schema or the build fails).
-
-| File | Status |
-|------|--------|
-| vintage-gaming-kid-post-skeleton.md | Skeleton/outline. Retro handheld (R36S) as an ad-free first console for a kid. Title TBD. |
+None currently. New posts in progress are drafted directly in `src/content/blog/`
+and left uncommitted until they are ready to publish.
 
 ### assets/ (7 dirs)
 

@@ -159,6 +159,30 @@
   opacity: 0.75;
   font-style: italic;
 }
+/* A single portrait-orientation figure (a phone photo of a handheld object).
+   Same visual treatment as .figure-wide, but capped near the source's native width
+   so it is neither upscaled nor left dominating the column vertically. */
+.figure-portrait {
+  margin: 2.5rem 0;
+}
+.figure-portrait img {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+  background: #0b0b0e;
+  border: 1px solid rgba(128, 128, 128, 0.25);
+}
+.figure-portrait figcaption {
+  font-size: 0.9375rem;
+  margin-top: 0.9rem;
+  opacity: 0.75;
+  font-style: italic;
+  text-align: center;
+}
+
 /* A single wide figure (annotated spreads). Same visual treatment as .page-pair,
    minus the two-column row. */
 .figure-wide {
