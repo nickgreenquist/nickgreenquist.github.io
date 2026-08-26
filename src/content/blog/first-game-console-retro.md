@@ -57,6 +57,8 @@ It did not arrive 'ready to go'. Like most of these handhelds, it shipped with a
 
 In terms of games, what's left is a short list I picked deliberately.
 
+This only works because he's one. He can't log into Amazon and buy a wifi dongle (to access the internet) behind my back. Ask me again when he has a friend with an older brother. But for now: I can be sure that what he's playing is what I've reviewed.
+
 <figure class="figure-portrait not-prose">
   <img src="/blog/assets/FirstConsole/sd-card.webp"
        alt="The R36S lying face up on a wooden table with its microSD card resting on the dark screen."
