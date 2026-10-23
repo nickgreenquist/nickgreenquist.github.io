@@ -16,6 +16,9 @@ const blog = defineCollection({
     // Pinned posts replace the default "latest 3" there; the blog index stays
     // purely chronological.
     pinned: z.number().optional(),
+    // Hidden posts stay in the repo but are never built: no page, no listing, no
+    // RSS entry, no sitemap URL. Filter with isVisible() from src/utils/blog.ts.
+    hidden: z.boolean().optional(),
   }),
 });
 

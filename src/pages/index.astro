@@ -9,18 +9,22 @@ import PhotoGrid from '../components/PhotoGrid.astro';
 import { headline, subhead, bioIntro, journeyLead, journey } from '../data/about';
 import { photos, portfolioUrl } from '../data/photography';
 import { gatewayLinks } from '../data/links';
-import { postPath, formatDate, byNewest, categoryLabel } from '../utils/blog';
+import { postPath, formatDate, byNewest, categoryLabel, isVisible } from '../utils/blog';
 import mePhoto from '../assets/me.jpg';
 
 import { movie, book, steam, amazon } from '../data/projects';
 
 // Featured posts: those with a `pinned` number in frontmatter, ordered by it
 // (lower first). Falls back to the latest 3 if nothing is pinned yet.
-const allPosts = (await getCollection('blog')).sort(byNewest);
+const allPosts = (await getCollection('blog', isVisible)).sort(byNewest);
 const pinned = allPosts
   .filter((post) => post.data.pinned != null)
   .sort((a, b) => a.data.pinned! - b.data.pinned!);
 const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
+
+// Home sections switched off without deleting them: flip to true to show again.
+const showAtTheKeyboard = false;
+const showFeaturedPosts = false;
 ---
 
 <Layout
@@ -53,7 +57,8 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
       </div>
     </section>
 
-    <!-- At the Keyboard -->
+    {/* At the Keyboard: hidden, see showAtTheKeyboard */}
+    {showAtTheKeyboard && (
     <section data-reveal class="mt-10">
       <div class="flex items-center justify-between gap-4 mb-1">
         <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">At the Keyboard</h2>
@@ -69,8 +74,10 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
         ))}
       </div>
     </section>
+    )}
 
-    <!-- From the Blog -->
+    {/* From the Blog (featured posts): hidden, see showFeaturedPosts */}
+    {showFeaturedPosts && (
     <section data-reveal class="mt-10">
       <div class="flex items-center justify-between gap-4 mb-4">
         <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">Featured Blog Posts</h2>
@@ -102,6 +109,7 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
         ))}
       </div>
     </section>
+    )}
 
     <!-- Publications -->
     <section data-reveal id="publications" class="mt-10 scroll-mt-20">

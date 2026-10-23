@@ -5,6 +5,7 @@ date: "2026-06-17"
 slug: "recency-user-history-two-tower-ablation"
 category: projects
 image: "/blog/assets/MultiPoolUserTower/fig1_pooling_mrr.png"
+hidden: true
 ---
 
 > *The textbook move in deep two-tower retrieval models — going back to YouTube's DNN recommender ([Covington et al., 2016](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/)) — is to pool a user's interaction history into a single input vector. It's the standard approach, and it buries possibly the most predictive signal there is: the last item the user interacted with.*

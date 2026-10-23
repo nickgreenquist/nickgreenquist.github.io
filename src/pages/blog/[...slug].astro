@@ -1,11 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { formatDate, categoryLabel } from '../../utils/blog';
+import { formatDate, categoryLabel, isVisible } from '../../utils/blog';
 import 'katex/dist/katex.min.css';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', isVisible);
   return posts.map((post) => {
     const [y, m, d] = post.data.date.split('-');
     return {
