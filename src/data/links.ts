@@ -104,7 +104,7 @@ const goodreads: SiteLink = { ...pick('Reading'), label: 'Goodreads' };
  * pinned last. Split into two groups so the menu can render a divider between.
  */
 export const menuSectionLinks: SiteLink[] = [
-  // pick('Projects'), // /projects is hidden (src/pages/_projects.astro); uncomment to restore
+  pick('Projects'),
   pick('Blog'),
   pick('Publications'),
   pick('Photography'),

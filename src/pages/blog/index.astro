@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { postPath, formatDate, byNewest, categoryLabel, isVisible } from '../../utils/blog';
+import { postPath, formatDate, byNewest, categoryLabel } from '../../utils/blog';
 
-const posts = (await getCollection('blog', isVisible)).sort(byNewest);
+const posts = (await getCollection('blog')).sort(byNewest);
 
 // Filter buttons are derived from the posts themselves, so a new category
 // shows up automatically once a post uses it. Sorted by post count (desc),

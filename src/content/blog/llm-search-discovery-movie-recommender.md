@@ -6,7 +6,6 @@ slug: "llm-search-discovery-movie-recommender"
 category: projects
 image: "/blog/assets/AskTabLLM/fig1_landing.png"
 pinned: 3
-hidden: true
 ---
 
 > **TL;DR:** LLMs are becoming a core part of how industry recommendation systems work: Netflix's natural-language search, Spotify's AI playlists. This project brings that same idea to movies: describe what you want in your own words, and let an LLM translate it into a query a standard recommender retrieval system can serve.

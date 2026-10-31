@@ -53,10 +53,3 @@ Image directories referenced by the posts above (`GradientDescent`, `Kernels`,
 
 The listing, post route, RSS feed, and URL all derive automatically once it's in the
 collection.
-
-## public/
-
-Files moved out of `public/` so they stop being served, kept at their old relative path.
-`public/blog/projects/2024/02/04/two-tower-deep-learning-movie-recommender-system.html` is the
-Jekyll-era redirect stub for the Two-Tower post, parked here while that post is `hidden: true`.
-Move it back into `public/` (same path) when the post is unhidden.

@@ -1,12 +1,12 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';
-import { postPath, byNewest, isVisible } from '../../utils/blog';
+import { postPath, byNewest } from '../../utils/blog';
 
 const SITE = 'https://nickgreenquist.com';
 
 export async function GET(_context: APIContext) {
-  const posts = (await getCollection('blog', isVisible)).sort(byNewest);
+  const posts = (await getCollection('blog')).sort(byNewest);
   return rss({
     title: 'Nick Greenquist',
     description: 'Writing on machine learning, recommender systems, and software projects.',

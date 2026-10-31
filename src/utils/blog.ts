@@ -11,11 +11,6 @@ export function postPath(post: Post): string {
   return `/blog/${post.data.category}/${y}/${m}/${d}/${post.data.slug}/`;
 }
 
-/** Filter for getCollection('blog', isVisible): drops posts marked `hidden: true`. */
-export function isVisible(post: Post): boolean {
-  return !post.data.hidden;
-}
-
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December',
