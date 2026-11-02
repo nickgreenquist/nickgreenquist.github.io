@@ -4,6 +4,7 @@ description: "MissingNo.Zero, trained tabula rasa by self-play reinforcement lea
 date: "2026-11-02"
 slug: "missingno-zero-self-play-pokemon-showdown"
 category: projects
+pinned: 1
 image: "/blog/assets/MissingNoZero/board_gen6.png"
 ---
 
