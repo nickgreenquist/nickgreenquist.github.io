@@ -1,6 +1,6 @@
 ---
 title: "MissingNo.Zero: #1 on Pokémon Showdown in five generations with self-play RL"
-description: "MissingNo.Zero, trained tabula rasa by self-play reinforcement learning, reached #1 on Pokémon Showdown's public random-battle ladders in five generations."
+description: "MissingNo.Zero, trained by self-play reinforcement learning, reached #1 on Pokémon Showdown's public random-battle ladders in five generations."
 date: "2026-11-02"
 slug: "missingno-zero-self-play-pokemon-showdown"
 category: projects
@@ -12,13 +12,13 @@ image: "/blog/assets/MissingNoZero/board_gen6.png"
   <img src="/blog/assets/MissingNoZero/missingno.svg" height="150" alt="MissingNo." style="display: inline-block; height: 150px; width: auto;">
 </div>
 
-*MissingNo.Zero, trained tabula rasa by self-play reinforcement learning, reached #1 on Pokémon Showdown's public random-battle ladders in five generations.*
+*MissingNo.Zero, trained by self-play reinforcement learning, reached #1 on Pokémon Showdown's public random-battle ladders in five generations.*
 
 ---
 
 ## TL;DR
 
-- **#1 in five generations** (gens 1, 2, 4, 6 and 7) and top 10 (best #5) in gen 9. To my knowledge, no AI had reached #1 on these ladders before, or in more than one generation.
+- **#1 in five generations** (gens 1, 2, 4, 6 and 7) and top 10 (best #5) in gen 9.
 - **Pure self-play.** It learned only from games against itself, with no human games.
 - **Small and cheap.** About 3M parameters. Gen 1 trained on my laptop in about 40 hours; the whole project (six generations) cost about \$2,006 in rented GPUs.
 
@@ -137,7 +137,7 @@ The premise is [AlphaZero](https://doi.org/10.1126/science.aar6404)'s: one gener
 - **Fresh every month.** Showdown rebalances random battles monthly, so each run trained on that month's teams and laddered before the next patch.
 - **Search only at play time.** On the ladder, a short look-ahead guided by the network picks each move, on my laptop's CPU.
 
-I'm not sharing code or weights. A detailed recipe would make it easy to run strong bots on Showdown that ignore its bot policy.
+I'm not sharing code or weights for now. Showdown's bot policy is new, and I'd rather not make it easier to run strong bots that don't follow it.
 
 ## Prior work
 
