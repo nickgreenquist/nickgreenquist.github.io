@@ -13,7 +13,7 @@ pinned: 2
 ## TL;DR
 
 - MovieLens ships a 'tag genome': a dense matrix of how well each tag describes each movie. It sits on top of fifteen years of community tagging plus a volunteer survey, which no normal company has.
-- I built a replacement with an LLM instead. I scraped each movie's public text (TMDB and Wikipedia) and had Claude Sonnet score it on 132 tags taken from the genome. All \~9,375 movies took one day and about \$200 in API calls.
+- I built a replacement with an LLM instead. I scraped each movie's public text (TMDB and Wikipedia) and had Claude Sonnet score it on 132 tags taken from the genome. All \~9,375 movies took one day. At API prices that's about \$200 (I actually ran it on my Claude Max plan).
 - In a bare-bones two-tower model (interaction history plus one content vector), the LLM features beat a no-content baseline and slightly beat the genome: MRR 0.1155 (LLM) vs 0.1148 (genome) vs 0.1121 (no content).
 - Add MovieLens's curated genres, user tags and year back in, and neither content vector helps much anymore.
 

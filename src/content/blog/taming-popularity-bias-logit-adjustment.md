@@ -70,7 +70,7 @@ To make sure this wasn't just a couple of cherry-picked users, I ran both models
 | **Exposure inequality** (Gini) | 0.907 | **0.776** | more equal |
 | **Long-tail share of recommendations** | 0.2% | **4.3%** | **~20×** |
 
-The median recommendation is half as popular, and the model went from recommending 48% of the catalog to 84%. That's 3,400+ movies the old model never showed to anyone.
+The median recommendation is half as popular, and the model went from recommending 48% of the catalog to 84%. That's 3,414 more movies the model recommended to at least one test user.
 
 ## The cost
 
@@ -107,7 +107,7 @@ First, a pure blockbuster fan who only liked the big crowd-pleasers (*Avatar*, *
 
 Second, a modern sci-fi fan: *Inception*, *Interstellar*, *Ex Machina*, *Arrival*, *District 9*, *Moon*. This person watches 2010s sci-fi, not 1950s sci-fi, and it's the case people usually expect α to break (by pushing them toward *Forbidden Planet* and *2001*), but it doesn't. α=0.5 cuts the median recommendation by 2.3× (15,100 to 6,500 ratings), but every pick is still modern sci-fi: *Oblivion*, *Prometheus*, *Sunshine*, *Primer*, *Coherence*, *Predestination*, all from 2004–2014. It just found less popular modern movies.
 
-![Modern sci-fi fan: α=0 (left) vs α=0.5 (right). Every pick stays modern, on-genre sci-fi (2002–2015); α=0.5 surfaces deeper modern catalog, median 15,100 → 6,500 ratings.](/blog/assets/PopularityBias/modern_scifi_poster_board.png)
+![Modern sci-fi fan: α=0 (left) vs α=0.5 (right). Every pick stays modern, on-genre sci-fi (2004–2014); α=0.5 surfaces deeper modern catalog, median 15,100 → 6,500 ratings.](/blog/assets/PopularityBias/modern_scifi_poster_board.png)
 
 This is why doing it in the loss is better than a blunt post-filter. It discounts popularity relative to how well a movie matches you, so the movies you really match still score high. α=0.5 stops the model from pushing blockbusters on people who don't want them, but it doesn't take them away from people who do. I got the same result on every other profile I checked (modern superhero, Pixar-era animation, action, crime-thriller, post-2000 horror): each one stayed in recent, on-genre films.
 
