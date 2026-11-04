@@ -3,7 +3,8 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import GatewayCard from '../components/GatewayCard.astro';
-import RecommenderCard from '../components/RecommenderCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import PokeBall from '../components/PokeBall.astro';
 import JourneyTimeline from '../components/JourneyTimeline.astro';
 import PhotoGrid from '../components/PhotoGrid.astro';
 import { headline, subhead, bioIntro, journeyLead, journey } from '../data/about';
@@ -12,7 +13,7 @@ import { gatewayLinks } from '../data/links';
 import { postPath, formatDate, byNewest, categoryLabel } from '../utils/blog';
 import mePhoto from '../assets/me.jpg';
 
-import { movie, book, steam, amazon } from '../data/projects';
+import { movie, book, steam, amazon, missingno } from '../data/projects';
 
 // Featured posts: those with a `pinned` number in frontmatter, ordered by it
 // (lower first). Falls back to the latest 3 if nothing is pinned yet.
@@ -21,6 +22,7 @@ const pinned = allPosts
   .filter((post) => post.data.pinned != null)
   .sort((a, b) => a.data.pinned! - b.data.pinned!);
 const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
+const missingnoPost = allPosts.find((post) => post.data.slug === missingno.postSlug);
 ---
 
 <Layout
@@ -53,19 +55,20 @@ const featuredPosts = pinned.length > 0 ? pinned : allPosts.slice(0, 3);
       </div>
     </section>
 
-    <!-- At the Keyboard -->
-    <section data-reveal class="mt-10">
-      <div class="flex items-center justify-between gap-4 mb-1">
-        <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500">At the Keyboard</h2>
-        <a href="/projects" class="group flex flex-shrink-0 items-center gap-1 text-base font-medium text-neutral-500 transition-colors hover:text-neutral-900">
-          Full deep-dive
-          <span class="transition-transform group-hover:translate-x-0.5">→</span>
-        </a>
-      </div>
+    <!-- Projects (the header's Projects link lands here) -->
+    <section data-reveal id="projects" class="mt-10 scroll-mt-20">
+      <h2 class="text-lg font-semibold uppercase tracking-wider text-neutral-500 mb-4">At the Keyboard</h2>
+
+      <h3 class="text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-3">Reinforcement Learning</h3>
+      <ProjectCard label={missingno.shortLabel} description={missingno.arch} href={missingnoPost ? postPath(missingnoPost) : missingno.codeHref} codeHref={missingno.codeHref} external={false}>
+        <PokeBall slot="icon" class="h-[1.1em] w-[1.1em]" />
+      </ProjectCard>
+
+      <h3 class="mt-8 text-sm font-semibold uppercase tracking-wider text-neutral-500 mb-1">Recommender Systems</h3>
       <p class="text-neutral-500 mb-4">Production-grade recommender systems: built in PyTorch and deployed live on Streamlit.</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[movie, book, steam, amazon].map((r) => (
-          <RecommenderCard emoji={r.emoji} shortLabel={r.shortLabel} arch={r.arch} demoHref={r.demoHref} />
+          <ProjectCard emoji={r.emoji} label={r.shortLabel} description={r.arch} href={r.demoHref} codeHref={r.codeHref} />
         ))}
       </div>
     </section>

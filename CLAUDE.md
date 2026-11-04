@@ -1,6 +1,6 @@
 # nickgreenquist.github.io
 
-Personal portfolio site for Nick Greenquist — Astro + Tailwind, static, deployed to GitHub Pages via GitHub Actions. **Single-scroll home**: `index.astro` is one identity-first page (hero → about/journey → recommender cards → featured posts → publications → photography → personal → links tail); deep dives live on subpages. Live at `https://nickgreenquist.com/` (`nickgreenquist.github.io` redirects to it). Remaining polish backlog: `docs/portfolio-improvements.md`.
+Personal portfolio site for Nick Greenquist — Astro + Tailwind, static, deployed to GitHub Pages via GitHub Actions. **Single-scroll home**: `index.astro` is one identity-first page (hero → about/journey → At the Keyboard projects (`#projects`; the nav's Projects link) → featured posts → publications → photography → personal → links tail); deep dives live on subpages. Live at `https://nickgreenquist.com/` (`nickgreenquist.github.io` redirects to it). Remaining polish backlog: `docs/portfolio-improvements.md`.
 
 ## Stack
 
@@ -22,12 +22,12 @@ npm run preview  # serves built dist/
 
 ## Structure
 
-- `src/pages/` — `index.astro` (single-scroll home), `projects.astro`, `education.astro`, `wrestling.astro`, `map.astro`, `contact.astro`; blog under `blog/` (`index.astro` listing, `[...slug].astro` route, `feed.xml.ts` RSS)
+- `src/pages/` — `index.astro` (single-scroll home), `education.astro`, `wrestling.astro`, `map.astro`, `contact.astro`; blog under `blog/` (`index.astro` listing, `[...slug].astro` route, `feed.xml.ts` RSS)
 - `src/content/blog/*.md` — post bodies + frontmatter; schema in `src/content.config.ts`: `title`, `description`, `date` (`YYYY-MM-DD` string), `slug`, `category`, optional `image`
 - `src/utils/blog.ts` — `postPath()`, `formatDate()`, `byNewest()`, `categoryLabel()`
 - `src/layouts/Layout.astro` — global head, OG/Twitter meta (`ogType` prop → `article` for posts)
-- `src/components/` — GatewayCard, RecommenderCard, ProjectCard, JourneyTimeline, PhotoGrid, EducationSection, Gallery
-- `src/data/` — `about.ts` (bio + journey timeline), `courses.json`, `links.ts`, `projects.ts`, `photography.ts`
+- `src/components/` — GatewayCard, ProjectCard (card → demo/write-up, GitHub mark → repo), PokeBall, JourneyTimeline, PhotoGrid, EducationSection, Gallery
+- `src/data/` — `about.ts` (bio + journey timeline), `courses.json`, `links.ts`, `projects.ts` (home project cards), `photography.ts`
 - `src/assets/` — images optimized through `astro:assets` (auto WebP at build)
 - `public/` — served verbatim at stable URLs: `Resume.pdf`, OG/social images, favicons, and `blog/` (see below)
 

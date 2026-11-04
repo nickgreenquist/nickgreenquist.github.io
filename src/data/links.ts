@@ -32,9 +32,9 @@ export const links: SiteLink[] = [
     external: true,
   },
   {
-    href: '/projects',
+    href: '/#projects',
     label: 'Projects',
-    description: 'Recommender systems (in depth writeups).',
+    description: 'MissingNo.Zero and recommender systems.',
   },
   {
     href: 'https://scholar.google.com/citations?user=28QAvAcAAAAJ&hl=en',

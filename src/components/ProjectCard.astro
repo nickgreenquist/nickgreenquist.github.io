@@ -1,45 +1,43 @@
 ---
+// A home-page project card. The whole card opens `href` (live demo, or the
+// write-up when there is no demo); the GitHub mark in the corner opens the repo.
+// Pass an `icon` slot to replace the emoji (e.g. an SVG with no emoji equivalent).
 interface Props {
+  emoji?: string;
   label: string;
-  dataset?: string;
-  items?: string;
-  users?: string;
-  result?: string;
-  demoHref: string;
-  codeHref?: string;
+  description: string;
+  href: string;
+  codeHref: string;
+  /** Opens `href` in a new tab. Off for internal links like a blog post. */
+  external?: boolean;
 }
 
-const { label, dataset, items, users, result, demoHref, codeHref } = Astro.props;
-const meta = [dataset, items, users].filter(Boolean).join(' · ');
+const { emoji, label, description, href, codeHref, external = true } = Astro.props;
 ---
 
-<div class="flex flex-col">
+<div class="group relative rounded-lg border border-neutral-200 bg-white p-5 transition-all duration-200 ease-spring hover:border-neutral-900 hover:shadow-lg motion-safe:hover:-translate-y-1">
+  <!-- Stretched link: its ::after covers the card, so the whole card is clickable. -->
   <a
-    href={demoHref}
+    href={href}
+    target={external ? '_blank' : undefined}
+    rel={external ? 'noopener noreferrer' : undefined}
+    class="after:absolute after:inset-0 after:rounded-lg"
+  >
+    <h4 class="flex items-center pr-8 text-lg font-semibold text-neutral-900">
+      <span aria-hidden="true" class="mr-2 inline-flex"><slot name="icon">{emoji}</slot></span>{label}
+    </h4>
+  </a>
+  <p class="mt-1 pr-8 text-sm text-neutral-600">{description}</p>
+  <!-- Sits above the stretched link; the padding gives it a finger-sized hit area. -->
+  <a
+    href={codeHref}
     target="_blank"
     rel="noopener noreferrer"
-    class="group block rounded-lg border border-neutral-200 bg-white p-5 transition-all duration-200 ease-spring hover:border-neutral-900 hover:shadow-lg motion-safe:hover:-translate-y-1"
+    aria-label={`${label} code on GitHub`}
+    class="absolute right-2.5 top-3.5 z-10 rounded-md p-2 text-neutral-400 transition-colors hover:text-neutral-900"
   >
-    <div class="flex items-center justify-between">
-      <h3 class="font-semibold text-neutral-900">{label}</h3>
-      <span class="text-neutral-400 transition-all group-hover:translate-x-0.5 group-hover:text-neutral-900">→</span>
-    </div>
-    {meta && <p class="mt-1 text-sm text-neutral-600">Trained on {meta}</p>}
+    <svg viewBox="0 0 24 24" aria-hidden="true" class="h-5 w-5 fill-current">
+      <path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z" />
+    </svg>
   </a>
-
-  <div class="mt-2 flex items-baseline justify-between gap-3">
-    {result ? (
-      <p class="text-sm text-neutral-600"><span class="font-medium text-emerald-600">↑</span> {result}</p>
-    ) : <span></span>}
-    {codeHref && (
-      <a
-        href={codeHref}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex-shrink-0 text-sm font-medium text-neutral-600 hover:text-neutral-900 hover:underline"
-      >
-        GitHub ↗
-      </a>
-    )}
-  </div>
 </div>
