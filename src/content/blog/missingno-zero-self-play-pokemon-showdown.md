@@ -18,9 +18,9 @@ image: "/blog/assets/MissingNoZero/board_gen6.png"
 
 ## TL;DR
 
-- **#1 in five generations** (gens 1, 2, 4, 6 and 7) and top 10 (best #5) in gen 9.
-- **Pure self-play.** It learned only from games against itself, with no human games.
-- **Small and cheap.** About 3M parameters. Gen 1 trained on my laptop in about 40 hours; the whole project (six generations) cost about \$2,006 in rented GPUs.
+- #1 in five generations (gens 1, 2, 4, 6 and 7), and top 10 (best #5) in gen 9.
+- Pure self-play: it only ever learned from games against itself. No human games.
+- Small and cheap: about 3M parameters. Gen 1 trained on my laptop in about 40 hours, and the whole project (six generations) cost about \$2,006 in rented GPUs.
 
 ## Real games on the public ladder
 
@@ -121,29 +121,29 @@ On July 25, 2026, I set out to reach #1 in gen 1, my favorite generation and the
 
 ## How it differs from chess and Go
 
-Most people know game-playing RL from chess and Go. Pokémon random battles differ in four ways:
+Most people know game-playing RL from chess and Go. Pokémon random battles are a different kind of game in four ways:
 
-- **Hidden information.** You can't see the opponent's team, moves or items until they're revealed.
-- **Chance.** Damage rolls and critical hits make every turn random.
-- **Simultaneous moves.** Both players choose at once, so being predictable gets punished.
-- **Random teams.** Every game starts from a new, randomly dealt matchup.
+- Hidden information: you can't see the opponent's team, moves or items until they're revealed.
+- Chance: damage rolls and critical hits make every turn random.
+- Simultaneous moves: both players pick at the same time, so being predictable gets punished.
+- Random teams: every game starts from a new, randomly dealt matchup.
 
 ## How it learns
 
-The premise is [AlphaZero](https://doi.org/10.1126/science.aar6404)'s: one general algorithm that learns from self-play alone. Each generation is a new game; only the rules and the input encoding change, plus a few settings.
+The idea comes from [AlphaZero](https://doi.org/10.1126/science.aar6404): one general algorithm that learns from self-play alone. Each generation is basically a new game (only the rules, the input encoding and a few settings change).
 
-- **Self-play PPO.** A small policy-and-value network trains against itself and its past versions.
-- **Showdown's own simulator.** Most gens trained on the exact program that runs the ladder.
-- **Fresh every month.** Showdown rebalances random battles monthly, so each run trained on that month's teams and laddered before the next patch.
-- **Search only at play time.** On the ladder, a short look-ahead guided by the network picks each move, on my laptop's CPU.
+- Self-play PPO: a small policy-and-value network trains against itself and its past versions.
+- Showdown's own simulator: most gens trained on the exact same program that runs the ladder.
+- Fresh every month: Showdown rebalances random battles every month, so each run trained on that month's teams and laddered before the next patch.
+- Search only at play time: on the ladder, a short look-ahead guided by the network picks each move (on my laptop's CPU).
 
-I'm not sharing code or weights for now. Showdown's bot policy is new, and I'd rather not make it easier to run strong bots that don't follow it.
+I'm not sharing the code or weights for now. Showdown's bot policy is brand new, and I'd rather not make it easier for people to run strong bots that don't follow it.
 
 ## Prior work
 
-- **[Wang (2024)](https://dspace.mit.edu/handle/1721.1/153888)**, an MIT thesis, gave me my starting recipe. It and **[Foul Play](https://pmariglia.github.io/posts/foul-play/)** reported peak ranks of 8 and 3 on the gen 4 random-battle ladder.
-- **[Jaxcalibur](https://jaxcalibur.github.io/)** reached #1 in gen 9 with self-play PPO in August. My gen 1 agents were already laddering (best #5 at the time). Its write-up showed self-play PPO could reach #1 without search during training, a dead end I'd been stuck on, so I dropped it and borrowed several of its ideas.
-- **The [PokéAgent Challenge](https://arxiv.org/abs/2603.15563)**, a NeurIPS 2025 competition, was played in gen 1 OU and gen 9 OU on a separate server for AI agents, with no public-ladder rank.
+- [Wang (2024)](https://dspace.mit.edu/handle/1721.1/153888), an MIT thesis, gave me my starting recipe. It and [Foul Play](https://pmariglia.github.io/posts/foul-play/) reported peak ranks of 8 and 3 on the gen 4 random-battle ladder.
+- [Jaxcalibur](https://jaxcalibur.github.io/) reached #1 in gen 9 with self-play PPO in August. My gen 1 agents were already laddering (best #5 at the time). Its write-up showed self-play PPO could reach #1 without search during training, which was a dead end I'd been stuck on, so I dropped it and borrowed several of its ideas.
+- The [PokéAgent Challenge](https://arxiv.org/abs/2603.15563), a NeurIPS 2025 competition, was played in gen 1 OU and gen 9 OU on a separate server for AI agents, with no public-ladder rank.
 
 ## Training cost
 
@@ -156,63 +156,63 @@ I'm not sharing code or weights for now. Showdown's bot policy is new, and I'd r
 | 7 | 600M | rented GPU | ~4 days | ~\$220 |
 | 9 | 800M | rented GPU | ~8 days | ~\$280 |
 
-The table covers each final network's own run. The whole project, dead ends and tests included, cost about **\$2,006** in rented GPUs.
+The table covers each final network's own run. The whole project (dead ends and tests included) cost about \$2,006 in rented GPUs.
 
 ## Measuring strength offline
 
-A ladder run is too few games to tell two models apart, so I compared models offline, in thousands of battles against [Foul Play](https://github.com/pmariglia/foul-play), an open-source search bot that won the gen 9 OU track of the NeurIPS 2025 PokéAgent Challenge.
+A ladder run is too few games to tell two models apart, so I compared models offline over thousands of battles against [Foul Play](https://github.com/pmariglia/foul-play), an open-source search bot that won the gen 9 OU track of the NeurIPS 2025 PokéAgent Challenge.
 
-Foul Play searches for a set time per move, so it plays weaker on a slower machine, or when several copies share one. My fix was to calibrate time to iterations: measure how many search iterations Foul Play reaches in its time budget on my laptop, then fix it at that count. It then plays at the same strength anywhere, so I could run thousands of games in parallel on rented servers.
+One catch: Foul Play searches for a set amount of time per move, so it plays weaker on a slower machine (or when several copies share one). My fix was to switch it from time to iterations. I measured how many search iterations Foul Play reaches in its time budget on my laptop, then fixed it at that count. That way it plays at the same strength anywhere, and I could run thousands of games in parallel on rented servers.
 
 ## Lessons learned
 
-### 1. Search originally made the agent worse
+### 1. Search made the agent worse (at first)
 
-On my gen 1 networks, one-step search **cost 6.8 points of win rate**. It picked the move with the best value estimate, but the estimates' noise was 4.5 times the gaps between moves, so it mostly picked whichever move got the luckiest error (the "optimizer's curse": take the max of noisy estimates and you pick the noise). It overruled the network on 72.8% of moves.
+My first version of search actually LOST win rate: 6.8 points on my gen 1 networks. Search picked the move with the highest value estimate, but those estimates were noisy, and with noisy estimates the 'best' move is usually just the luckiest one (the 'optimizer's curse'). It was overruling the network on 72.8% of moves.
 
-The fix: take the search's move only when it beats the network's choice by a clear margin. Overrides fell to 8.5%, and search went from costing points to **adding 1.6**. I hadn't noticed earlier because on weak early networks, search helped even with the bug.
+The fix was simple: only trust search when it beats the network's pick by a clear margin. After that it overruled the network on 8.5% of moves, and search went from costing 6.8 points to adding 1.6.
 
-### 2. The value head took over the network
+### 2. The value head took over
 
-The policy and value heads share one trunk. In the runs that trained without a teacher, the value gradient into that trunk was about 50 times the policy's, against a few times in the runs that went well. The trunk learned to predict who wins, not how to play: the policies ignored status conditions and gen 9's Tera types, while their win rates looked fine.
+The policy and value heads share one trunk. In the runs that trained without a teacher, the value gradient into that trunk was about 50x the policy's. So the network got good at predicting who wins and bad at actually playing (it ignored things like status conditions and gen 9's Tera types), even though its win rates looked fine.
 
-The fix: let the trunk see only a fraction of the value gradient, with a shorter advantage horizon and an entropy schedule. From then on, a run paused itself if the ratio climbed early. Gen 6's fresh run trained this way and reached #1.
+The fix was to only let a fraction of the value gradient reach the trunk (plus a shorter advantage horizon and an entropy schedule), and to auto-pause any run where the ratio started climbing early. Gen 6 trained this way and reached #1.
 
-### 3. Gen 2 kept losing long games
+### 3. Gen 2 didn't understand sleep
 
-Gen 2's first model went **57-5** in games under 56 turns and **5-14** in longer ones. The replays pointed at sleep: asleep from Rest with Sleep Talk available, it chose a move that fails while asleep **28%** of the time. An input probe showed why: the network keyed on having just used Rest, not on being asleep.
+Gen 2's first model was great in short games (57-5) and bad in long ones (5-14). The replays showed the problem was sleep: asleep from Rest with Sleep Talk available, it picked a move that fails while asleep 28% of the time. It turned out the network was looking at "did I just use Rest?" instead of "am I asleep?".
 
-A hand-written "if asleep, use Sleep Talk" rule isn't self-play, so the fix came from training: a retrain aimed at sleep and long games, its inputs probed at early checkpoints. It beat the old model against Foul Play, **72.0%** to **58.4%** over about 3,000 games each, and its second ladder run reached #1.
+I could have hard-coded "if asleep, use Sleep Talk", but then it isn't self-play anymore. Instead I retrained it with a focus on sleep and long games. Against Foul Play, the new model won 72.0% of games vs 58.4% for the old one (about 3,000 games each), and it reached #1 on its second ladder run.
 
-### 4. Train on the real simulator, not a copy
+### 4. Use the real simulator
 
-I tried a few ways to speed up training. The obvious one, porting Showdown's rules to a faster engine for each generation, was slow to build and never quite exact: one port quietly skipped every battle with a Ditto, so the agent never learned to play it. What worked far better was keeping Showdown's own simulator and changing how training drove it. It was exact in every generation from day one and nearly as fast as the port, so every later run trained on it.
+I tried porting Showdown's rules to a faster engine for each generation. It was slow to build and never quite exact (one port skipped every battle with a Ditto, so the agent never learned to play it). Keeping Showdown's own simulator and just changing how training drove it was nearly as fast, and exact from day one.
 
 ### 5. Train on this month's teams
 
-Showdown rebalances random-battle sets every month, and the changes reach older generations through shared team generators. My first gen 4 runs trained on July's teams while the ladder dealt September's. Now every run trains on a copy refreshed right after the month's patch and ladders before the next one, and the launch scripts refuse to start if the files have moved.
+Showdown changes the random-battle sets every month, and that includes the older generations. My first gen 4 runs trained on July's teams while the ladder was dealing September's. Now every run trains on the current month's teams and ladders before the next patch.
 
 ## Following Showdown's bot rules
 
-- **Openly a bot.** Every account had "bot" in its name, and the bot never chatted or added delays to look human. It also never reported or blocked another player.
-- **Registered.** When Showdown's bot registry opened on 2026-10-13, all four of my accounts were registered as bots.
+- Openly a bot: every account had 'bot' in its name, and it never chatted or added delays to look human. It also never reported or blocked another player.
+- Registered: when Showdown's bot registry opened on 2026-10-13, all four of my accounts were registered as bots.
   - Gens 1 and 4: #1 before Showdown had a bot policy.
   - Gens 2 and 6: registered bots, before the bot opt-in (2026-10-20); matched like any other account.
   - Gens 7 and 9: after the opt-in; only opted-in players and other bots.
-- **Run at home.** Every ladder game ran on my laptop, never on rented hardware.
-- **Moderators first.** Any contact from a moderator would have stopped every ladder run until I'd answered it. None came.
+- Run at home: every ladder game ran on my laptop, never on rented hardware.
+- Moderators first: any contact from a moderator would have stopped every ladder run until I'd answered it. None came.
 
 ## Built with Claude Code
 
 I built this with five [Claude Code](https://claude.com/claude-code) sessions running in parallel, each owning one job:
 
-- **Project manager:** held the plan and my to-do list, and reviewed the others' work.
-- **Training:** rented GPUs and ran the training runs.
-- **Ladder:** ran the ladder and analyzed the games.
-- **Engine:** each generation's simulator and rules.
-- **Helper:** side tasks the others handed it.
+- Project manager: held the plan and my to-do list, and reviewed the others' work.
+- Training: rented GPUs and ran the training runs.
+- Ladder: ran the ladder and analyzed the games.
+- Engine: each generation's simulator and rules.
+- Helper: side tasks the others handed it.
 
-They shared one rules file and a log of my decisions, and messaged each other directly. For about three weeks in October I split them across two Claude accounts to spread the usage, so their messages went through files.
+They shared one rules file and a log of my decisions, and messaged each other directly. For about three weeks in October I split them across two Claude accounts to spread out the usage, so their messages went through files instead.
 
 ## Appendix
 
