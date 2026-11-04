@@ -1,47 +1,51 @@
 ---
 title: "Recency Is All You Need: A 12-Model Experiment on User-History Representation for Two-Tower Retrieval in Recommenders"
-description: "The textbook move in deep two-tower retrieval models is to pool a user's interaction history into a single input vector. It's the standard approach, and it buries possibly the most predictive signal there is: the last item the user interacted with."
+description: "Most two-tower recommenders pool a user's whole history into one vector. I trained twelve versions of the user tower to see which parts of the history actually matter, and the last movie the user watched mattered most."
 date: "2026-06-17"
 slug: "recency-user-history-two-tower-ablation"
 category: projects
 image: "/blog/assets/MultiPoolUserTower/fig1_pooling_mrr.png"
 ---
 
-> *The textbook move in deep two-tower retrieval models — going back to YouTube's DNN recommender ([Covington et al., 2016](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/)) — is to pool a user's interaction history into a single input vector. It's the standard approach, and it buries possibly the most predictive signal there is: the last item the user interacted with.*
+*The standard way to build the user side of a two-tower retrieval model (going back to YouTube's DNN recommender, [Covington et al., 2016](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/)) is to pool the user's interaction history into a single vector. That buries what might be the most predictive signal you have: the last item the user interacted with.*
 
 ## TL;DR
 
-I built a **two-tower movie recommender** and swapped its user tower **twelve ways, each differing only in which slices of a user's watch history feed the user vector** — the whole history, the liked or disliked movies, the rating-weighted history, or just the most-recent item — trained them identically on MovieLens 32M, and measured retrieval (MRR). Three findings, and not what I assumed when starting this experiment:
+I trained twelve versions of the user tower in my two-tower movie recommender, all identical except for which parts of the watch history feed the user vector (the whole history, the liked or disliked movies, a rating-weighted history, or just the most recent movie). All of them were trained on MovieLens 32M and compared on retrieval MRR:
 
-- **Recency matters.** Adding the single most-recently-watched movie to the standard full-history pool lifts MRR **+22%** — the biggest move in the study. One recent item nearly matches the *entire* summed history ([§5](#5-what-the-numbers-say)).
-- **Valence doesn't help.** The liked / disliked / rating-weighted channels that justify the production four-pool tower add nothing over a plain sum pool; the rating-weighted-only pool is the *worst* arm.
-- **The case for a Transformer.** The sharp drop-off in value past the last item is exactly why the field moved from pooling to sequential/Transformer architectures — the FMC → FPMC → SASRec ladder ([§7](#7-takeaway)).
+- Recency: adding the last watched movie to the usual full-history pool improves MRR by +22%, the biggest gain in the study. That one movie on its own nearly matches the entire summed history.
+- Ratings: the liked / disliked / rating-weighted pools (the reason for the production four-pool tower) add nothing over a plain sum pool. The rating-weighted pool alone is the worst of the twelve.
+- Going one movie further back barely helps, which is basically why the field moved from pooling to sequential models and Transformers (FMC → FPMC → SASRec).
 
 ![Whole-corpus MRR for all 12 user-pooling arms, sorted and colour-coded by pool family](/blog/assets/MultiPoolUserTower/fig1_pooling_mrr.png)
 
-*Twelve user towers, identical except for which history slices feed the user vector: adding the single last-watched item (orange) is a +22% MRR move, while the rating-valence channels (blue) sit on the full-pool baseline.*
+*All twelve user towers. Adding the last-watched movie (orange) is worth +22% MRR, while the rating-based pools (blue) sit right on the full-history baseline.*
 
 ---
 
-## 1. The setup: how do you turn a history into a vector?
+## Turning a history into a vector
 
-A two-tower model scores a (user, item) pair by the dot product of two embeddings. The user tower is, at its most basic, the user's interaction history. That history is a variable-length list of watched movies, and the tower has to fold it into one fixed-size vector. The default is a **sum pool** — look up an embedding per item, add, project:
+A two-tower model scores a (user, item) pair with the dot product of two embeddings. At its most basic, the user tower is just the user's history: a variable-length list of watched movies that has to become one fixed-size vector. The default is a 'sum pool': look up an embedding for each movie, add them up, and project:
 
 ![Pooling an arbitrary-length watch history into one fixed user vector](/blog/assets/MultiPoolUserTower/fig2_pooling_schematic.png)
 
-Which pooling op you use seems to matter less than you'd think — here, sum and mean came out about even. The more interesting question is *which* history you pool. Instead of one bag, you can carve history into typed sub-histories — **by rating sign** (liked vs. disliked pools), **by magnitude** (weight each item by how far its rating sat above/below the user's mean), or **by recency** (pull the most-recent item out as its own channel).
+The pooling op matters less than you'd think (sum and mean came out about even here). The more interesting question is which history you pool. Instead of one bag of movies, you can split it into sub-histories:
+
+- By rating sign: separate pools for liked and disliked movies
+- By rating magnitude: weight each movie by how far its rating was above or below the user's average
+- By recency: pull the most recent movie out as its own input
 
 ### Adding a channel
 
-Using the single last-watched movie's embedding as its own channel is the simplest case: the model grabs that one item, looks up its embedding (**no sum**), and runs its own LayerNorm. That 32-d block is **concatenated** alongside the sum-pool block, and the combined vector goes through the **one shared projection** — concat first, project once:
+The last-watched movie is the simplest case. The model looks up that one movie's embedding (no sum) and runs it through its own LayerNorm. That 32-d block gets concatenated next to the sum-pool block, and the combined vector goes through one shared projection (concat first, then project once):
 
 ![Adding the last-watched item as its own 32-d block, concatenated before the shared projection](/blog/assets/MultiPoolUserTower/fig3_last_watched.png)
 
-Because each block lands on its own columns of the projection's input, the model can weight "what you just watched" differently from "everything you've watched." Every arm in this study is just a different set of these blocks switched on.
+Since each block feeds its own columns of the projection's input, the model can weight "what you just watched" differently from "everything you've watched." Every model in this post is just a different set of these blocks turned on.
 
-## 2. The twelve arms
+## The twelve models
 
-Each arm activates a different subset of pools; every active pool adds a 32-dim block, concatenated and projected `→ 256 → 128 → L2-normalize`. **Sum pools** (`full`, `liked`, `disliked`, `weighted`) sum over *all* matching items into one vector. **Single-item slots** (`last_liked`, `last_watched`, `second_to_last_watched`) look up exactly *one* item — no sum — each with its own projection weights.
+Each model (or 'arm') turns on a different set of pools. Every active pool adds a 32-dim block, and the blocks are concatenated and projected `→ 256 → 128 → L2-normalize`. The sum pools (`full`, `liked`, `disliked`, `weighted`) add up all matching movies into one vector. The single-item slots (`last_liked`, `last_watched`, `second_to_last_watched`) look up exactly one movie (no sum), and each one gets its own projection weights.
 
 | # | Model | Active pools | Dim | What it isolates |
 |---|---|---|---|---|
@@ -54,21 +58,21 @@ Each arm activates a different subset of pools; every active pool adds a 32-dim 
 | 7 | history + last-liked | `full, last_liked` | 64 | the minimal recency×valence test |
 | 8 | history + weighted | `full, weighted` | 64 | valence-weighting as an overlay on a dense pool |
 | 9 | last-liked only | `last_liked` | 32 | the most-recent *liked* item, alone |
-| 10 | last-watched only | `last_watched` | 32 | the most-recent item (any rating), alone — *first-order Markov* |
-| 11 | history + last-watched | `full, last_watched` | 64 | recency channel on plain history — *FPMC* |
+| 10 | last-watched only | `last_watched` | 32 | the most-recent item (any rating), alone (*first-order Markov*) |
+| 11 | history + last-watched | `full, last_watched` | 64 | recency channel on plain history (*FPMC*) |
 | 12 | history + last-watched + 2nd-last | `full, last_watched, second_to_last_watched` | 96 | does recency reach past the single last item? |
 
-Three families: the **baseline** (arm 1), the **rating-valence** arms (2/3/4/5/8), and the **recency** arms (6/7/9/10/11/12).
+They fall into three groups: the baseline (arm 1), the rating arms (2/3/4/5/8), and the recency arms (6/7/9/10/11/12).
 
-## 3. Results
+## Results
 
-Held-out **rollback** protocol: for each of **19,134 validation users**, context = history so far, target = next watch, over **n ≈ 382,138** examples. Numbers are full-corpus.
+I used a held-out 'rollback' eval: for each of the 19,134 validation users, the context is their history so far and the target is the next movie they watched, for n ≈ 382,138 examples in total. All numbers are over the full corpus.
 
-**Whole-corpus retrieval, Δ vs arm 1:**
+Whole-corpus retrieval, with the MRR change vs arm 1:
 
 | # | Model | Active pools | MRR | Recall@10 | Recall@50 | NDCG@10 | MRRΔ |
 |---|---|---|---|---|---|---|---|
-| 1 | Only history | `full` | 0.1133 | 0.2189 | 0.4590 | 0.1270 | — |
+| 1 | Only history | `full` | 0.1133 | 0.2189 | 0.4590 | 0.1270 |  |
 | 2 | + likes | `full,liked` | 0.1141 | 0.2208 | 0.4602 | 0.1280 | +0.0008 |
 | 3 | + dislikes | `full,liked,disliked` | 0.1133 | 0.2204 | 0.4593 | 0.1274 | 0.0000 |
 | 4 | Weighted only | `weighted` | 0.0708 | 0.1476 | 0.3484 | 0.0790 | −0.0425 |
@@ -81,9 +85,9 @@ Held-out **rollback** protocol: for each of **19,134 validation users**, context
 | 11 | history + last-watched | `full,last_watched` | 0.1386 | 0.2637 | 0.5129 | 0.1566 | +0.0253 |
 | **12** | **history + last-watched + 2nd-last** | `full,last_watched,second_to_last_watched` | **0.1431** | **0.2724** | **0.5274** | **0.1619** | **+0.0298** |
 
-## 4. Results by popularity tier
+## Results by popularity tier
 
-Does pooling help more on popular movies or the long tail? MRR split by target-movie popularity:
+Does any of this help more on popular movies or on the long tail? Here's MRR split by how popular the target movie is:
 
 | Arm | Whole (382,138) | HEAD >1k (369,486) | Q4 popular (343,906) | Q3 mid (26,923) | TAIL ≤1k (12,652) |
 |---|---|---|---|---|---|
@@ -100,33 +104,39 @@ Does pooling help more on popular movies or the long tail? MRR split by target-m
 | 11 full+lastW | 0.1386 | 0.1431 | 0.1520 | 0.0232 | 0.0061 |
 | 12 full+lastW+2nd | **0.1431** | **0.1478** | **0.1568** | **0.0251** | 0.0070 |
 
-## 5. What the numbers say
+## What the numbers say
 
-- **Recency is the lever, one item deep.** Adding the last watch (arm 11) beats the plain pool **+22%**; the 2nd-to-last (arm 12) adds nothing past noise. The signal is first-order.
-- **One recent item ≈ the whole summed history.** `last_watched` alone (arm 10) lands within 3% of the full pool (arm 1) — proof the sum is lossy: ~50 items collapsed to one point, no identity, no order.
-- **Recency beats valence.** `last_watched` > `last_liked` on every tier. The "did they like it?" filter drops the immediately-preceding watch — the most predictive item there is.
-- **Rating channels add nothing.** Liked/disliked/weighted splits (arms 2/3/5/8) sit on the plain pool; weighted-only (arm 4, **0.0708**) is the worst arm — debiasing starves the gradient.
-- **Head vs tail split the prize.** Recency arms win the head (arm 12 tops every head tier); on the tail, `last_watched` alone (arm 10) wins — no `full`-pool popularity bias.
+- Recency matters, but only one movie deep. Adding the last watch (arm 11) beats the plain pool by +22%. Putting the 2nd-to-last on top (arm 12) doesn't add anything past noise, so the signal is first-order.
+- One recent movie is about as good as the whole summed history. `last_watched` alone (arm 10) is within 3% of the full pool (arm 1). That shows how lossy the sum is: ~50 movies collapsed into one point, with no identity and no order.
+- Recency beats ratings. `last_watched` beats `last_liked` on every tier. Filtering on "did they like it?" drops the movie they watched right before, which is the most predictive one there is.
+- The rating pools add nothing. The liked/disliked/weighted splits (arms 2/3/5/8) all sit on the plain pool, and weighted-only (arm 4, 0.0708) is the worst arm, since the debiasing starves the gradient.
+- Head and tail have different winners. The recency arms win on popular movies (arm 12 is best on every head tier), but on the tail `last_watched` alone (arm 10) wins, because it doesn't have the `full` pool's popularity bias.
 
-## 6. Honest caveats
+## Caveats
 
-- **The eval probably overstates recency.** We're predicting a user's *next* movie, and the winning arms get to see the one they *just* watched. On MovieLens, back-to-back ratings are often from the same sitting, so the last watch is an unusually strong hint. Some of the +22% is just that.
-- **This is dataset-specific.** Recency dominates on MovieLens, where consumption is sequential and session-correlated. On your problem — different catalog, weaker session structure, longer gaps between events — the last item may carry far less, and rating valence may carry more. Treat "recency is the lever" as a hypothesis to re-test, not a law.
+- The eval probably overstates recency. The task is predicting a user's next movie, and the winning models get to see the one they just watched. On MovieLens, back-to-back ratings often come from the same sitting, so the last watch is an unusually strong hint. Some of the +22% is just that.
+- This is specific to the dataset. Recency dominates on MovieLens, where watching is sequential and tied to sessions. On a different problem (different catalog, weaker sessions, longer gaps between events) the last item might matter a lot less and ratings might matter more. I'd treat "recency matters most" as something to re-test, not a rule.
 
-## 7. Takeaway
+## Takeaway
 
-If you're folding a history into one vector for two-tower retrieval, **recency may well matter more than rating valence** — it certainly did here. The single last-watched item is worth more than the entire rest of the history summed together (+22% MRR as its own channel), while the liked / disliked / weighted machinery that *feels* principled adds nothing on top of a plain sum pool.
+If you're folding a user's history into one vector for two-tower retrieval, recency may well matter more than ratings. It did here.
 
-None of this is new ground — the field walked it years ago, and the arms here happen to retrace its steps. They climb the **FMC → FPMC → SASRec** ladder of sequential recommendation: `last_watched` alone (arm 10) is a first-order **Markov chain (FMC)**; bolt it onto the full pool (arm 11) and you have **FPMC** (Factorizing Personalized Markov Chains — a personalized history pool plus a last-item transition term); and arm 12's hand-built second-order term barely moves. Hand-coding recency runs out by the second item. That's the argument for a model that *learns* it instead: self-attention over the sequence, i.e. **SASRec** (a Transformer that weights which past items matter).
+None of this is new, and the arms here happen to retrace the FMC → FPMC → SASRec line of sequential recommendation:
+
+- `last_watched` alone (arm 10) is a first-order Markov chain (FMC).
+- Adding it to the full pool (arm 11) gives you FPMC (Factorizing Personalized Markov Chains): a personalized history pool plus a last-item transition term.
+- Arm 12 adds a hand-built second-order term, and it barely moves anything.
+
+So hand-coding recency runs out by the second item. That's the argument for a model that learns it instead with self-attention over the sequence: SASRec (a Transformer that weights which past items matter).
 
 ---
 
 ## Appendix
 
-- **Architecture** — two-tower model, ID-only item tower (`BASE_TOWERS=idonly FEATURE_TOWERS=none`); only `USER_POOLS` varies across arms.
-- **Training** — identical for every arm: seed 42, 200k steps, LR 0.001 (cosine → 1e-4), batch 512, softmax temperature 0.1, α = 0. Pool signals come from the cached softmax training tensor, so no data was rebuilt between arms.
-- **Evaluation** — held-out rollback protocol over all 19,134 validation users (n ≈ 382,138); Recall / Hit / NDCG / MRR @ K ∈ {1, 5, 10, 20, 50, 100, 150, 200, 250} plus the popularity-tier split.
+- Architecture: two-tower model with an ID-only item tower (`BASE_TOWERS=idonly FEATURE_TOWERS=none`). Only `USER_POOLS` changes between arms.
+- Training (same for every arm): seed 42, 200k steps, LR 0.001 (cosine → 1e-4), batch 512, softmax temperature 0.1, α = 0. The pool inputs come from the cached softmax training tensor, so no data was rebuilt between arms.
+- Evaluation: held-out rollback over all 19,134 validation users (n ≈ 382,138); Recall / Hit / NDCG / MRR @ K ∈ {1, 5, 10, 20, 50, 100, 150, 200, 250}, plus the popularity-tier split.
 
-**Background sources.**
-- [Covington et al., 2016 — *Deep Neural Networks for YouTube Recommendations*](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/): the standard baseline of averaging watch-history embeddings into the user vector.
-- [Rendle et al., 2010 — *FPMC*](https://dl.acm.org/doi/10.1145/1772690.1772773) and [Kang & McAuley, 2018 — *SASRec*](https://arxiv.org/abs/1808.09781): the sequential-recommendation line behind the order-aware, last-item-vs-full-history framing.
+Background sources:
+- [Covington et al., 2016: *Deep Neural Networks for YouTube Recommendations*](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/): the standard baseline of averaging watch-history embeddings into the user vector.
+- [Rendle et al., 2010: *FPMC*](https://dl.acm.org/doi/10.1145/1772690.1772773) and [Kang & McAuley, 2018: *SASRec*](https://arxiv.org/abs/1808.09781): the sequential-recommendation papers behind the last-item vs full-history framing.
