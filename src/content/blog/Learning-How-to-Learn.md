@@ -1,6 +1,6 @@
 ---
 title: "Learning How to Learn"
-description: "An overview of Coursera's 'Learning How to Learn' — chunking, memory, focused vs. diffuse thinking, and beating procrastination."
+description: "An overview of Coursera's 'Learning How to Learn': chunking, memory, focused vs. diffuse thinking, and beating procrastination."
 date: "2018-04-10"
 slug: "Learning-How-to-Learn"
 category: miscl

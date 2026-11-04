@@ -14,18 +14,18 @@ embed.html            the block to paste into the markdown post
 
 The draft post assumed an MDX + React blog. `nickgreenquist.github.io` is neither:
 
-- `src/content.config.ts` loads `**/*.md` only — an `.mdx` file is not even picked up
+- `src/content.config.ts` loads `**/*.md` only; an `.mdx` file is not even picked up
 - no `@astrojs/mdx`, no `@astrojs/react`, no `react` / `react-dom` in `package.json`
 - all 15 existing posts are plain `.md`, and `.md` cannot import components
 
 So `BinderViewer.jsx` could not run there without adding two integrations, two runtime
 dependencies, a content-config change, and shipping a React runtime to every reader for one
-widget. Instead this is vanilla HTML/CSS/JS built on **StPageFlip** — the same library
+widget. Instead this is vanilla HTML/CSS/JS built on **StPageFlip**, the same library
 `react-pageflip` wraps, minus the React layer. It needs **zero** changes to the blog: Astro
 passes raw HTML in markdown straight through, and both `<script>` tags execute (verified
 against a real build, not assumed).
 
-If the blog ever does gain MDX + React, this still works as-is — an HTML island is valid
+If the blog ever does gain MDX + React, this still works as-is: an HTML island is valid
 inside MDX too.
 
 ## Publishing
@@ -69,7 +69,7 @@ at a different set of images is a one-attribute change.
 69 pages × ~286 KB is 19 MB, which is not something to hand a reader who scrolls past. Only a
 window of ±3 pages around the reader ever gets a `src`; first paint costs ~4 images. Pages not
 yet fetched show a shimmer instead of a white hole. Dragging the scrubber deliberately does
-*not* fetch what it passes over — that would walk the entire binder — the window fills 150 ms
+*not* fetch what it passes over (that would walk the entire binder); the window fills 150 ms
 after the drag settles.
 
 ## Testing
@@ -87,7 +87,7 @@ lazy loading holds, and that nothing 404s or throws. Screenshots land in
 
 Two library details the tests depend on, both found by reading the dist rather than guessing:
 `touchstart` binds to `.stf__block` (not the wrapper, and `touchmove`/`touchend` go to
-`window`), and a swipe only counts if touchstart→touchend is under a hard-coded 250 ms — so
+`window`), and a swipe only counts if touchstart→touchend is under a hard-coded 250 ms, so
 the whole gesture has to be dispatched inside a single `page.evaluate`.
 
 ## Layout notes

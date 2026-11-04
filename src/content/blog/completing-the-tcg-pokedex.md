@@ -46,7 +46,7 @@ The idea was simple: any card counts. Price and set didn't matter.
 ### Caveats:
 
 1. **The first 151 are all from [SV 151](https://bulbapedia.bulbagarden.net/wiki/151_%28TCG%29).** I just liked the set. Still the cheapest card per Pokémon, only restricted to that one set (Special Illustration Rares and ultra rares were too expensive).
-2. **Art override.** If I liked an illustration enough, I spent more instead of taking the cheapest copy — [this Salamence ex](https://www.tcgplayer.com/product/623604/pokemon-sv09-journey-together-salamence-ex-177-159?Language=English), for example.
+2. **Art override.** If I liked an illustration enough, I spent more instead of taking the cheapest copy ([this Salamence ex](https://www.tcgplayer.com/product/623604/pokemon-sv09-journey-together-salamence-ex-177-159?Language=English), for example).
 
 ### Two rules for the layout:
 
@@ -62,7 +62,7 @@ The idea was simple: any card counts. Price and set didn't matter.
 
 ---
 
-## Problem 1 — there's no list you can just copy
+## Problem 1: there's no list you can just copy
 
 You'd think a plain list of all 1,025 Pokémon in order would be a solved problem. It isn't. Bulbapedia comes close, but there's no way to copy or export it down to just the names in order, and its tables fold in regional variants and alternate forms. I wanted the 1,025 and nothing else.
 
@@ -77,7 +77,7 @@ Claude Code scraped and stripped the extra forms back out and created [one CSV](
 
 ---
 
-## Problem 2 — finding the cheapest card
+## Problem 2: finding the cheapest card
 
 I tried to automate this: pull prices from the TCGplayer API and auto-pick the cheapest printing for each Pokémon. It didn't work. The cheapest listings are often the ones missing price data in the API, so the real 'cheapest' cards never surface in a sorted query.
 
@@ -111,11 +111,11 @@ So I gave up and went manual:
 
 ---
 
-## Problem 3 — the layout (the big one)
+## Problem 3: the layout (the big one)
 
 The binder is 84 pages, 16 pockets each: 1,344 slots. If you put one card in the wrong pocket at #200 and every card after it has to shift down a slot, by hand. I had to do that twice. I wasn't doing it again, so I turned to Claude Code.
 
-Claude Code took my binder's dimensions and the spreadsheet and computed the entire layout up front — every Pokémon's page, row, and column before a single card went in. Knowing that Pikachu is page 2, row 1, column 1 means cards can be loaded in any order, and nothing ever shifts.
+Claude Code took my binder's dimensions and the spreadsheet and computed the entire layout up front: every Pokémon's page, row, and column before a single card went in. Knowing that Pikachu is page 2, row 1, column 1 means cards can be loaded in any order, and nothing ever shifts.
 
 The two layout rules were baked into the same pass, so the page breaks and energy leaders came out of the plan instead of being something I had to remember.
 

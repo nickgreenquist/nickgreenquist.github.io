@@ -132,7 +132,7 @@
     var genButtons = GENERATIONS.map(function (g) {
       var b = el('button', 'pdxb-gen', g.label);
       b.type = 'button';
-      b.setAttribute('aria-label', 'Jump to ' + g.label + ' — ' + g.region + ', ' + g.dex);
+      b.setAttribute('aria-label', 'Jump to ' + g.label + ': ' + g.region + ', ' + g.dex);
       b.addEventListener('click', function () { goTo(g.page); });
       gens.appendChild(b);
       return b;

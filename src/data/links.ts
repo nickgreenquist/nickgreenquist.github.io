@@ -10,7 +10,7 @@ export interface SiteLink {
 /**
  * Single source of truth for the site's outbound/section links.
  * Rendered both as gateway cards (home page "Links" section) and as the
- * compact nav bar in the header — keep them in sync by editing here.
+ * compact nav bar in the header; keep them in sync by editing here.
  */
 export const links: SiteLink[] = [
   {
@@ -99,7 +99,7 @@ function pick(label: string): SiteLink {
 const goodreads: SiteLink = { ...pick('Reading'), label: 'Goodreads' };
 
 /**
- * Header hamburger menu — same links as the section above, stacked, with the
+ * Header hamburger menu: same links as the section above, stacked, with the
  * social links (GitHub, LinkedIn, Instagram) grouped at the bottom and Contact
  * pinned last. Split into two groups so the menu can render a divider between.
  */
@@ -123,7 +123,7 @@ export const menuBottomLinks: SiteLink[] = [
 ];
 
 /**
- * Home page "Links" grid — same links and order as the hamburger menu, except
+ * Home page "Links" grid: same links and order as the hamburger menu, except
  * "Reading" keeps its label here (the menu relabels it "Goodreads").
  */
 export const gatewayLinks: SiteLink[] = [

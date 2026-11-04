@@ -1,6 +1,6 @@
 ---
 title: "The Effective Engineer - TLDR"
-description: "A condensed TL;DR of Edmond Lau's 'The Effective Engineer' — the highest-leverage ideas, in my own words."
+description: "A condensed TL;DR of Edmond Lau's 'The Effective Engineer': the highest-leverage ideas, in my own words."
 date: "2018-05-16"
 slug: "effective-engineer-tldr"
 category: miscl

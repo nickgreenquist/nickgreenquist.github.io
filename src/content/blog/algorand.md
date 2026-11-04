@@ -1,6 +1,6 @@
 ---
 title: "Implementing Algorand Agreement"
-description: "Implementing the Algorand Agreement protocol — fast, fork-free Byzantine consensus for a scalable cryptocurrency."
+description: "Implementing the Algorand Agreement protocol: fast, fork-free Byzantine consensus for a scalable cryptocurrency."
 date: "2019-01-04"
 slug: "algorand"
 category: projects
