@@ -1,6 +1,6 @@
 ---
 title: "Taming popularity bias in recommender systems with logit adjustment"
-description: "My two-tower recommender kept handing everyone the same blockbusters. Here's how one term in the loss got it surfacing the niche films that actually fit each user's taste."
+description: "My two-tower recommender kept recommending the same blockbusters to everyone. One extra term in the training loss got it recommending niche films that actually fit each user's taste."
 date: "2026-06-14"
 slug: "taming-popularity-bias-logit-adjustment"
 category: projects
@@ -8,62 +8,60 @@ image: "/blog/assets/PopularityBias/ww2_poster_board.png"
 pinned: 3
 ---
 
-*My recommender kept handing everyone the same blockbusters. Here's how I got it to surface the niche films that actually fit each user's taste.*
+*My recommender kept recommending the same blockbusters to everyone. This is how I got it to recommend niche films that actually fit each user's taste.*
 
 ---
 
-Picture a die-hard **WW2 movie buff**. Their watchlist is *Saving Private Ryan*, *Enemy at the Gates*, *Stalingrad*, *The Great Escape*. You ask the recommender: what next?
+Take a WW2 movie buff whose watchlist is *Saving Private Ryan*, *Enemy at the Gates*, *Stalingrad* and *The Great Escape*. What should they watch next?
 
-Here's what my two-tower model returned — **the same user, the same architecture, the same code path — for two versions of the model: one trained with a popularity-debiasing correction, one without.**
+Below are the recommendations for that user from two versions of my two-tower model. Both use the same architecture and code. The only difference is that the one on the right was trained with a popularity correction (explained below) and the one on the left wasn't.
 
 ![WW2 movie buff: α=0 (left, before) vs α=0.5 (right, after) recommendations, each poster badged with its MovieLens rating count](/blog/assets/PopularityBias/ww2_poster_board.png)
 
-Look at the left wall (the "before"). For a *WW2* fan, the model serves up **Braveheart** (medieval Scotland), **Gladiator** (ancient Rome), **The Lord of the Rings — twice** (Middle-earth), and **The Godfather Part II** (the Mob). **Six of the ten aren't even war movies.** What they *are* is **massively popular** — Braveheart alone has **75,514 ratings**. The model didn't recommend war films.
+The left side (before) is pretty bad for a WW2 fan: *Braveheart*, *Gladiator*, *The Lord of the Rings* (twice) and *The Godfather Part II*. Six of the ten aren't even war movies. They're just really popular (*Braveheart* alone has 75,514 ratings).
 
-Now the right wall (the "after"). **The Devil's Brigade. Cross of Iron. Tora! Tora! Tora! Battle of Britain.** Actual war films — most with **a few hundred ratings**, the kind of catalog depth a real enthusiast actually wants. The median recommendation went from **35,547 ratings to 1,083** — roughly **33× less mainstream — and it got *more* on-genre, not less.**
+The right side (after) is actual war films: *The Devil's Brigade*, *Cross of Iron*, *Tora! Tora! Tora!*, *Battle of Britain*. Most of them have only a few hundred ratings, which is the kind of deeper catalog a real enthusiast wants. The median recommendation went from 35,547 ratings to 1,083 (roughly 33× less mainstream), and the recommendations are more on-genre too.
 
-This isn't a WW2 quirk — the same before/after holds for *every* taste I tried. See **six more fans** — high-fantasy, crime, courtroom, vintage sci-fi, giallo horror, and screwball comedy — in the **[Appendix](#appendix-more-examples)** (the courtroom fan's "before" wall is practically the literal IMDb Top 10).
+It's not just WW2 fans. I got the same kind of before/after for every taste I tried, and there are six more in the [Appendix](#appendix-more-examples) (high-fantasy, crime, courtroom, vintage sci-fi, giallo horror and screwball comedy). The courtroom fan's 'before' list is basically the IMDb Top 10.
 
-## What's actually going wrong here
+## Popularity bias
 
-This is **popularity bias**, and it's a feedback loop, not a bug:
+This is called 'popularity bias', and it's a feedback loop:
 
-1. Popular movies get shown more, so they collect more clicks.
-2. You train on those clicks, so the model learns *"popular = good."*
-3. The model shows popular movies even more. **Go to step 1.**
+1. Popular movies get shown more, so they get more clicks.
+2. You train on those clicks, so the model learns that popular = good.
+3. The model shows popular movies even more, and you're back at step 1.
 
-Left alone, your "personalized" recommender slowly collapses into a **Most Popular shelf** — it hands everyone the same blockbusters and quietly buries the entire long tail of the catalog.
+Left alone, a 'personalized' recommender slowly turns into a Most Popular list. Everyone gets the same blockbusters and the rest of the catalog (the 'long tail') never gets recommended.
 
-## The fix
+## The fix: logit adjustment
 
-This comes straight from a 2020 paper, **["Long-Tail Learning via Logit Adjustment" (Menon et al.)](https://arxiv.org/abs/2007.07314)**. The idea is almost suspiciously simple:
-
-**During training, add a bonus to every movie's score equal to how popular it is — including the negatives.**
+The fix comes from a 2020 paper, ["Long-Tail Learning via Logit Adjustment" (Menon et al.)](https://arxiv.org/abs/2007.07314). The idea is really simple: during training, add a bonus to every movie's score based on how popular it is (including the negatives).
 
 ```python
 # during training only: add each movie's log-popularity to its score
 scores = user · movie_embeddings  +  α · log(1 + rating_count)
 ```
 
-The correction lives entirely in training — you just retrain a new model. Serving doesn't change, which makes it very easy to A/B test online.
+The bonus only exists in training, so all you do is retrain a new model. Nothing changes at serving time, which also makes it very easy to A/B test online.
 
-The strength is one knob, **α**. At `α=0` you get the blockbuster wall. Crank it too high and you over-correct into pure obscurity. I tuned it to **`α=0.5`** — enough to fix the drift, not so much that *Saving Private Ryan* never shows up.
+There's one knob, α. At `α=0` you get the blockbuster list from above, and if you set it too high the recommendations get way too obscure. I went with `α=0.5`, which fixes the drift but still lets *Saving Private Ryan* show up.
 
-## How it works
+## Why a popularity bonus reduces popularity bias
 
-**Why does *adding* a popularity bonus *reduce* popularity bias?** The model trains as a full softmax: each example scores the true next movie against *every* movie in the catalog, and the bonus `α · log(popularity)` is added to *all* of them. So in every training step, popular movies sit among the negatives **with a head start**. The model can only drive the loss down by scoring the *true* movie high enough to **beat those boosted popular negatives** — it's forced to clear a higher bar specifically against popular titles. Repeat over millions of examples and the model learns scores that encode **relevance net of popularity**: a movie ranks high only when you'd like it *more than its raw popularity already predicts*. At serving you drop the bonus and rank on those scores — so a niche film you're a perfect match for can finally outrank a blockbuster everyone half-watches.
+This sounds backwards at first. The model trains with a full softmax: each example scores the true next movie against every movie in the catalog, and the `α · log(popularity)` bonus gets added to all of them. So popular movies are always sitting among the negatives with a head start, and the only way to lower the loss is to score the true movie high enough to beat them. Over millions of examples, the model learns scores that mean 'relevance after accounting for popularity': a movie only ranks high if you'd like it more than its popularity alone would predict. At serving time you drop the bonus and rank on those scores, so a niche film that fits you well can finally beat a blockbuster.
 
-> *For the math-inclined:* the objective's optimum drives each raw score toward `log P(movie | you) − α · log(popularity)` — contextual relevance with the base rate divided back out. The bonus exists **only** in training; at serving you rank on the raw score, which has already absorbed that popularity discount. It's the Fisher-consistent result from the paper, not a heuristic.
+For the math: at the optimum, each raw score goes to `log P(movie | you) − α · log(popularity)`, which is your relevance with the popularity base rate divided back out. The bonus is ONLY used in training. At serving you rank on the raw score, which already has the popularity discount built in. The paper shows this is Fisher-consistent, so it's not just a heuristic.
 
-## Why this beats the usual post-ranking hacks
+## Why not fix it after the model?
 
-Most teams fight popularity bias **after** the model — demotion multipliers, per-page blockbuster caps, a bolted-on diversity re-ranker — heuristics nobody fully trusts that rot as the catalog shifts and add a stage to the serving path. Logit adjustment is the opposite: **one line** in the loss, **mathematically grounded** (the Fisher-consistent term from the box above, not an eyeballed constant), and **trivial to maintain** — the whole behavior is one hyperparameter you re-tune in the next retrain if your team finds the debiasing too aggressive.
+Most teams deal with popularity bias after the model, with things like demotion multipliers, caps on blockbusters per page, or a separate diversity re-ranker. These are heuristics nobody fully trusts, they break as the catalog changes, and they add another stage to serving. Logit adjustment is one line in the loss, it has real theory behind it (the Fisher-consistent result above), and it's easy to maintain: if your team thinks the debiasing is too aggressive, you just re-tune α in the next retrain.
 
-It's not even two-tower-specific: the correction lives in the softmax, so it drops into *any* model trained with cross-entropy over candidate items — **ranking models included.**
+It also isn't specific to two-tower models. The correction is in the softmax, so it works for any model trained with cross-entropy over candidate items (ranking models included).
 
-## Does it hold up beyond a couple of cherry-picked fans?
+## Results
 
-I ran both models over **60,000 held-out recommendation contexts** from 3,000 real users and measured the popularity of what they actually served:
+To make sure this wasn't just a couple of cherry-picked users, I ran both models over 60,000 held-out recommendation contexts from 3,000 real users and measured how popular their recommendations were:
 
 | | Before (α=0) | After (α=0.5) | |
 |---|---:|---:|---|
@@ -72,13 +70,13 @@ I ran both models over **60,000 held-out recommendation contexts** from 3,000 re
 | **Exposure inequality** (Gini) | 0.907 | **0.776** | more equal |
 | **Long-tail share of recommendations** | 0.2% | **4.3%** | **~20×** |
 
-The median recommendation got **half as mainstream**, and the model went from surfacing **48% of the catalog to 84%** — 3,400+ movies that previously had *zero* chance of being recommended to anyone.
+The median recommendation is half as popular, and the model went from recommending 48% of the catalog to 84%. That's 3,400+ movies the old model never showed to anyone.
 
-## No free lunch: the catch
+## The cost
 
 ![The trade in one chart: −4% accuracy on popular hits, +390% on niche long-tail films](/blog/assets/PopularityBias/accuracy_tradeoff.png)
 
-Demoting popular titles isn't free, and any honest writeup has to show the bill. Held-out viewings skew popular — that's literally what popularity bias *is* — so when you down-weight popular movies, some of those held-out favorites get ranked a notch lower. Across the **same ~100,000 held-out viewings**, scored by both models:
+This isn't free. Held-out viewings skew popular (that's what popularity bias is), so when you push popular movies down, some of those held-out movies get ranked a bit lower. Here are both models scored on the same ~100,000 held-out viewings:
 
 | Overall ranking accuracy | α=0 | α=0.5 | |
 |---|---:|---:|---|
@@ -86,64 +84,64 @@ Demoting popular titles isn't free, and any honest writeup has to show the bill.
 | **Recall@10** | 0.230 | 0.220 | −4.4% |
 | **NDCG@10** | 0.135 | 0.129 | −4.1% |
 
-About **4% off the top line.** Real — but look at *where* the bill is paid:
+So about 4% worse overall. If you split it by how popular the held-out movie was, you can see where that loss comes from:
 
 | MRR, split by how popular the held-out movie was | α=0 | α=0.5 | |
 |---|---:|---:|---|
 | **Popular head** (>1,000 ratings) | 0.124 | 0.119 | −4.7% |
 | **Long tail** (≤1,000 ratings) | 0.0031 | 0.0152 | **+390%** |
 
-**The entire cost lands on the popular head** — the blockbusters the model already nails and that barely need a recommender to be found. Meanwhile the **long tail gets 5–12× more accurate** (tail Recall@10 climbs from 0.2% to 3%): still hard in absolute terms, but no longer hopeless — and that's exactly the region where a recommender earns its keep.
+All of the loss is on the popular head: the blockbusters the model already gets right, and that people barely need a recommender to find. The long tail gets 5–12× more accurate (tail Recall@10 goes from 0.2% to 3%). That's still low, but it's no longer hopeless, and the long tail is where a recommender is actually useful.
 
-So the honest trade is: **give up ~4% accuracy on movies everyone already knows, to make the other 84% of the catalog findable at all.**
+So the trade is giving up ~4% accuracy on movies everyone already knows, to make the rest of the catalog findable at all.
 
-## But doesn't that hurt people who *like* the popular stuff?
+## What about people who like popular movies?
 
-That −4.7% on the popular head is the objection an interviewer always pushes on: if the model spends its budget discounting popularity, what happens to the user whose taste genuinely *is* mainstream — or who loves a niche but watches its *recent*, popular entries? Does α=0.5 exile them to the long tail too?
+The obvious pushback on that −4.7% is: what about users whose taste really is mainstream, or who love a genre but mostly watch its recent, popular movies? Does α=0.5 push them into the long tail too?
 
-No. I ran the same two twins on exactly those users.
+No. I checked both models on exactly those users.
 
-**A pure-blockbuster fan** — liked nothing but the four-quadrant canon (*Avatar*, *Titanic*, *Jurassic Park*, *The Dark Knight*, *Inception*, *The Matrix*…), every seed north of 27k ratings. The α=0.5 wall comes back *Spider-Man*, *Batman Begins*, *Iron Man*, *The Incredibles*, *Minority Report*, *Harry Potter* — still blockbusters, all of them. The median recommendation moves **42,700 → 38,700 ratings**: a rounding error. When mainstream really is your taste, the correction leaves you there.
+First, a pure blockbuster fan who only liked the big crowd-pleasers (*Avatar*, *Titanic*, *Jurassic Park*, *The Dark Knight*, *Inception*, *The Matrix* and so on, every one with over 27k ratings). The α=0.5 model recommends *Spider-Man*, *Batman Begins*, *Iron Man*, *The Incredibles*, *Minority Report* and *Harry Potter*, which are all still blockbusters. The median recommendation only moves from 42,700 to 38,700 ratings. If mainstream really is your taste, the model leaves you there.
 
-![Pure-blockbuster fan: α=0 (left) vs α=0.5 (right). Both walls stay blockbusters — median recommendation 42,700 → 38,700 ratings, no collapse.](/blog/assets/PopularityBias/blockbuster_poster_board.png)
+![Pure-blockbuster fan: α=0 (left) vs α=0.5 (right). Both walls stay blockbusters, median recommendation 42,700 → 38,700 ratings, no collapse.](/blog/assets/PopularityBias/blockbuster_poster_board.png)
 
-**A modern sci-fi fan** — *Inception*, *Interstellar*, *Ex Machina*, *Arrival*, *District 9*, *Moon* — a genre devotee who watches 2010s films, not 1950s ones. This is the case people *expect* α to break: surely demoting popularity dumps them into *Forbidden Planet* and *2001*? It doesn't. α=0.5 cuts the median recommendation **2.3× (15,100 → 6,500 ratings)** — real work — yet every pick stays modern, on-genre sci-fi: *Oblivion*, *Prometheus*, *Sunshine*, *Primer*, *Coherence*, *Predestination*, all **2004–2014**. The discount surfaced *modern catalog depth*, not vintage classics.
+Second, a modern sci-fi fan: *Inception*, *Interstellar*, *Ex Machina*, *Arrival*, *District 9*, *Moon*. This person watches 2010s sci-fi, not 1950s sci-fi, and it's the case people usually expect α to break (by pushing them toward *Forbidden Planet* and *2001*), but it doesn't. α=0.5 cuts the median recommendation by 2.3× (15,100 to 6,500 ratings), but every pick is still modern sci-fi: *Oblivion*, *Prometheus*, *Sunshine*, *Primer*, *Coherence*, *Predestination*, all from 2004–2014. It just found less popular modern movies.
 
-![Modern sci-fi fan: α=0 (left) vs α=0.5 (right). Every pick stays modern, on-genre sci-fi (2002–2015); α=0.5 surfaces deeper modern catalog — median 15,100 → 6,500 ratings.](/blog/assets/PopularityBias/modern_scifi_poster_board.png)
+![Modern sci-fi fan: α=0 (left) vs α=0.5 (right). Every pick stays modern, on-genre sci-fi (2002–2015); α=0.5 surfaces deeper modern catalog, median 15,100 → 6,500 ratings.](/blog/assets/PopularityBias/modern_scifi_poster_board.png)
 
-That's the payoff of doing this in the loss rather than with a blunt post-filter: it discounts popularity *relative to how well a title matches you*, so the films you genuinely match still score high. α=0.5 stops the model pushing blockbusters on people who *don't* want them; it doesn't take them from the people who do. (Same result on every profile I checked — modern superhero, Pixar-era animation, action, crime-thriller, post-2000 horror: each stayed in recent, on-genre films.)
+This is why doing it in the loss is better than a blunt post-filter. It discounts popularity relative to how well a movie matches you, so the movies you really match still score high. α=0.5 stops the model from pushing blockbusters on people who don't want them, but it doesn't take them away from people who do. I got the same result on every other profile I checked (modern superhero, Pixar-era animation, action, crime-thriller, post-2000 horror): each one stayed in recent, on-genre films.
 
-## The takeaway
+## Takeaway
 
-Most "fix the recommender" projects mean a bigger model, more features, more compute. This one was **a single term in a loss function**, grounded in a clean piece of theory, that:
+Usually 'fixing the recommender' means a bigger model, more features or more compute. This was one term in the loss function, backed by solid theory, and it:
 
-- **halved** the popularity of recommendations,
-- nearly **doubled** catalog coverage,
-- made the long tail **5–12× more findable**,
-- cost ~4% head-accuracy and **zero** added latency.
+- halved the popularity of recommendations
+- nearly doubled catalog coverage
+- made the long tail 5–12× more findable
+- cost ~4% accuracy on the popular head and zero added latency
 
 ## Appendix: More examples
 
-**High-fantasy fan**
+High-fantasy fan:
 
 ![High-fantasy fan: α=0 (left) vs α=0.5 (right) recommendations](/blog/assets/PopularityBias/fantasy_poster_board.png)
 
-**Courtroom-drama fan**
+Courtroom-drama fan:
 
 ![Courtroom-drama fan: α=0 (left) vs α=0.5 (right) recommendations](/blog/assets/PopularityBias/courtroom_poster_board.png)
 
-**Organized-crime fan**
+Organized-crime fan:
 
 ![Organized-crime fan: α=0 (left) vs α=0.5 (right) recommendations](/blog/assets/PopularityBias/crime_poster_board.png)
 
-**1950s creature-feature fan**
+1950s creature-feature fan:
 
 ![1950s creature-feature fan: α=0 (left) vs α=0.5 (right) recommendations](/blog/assets/PopularityBias/creature_feature_poster_board.png)
 
-**Argento-Fulci giallo cultist**
+Argento-Fulci giallo cultist:
 
 ![Argento-Fulci giallo cultist: α=0 (left) vs α=0.5 (right) recommendations](/blog/assets/PopularityBias/giallo_poster_board.png)
 
-**1930s screwball-comedy fan**
+1930s screwball-comedy fan:
 
 ![1930s screwball-comedy fan: α=0 (left) vs α=0.5 (right) recommendations](/blog/assets/PopularityBias/screwball_poster_board.png)
