@@ -43,7 +43,7 @@ export const amazon: Project = {
 // from this slug on the home page so the URL can't drift.
 export const missingno = {
   shortLabel: 'MissingNo.Zero',
-  arch: 'Self-play RL agent for Pokémon Showdown. Hit #1 on the random-battle ladder in five generations.',
+  arch: 'Self-play RL agent for Pokémon Showdown. Hit #1 on the random-battle ladder in six generations.',
   postSlug: 'missingno-zero-self-play-pokemon-showdown',
   codeHref: 'https://github.com/nickgreenquist/missingno-zero',
 };

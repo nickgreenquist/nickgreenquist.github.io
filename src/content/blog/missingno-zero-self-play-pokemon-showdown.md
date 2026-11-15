@@ -1,6 +1,6 @@
 ---
-title: "MissingNo.Zero: #1 on Pokémon Showdown in five generations with self-play RL"
-description: "MissingNo.Zero, trained by self-play reinforcement learning, reached #1 on Pokémon Showdown's public random-battle ladders in five generations."
+title: "MissingNo.Zero: #1 on Pokémon Showdown in six generations with self-play RL"
+description: "MissingNo.Zero, trained by self-play reinforcement learning, reached #1 on Pokémon Showdown's public random-battle ladders in six generations."
 date: "2026-11-02"
 slug: "missingno-zero-self-play-pokemon-showdown"
 category: projects
@@ -12,13 +12,13 @@ image: "/blog/assets/MissingNoZero/board_gen6.png"
   <img src="/blog/assets/MissingNoZero/missingno.svg" height="150" alt="MissingNo." style="display: inline-block; height: 150px; width: auto;">
 </div>
 
-*MissingNo.Zero, trained by self-play reinforcement learning, reached #1 on Pokémon Showdown's public random-battle ladders in five generations.*
+*MissingNo.Zero, trained by self-play reinforcement learning, reached #1 on Pokémon Showdown's public random-battle ladders in six generations.*
 
 ---
 
 ## TL;DR
 
-- #1 in five generations (gens 1, 2, 4, 6 and 7), and top 10 (best #5) in gen 9.
+- #1 in six generations (gens 1, 2, 4, 6, 7 and 9).
 - Pure self-play: it only ever learned from games against itself. No human games.
 - Small and cheap: about 3M parameters. Gen 1 trained on my laptop in about 40 hours, and the whole project (six generations) cost about \$2,006 in rented GPUs.
 
@@ -43,7 +43,7 @@ image: "/blog/assets/MissingNoZero/board_gen6.png"
 
 ## The ladders
 
-Each board's top 10 with my account at #1 (gen 9's at #5, its best). Other players' names are blanked.
+Each board's top 10 with my account at #1. Other players' names are blanked.
 
 <table>
   <tr>
@@ -64,11 +64,11 @@ Each board's top 10 with my account at #1 (gen 9's at #5, its best). Other playe
   </tr>
   <tr>
     <th>Gen 7 · #1 on 2026-10-24</th>
-    <th>Gen 9 · best #5 on 2026-10-25</th>
+    <th>Gen 9 · #1 on 2026-11-07</th>
   </tr>
   <tr>
     <td><img src="/blog/assets/MissingNoZero/board_gen7.png" width="100%" alt="Gen 7 random-battle top 10, MissingNo.ZeroBot at #1, other names blanked"></td>
-    <td><img src="/blog/assets/MissingNoZero/board_gen9.png" width="100%" alt="Gen 9 random-battle top 10, MissingNo.ZeroBot at #5, other names blanked"></td>
+    <td><img src="/blog/assets/MissingNoZero/board_gen9_rank1.png" width="100%" alt="Gen 9 random-battle top 10, MissingNo.ZeroBot at #1, other names blanked"></td>
   </tr>
 </table>
 
@@ -79,13 +79,13 @@ Each board's top 10 with my account at #1 (gen 9's at #5, its best). Other playe
 | 6 | **#1** | 2026-10-16 | 1942 | [archived](https://web.archive.org/web/20261016121841/https://pokemonshowdown.com/ladder/gen6randombattle?snap=1792153118) |
 | 2 | **#1** | 2026-10-18 | 1558 | [archived](https://web.archive.org/web/20261018142133/https://pokemonshowdown.com/ladder/gen2randombattle?snap=1792333234) |
 | 7 | **#1** | 2026-10-24 | 1900 | [archived](https://web.archive.org/web/20261024193431/https://pokemonshowdown.com/ladder/gen7randombattle?snap=1792870430) |
-| 9 | best #5 | 2026-10-25 | 2453 | [archived](https://web.archive.org/web/20261025072637/https://pokemonshowdown.com/ladder/gen9randombattle?snap=1792913158) |
+| 9 | **#1** | 2026-11-07 | 2461 | [archived](https://web.archive.org/web/20261111003412/https://pokemonshowdown.com/ladder/gen9randombattle) (#1 again on 11-11) |
 
 ## The idea
 
 I wanted a real reinforcement learning project, and I love Pokémon. That led me to [Pokémon Showdown](https://pokemonshowdown.com/), where anyone can battle online on public, ranked ladders.
 
-On July 25, 2026, I set out to reach #1 in gen 1, my favorite generation and the one I grew up with. 66 days later, MissingNo.Zero was #1 on the gen 1 ladder. By October 24 it was #1 in four more.
+On July 25, 2026, I set out to reach #1 in gen 1, my favorite generation and the one I grew up with. 66 days later, MissingNo.Zero was #1 on the gen 1 ladder. By October 24 it was #1 in four more, and in gen 9 on November 7.
 
 <div class="post-timeline not-prose" style="margin: 1.5rem 0;">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 132" style="width: 100%; height: auto; display: block;" role="img" aria-label="Timeline: start July 25, 2026. Earlier gen 1 ladder runs: August 25 and 27 below the top 500, September 4 seen at #369, September 16 in the top 500, September 27 best #5. #1 in gen 1 on September 29 after 66 days; then gen 4 on October 8, gen 6 on October 16, gen 2 on October 18 and gen 7 on October 24" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" fill="currentColor">
