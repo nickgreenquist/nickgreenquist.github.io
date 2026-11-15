@@ -88,14 +88,15 @@ I wanted a real reinforcement learning project, and I love Pokémon. That led me
 On July 25, 2026, I set out to reach #1 in gen 1, my favorite generation and the one I grew up with. 66 days later, MissingNo.Zero was #1 on the gen 1 ladder. By October 24 it was #1 in four more, and in gen 9 on November 7.
 
 <div class="post-timeline not-prose" style="margin: 1.5rem 0;">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 132" style="width: 100%; height: auto; display: block;" role="img" aria-label="Timeline: start July 25, 2026. Earlier gen 1 ladder runs: August 25 and 27 below the top 500, September 4 seen at #369, September 16 in the top 500, September 27 best #5. #1 in gen 1 on September 29 after 66 days; then gen 4 on October 8, gen 6 on October 16, gen 2 on October 18 and gen 7 on October 24" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" fill="currentColor">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 830 132" style="width: 100%; height: auto; display: block;" role="img" aria-label="Timeline: start July 25, 2026. Earlier gen 1 ladder runs: August 25 and 27 below the top 500, September 4 seen at #369, September 16 in the top 500, September 27 best #5. #1 in gen 1 on September 29 after 66 days; then gen 4 on October 8, gen 6 on October 16, gen 2 on October 18, gen 7 on October 24 and gen 9 on November 7" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" fill="currentColor">
 <defs><clipPath id="tl-pb-clip"><circle cx="0" cy="0" r="6.5"/></clipPath><g id="tl-pb" transform="scale(0.9)"><g clip-path="url(#tl-pb-clip)"><rect x="-7" y="-7" width="14" height="7" fill="#ee1515"/><rect x="-7" y="0" width="14" height="7" fill="#f6f6f6"/><rect x="-7" y="-0.9" width="14" height="1.8" fill="#1b1b1b"/></g><circle r="6.5" fill="none" stroke="#1b1b1b" stroke-width="1.4"/><circle r="2.2" fill="#f6f6f6" stroke="#1b1b1b" stroke-width="1.2"/></g></defs>
-<line x1="40" y1="78" x2="700.0" y2="78" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/>
+<line x1="40" y1="78" x2="810.0" y2="78" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/>
 <line x1="40" y1="78" x2="513.5" y2="78" stroke="currentColor" stroke-opacity=".6" stroke-width="2" stroke-dasharray="3 4"/>
 <circle cx="40" cy="78" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
 <text x="40" y="102" font-size="12" text-anchor="middle" font-weight="600">Start</text><text x="40" y="116" font-size="11" text-anchor="middle" fill-opacity=".7">Jul 25</text>
 <path d="M40.0 30 V24 H513.5 V30" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/><text x="276.7" y="17" font-size="12" text-anchor="middle" fill-opacity=".85">66 days to the first #1</text>
 <path d="M513.5 30 V24 H692.8 V30" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/><text x="603.2" y="17" font-size="12" text-anchor="middle" fill-opacity=".85">4 more in 25 days</text>
+<path d="M692.8 30 V24 H793.2 V30" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/><text x="743.0" y="17" font-size="12" text-anchor="middle" fill-opacity=".85">gen 9, 14 days later</text>
 <circle cx="262.4" cy="78" r="4" fill="currentColor" fill-opacity=".55"/>
 <circle cx="276.7" cy="78" r="4" fill="currentColor" fill-opacity=".55"/>
 <circle cx="334.1" cy="78" r="4" fill="currentColor" fill-opacity=".55"/>
@@ -116,6 +117,8 @@ On July 25, 2026, I set out to reach #1 in gen 1, my favorite generation and the
 <text x="649.8" y="102" font-size="12" text-anchor="middle" font-weight="600">Gen 2</text><text x="649.8" y="116" font-size="11" text-anchor="middle" fill-opacity=".7">Oct 18</text>
 <use href="#tl-pb" x="692.8" y="78"/>
 <text x="692.8" y="51" font-size="12" text-anchor="middle" font-weight="600">Gen 7</text><text x="692.8" y="64" font-size="11" text-anchor="middle" fill-opacity=".7">Oct 24</text>
+<use href="#tl-pb" x="793.2" y="78"/>
+<text x="793.2" y="102" font-size="12" text-anchor="middle" font-weight="600">Gen 9</text><text x="793.2" y="116" font-size="11" text-anchor="middle" fill-opacity=".7">Nov 7</text>
 </svg>
 </div>
 
