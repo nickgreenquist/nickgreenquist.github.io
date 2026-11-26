@@ -222,4 +222,4 @@ They shared one rules file and a log of my decisions, and messaged each other di
 - [GitHub README](https://github.com/nickgreenquist/missingno-zero): every board, six ladder games, an FAQ and the technical report (PDF).
 - [Smogon thread](https://www.smogon.com/forums/threads/missingno-zero-a-pure-self-play-reinforcement-learning-bot-that-reached-1-on-five-random-battle-ladders.3790707/)
 
-<small>*Written in a personal capacity; the views here are my own.*</small>
+<small>*This is a personal project, not affiliated with my employer. All views are my own.*</small>

@@ -225,3 +225,5 @@ Top 5: New York, New York (1977), After Hours (1985), Taxi Driver (1976), Mean S
 
 ## Try it
 You can [try it in the Ask tab of the live demo](https://movie-recommender-system-two-tower-model.streamlit.app/). For more on how it works (the schema, the resolution pipeline, and why the LLM's output is kept hidden), see the About tab in the app or the [GitHub README](https://github.com/nickgreenquist/Movie-Recommender-System-PyTorch-TwoTower-Model).
+
+<small>*This is a personal project, not affiliated with my employer. All views are my own.*</small>

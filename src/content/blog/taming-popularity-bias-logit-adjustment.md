@@ -145,3 +145,5 @@ Argento-Fulci giallo cultist:
 1930s screwball-comedy fan:
 
 ![1930s screwball-comedy fan: α=0 (left) vs α=0.5 (right) recommendations](/blog/assets/PopularityBias/screwball_poster_board.png)
+
+<small>*This is a personal project, not affiliated with my employer. All views are my own.*</small>

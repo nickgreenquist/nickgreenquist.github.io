@@ -140,3 +140,5 @@ So hand-coding recency runs out by the second item. That's the argument for a mo
 Background sources:
 - [Covington et al., 2016: *Deep Neural Networks for YouTube Recommendations*](https://research.google/pubs/deep-neural-networks-for-youtube-recommendations/): the standard baseline of averaging watch-history embeddings into the user vector.
 - [Rendle et al., 2010: *FPMC*](https://dl.acm.org/doi/10.1145/1772690.1772773) and [Kang & McAuley, 2018: *SASRec*](https://arxiv.org/abs/1808.09781): the sequential-recommendation papers behind the last-item vs full-history framing.
+
+<small>*This is a personal project, not affiliated with my employer. All views are my own.*</small>

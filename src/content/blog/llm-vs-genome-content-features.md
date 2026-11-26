@@ -225,3 +225,5 @@ If you're building a recommender with implicit interactions, item text and no cu
 The genome and the LLM features are really the same idea a generation apart. Both turn cheap signals into a dense content matrix per item. GroupLens did it with a 50,000-judgment survey and a regression on top of fifteen years of community data. The LLM does it from each item's own text, in a day, for any item at any company.
 
 *Sources: genome facts come from GroupLens's tag-genome work (Vig, Sen & Riedl, 2010/2012) and its follow-ups (TagDL, SIGIR '21; book genome, CHIIR '22; cross-domain genome, CHIIR '26), with cost anchors from public MTurk/Prolific and Pandora figures. The code, data pipeline and per-tier eval outputs are in the [repo](https://github.com/nickgreenquist/Movie-Recommender-System-PyTorch-TwoTower-Model).*
+
+<small>*This is a personal project, not affiliated with my employer. All views are my own.*</small>
